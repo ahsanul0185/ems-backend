@@ -56,6 +56,22 @@ const getEmployeeById = catchAsync(
     }
 )
 
+const deleteEmployee = catchAsync(
+    async (req: Request, res: Response) => {
+        const employeeId = req.params.id;
+        const result = await employeeService.deleteEmployee(employeeId as string);
+
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Employee deleted successfully",
+            data: {
+                employee: result.employee,
+            }
+        })
+    }
+)
+
 const getAllEmployees = catchAsync(
     async (req: Request, res: Response) => {
         const queryParams = req.query as IEmployeeQueryParams;
@@ -77,5 +93,6 @@ export const employeeController = {
     createEmployee,
     updateEmployee,
     getEmployeeById,
+    deleteEmployee,
     getAllEmployees,
 };

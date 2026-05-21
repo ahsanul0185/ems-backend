@@ -4,7 +4,7 @@ import { prisma } from "../../lib/prisma";
 import { QueryBuilder } from "../../utils/QueryBuilder";
 import { IQueryResult } from "../../interfaces/query.interface";
 import { ICreateEmployeePayload, IEmployeeQueryParams, IUpdateEmployeePayload } from "./employee.interface";
-import { Employee } from "../../../generated/prisma/client";
+import { Employee, EmployeeStatus } from "../../../generated/prisma/client";
 
 const createEmployee = async (payload: ICreateEmployeePayload) => {
     const { user_id } = payload;
@@ -81,6 +81,44 @@ const getEmployeeById = async (employeeId: string) => {
     };
 }
 
+const deleteEmployee = async (employeeId: string) => {
+    const employee = await prisma.employee.findUnique({
+        where: {
+            id: employeeId,
+        },
+    });
+
+    if (!employee) {
+        throw new AppError(status.NOT_FOUND, "Employee not found");
+    }
+
+    const result = await prisma.$transaction(async (tx) => {
+        const updatedUser = await tx.user.update({
+            where: {
+                id: employee.user_id,
+            },
+            data: {
+                is_deleted: true,
+            },
+        });
+
+        const updatedEmployee = await tx.employee.update({
+            where: {
+                id: employeeId,
+            },
+            data: {
+                employment_status: EmployeeStatus.INACTIVE,
+            },
+        });
+
+        return { updatedEmployee, updatedUser };
+    });
+
+    return {
+        employee: result.updatedEmployee,
+    };
+}
+
 const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQueryResult<Employee>> => {
     const builder = new QueryBuilder<Employee>(
         prisma.employee,
@@ -135,5 +173,6 @@ export const employeeService = {
     createEmployee,
     updateEmployee,
     getEmployeeById,
+    deleteEmployee,
     getAllEmployees,
 };
