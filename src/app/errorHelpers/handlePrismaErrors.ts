@@ -119,6 +119,15 @@ export const handlePrismaClientKnownRequestError = (error: Prisma.PrismaClientKn
             message = "Database connection timed out. Please try again";
             break;
 
+        case "P2007": {
+            const driverError = meta?.driverAdapterError as Record<string, any> | undefined;
+            const originalMessage = driverError?.cause?.originalMessage as string | undefined;
+            message = originalMessage?.includes("uuid")
+                ? "Invalid ID format — please provide a valid UUID"
+                : originalMessage || "Invalid input value — check your parameters";
+            break;
+        }
+
         default: {
             const cleanMessage = error.message
                 .replace(/Invalid `.*?` invocation:?\s*/i, "")

@@ -23,6 +23,38 @@ const createEmployee = catchAsync(
     }
 )
 
+const updateEmployee = catchAsync(
+    async (req: Request, res: Response) => {
+        const employeeId = req.params.id;
+        const payload = req.body;
+        const result = await employeeService.updateEmployee(employeeId as string, payload);
+
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Employee updated successfully",
+            data: {
+                employee: result.employee,
+            }
+        })
+    }
+)
+
+const getEmployeeById = catchAsync(
+    async (req: Request, res: Response) => {
+        const employeeId = req.params.id;
+        const result = await employeeService.getEmployeeById(employeeId as string);
+
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Employee retrieved successfully",
+            data: {
+                employee: result.employee,
+            }
+        })
+    }
+)
 
 const getAllEmployees = catchAsync(
     async (req: Request, res: Response) => {
@@ -43,5 +75,7 @@ const getAllEmployees = catchAsync(
 
 export const employeeController = {
     createEmployee,
+    updateEmployee,
+    getEmployeeById,
     getAllEmployees,
 };

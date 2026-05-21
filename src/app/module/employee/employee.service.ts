@@ -3,7 +3,7 @@ import AppError from "../../errorHelpers/AppError";
 import { prisma } from "../../lib/prisma";
 import { QueryBuilder } from "../../utils/QueryBuilder";
 import { IQueryResult } from "../../interfaces/query.interface";
-import { ICreateEmployeePayload, IEmployeeQueryParams } from "./employee.interface";
+import { ICreateEmployeePayload, IEmployeeQueryParams, IUpdateEmployeePayload } from "./employee.interface";
 import { Employee } from "../../../generated/prisma/client";
 
 const createEmployee = async (payload: ICreateEmployeePayload) => {
@@ -35,6 +35,51 @@ const createEmployee = async (payload: ICreateEmployeePayload) => {
     };
 }
 
+const updateEmployee = async (employeeId: string, payload: IUpdateEmployeePayload) => {
+    const existingEmployee = await prisma.employee.findUnique({
+        where: {
+            id: employeeId,
+        },
+    });
+
+    if (!existingEmployee) {
+        throw new AppError(status.NOT_FOUND, "Employee not found");
+    }
+
+    const employee = await prisma.employee.update({
+        where: {
+            id: employeeId,
+        },
+        data: payload,
+    });
+
+    return {
+        employee,
+    };
+}
+
+const getEmployeeById = async (employeeId: string) => {
+    const employee = await prisma.employee.findUnique({
+        where: {
+            id: employeeId,
+        },
+        include: {
+            user: true,
+            department: true,
+            attendance: true,
+            payslips: true,
+            leave_requests: true,
+        },
+    });
+
+    if (!employee) {
+        throw new AppError(status.NOT_FOUND, "Employee not found");
+    }
+
+    return {
+        employee,
+    };
+}
 
 const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQueryResult<Employee>> => {
     const builder = new QueryBuilder<Employee>(
@@ -88,5 +133,7 @@ const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQuer
 
 export const employeeService = {
     createEmployee,
+    updateEmployee,
+    getEmployeeById,
     getAllEmployees,
 };

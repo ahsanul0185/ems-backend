@@ -37,3 +37,10 @@ export const createEmployeeZodSchema = z.object({
     tin_number: z.string().optional(),
     passport_number: z.string().optional(),
 });
+
+export const updateEmployeeZodSchema = createEmployeeZodSchema
+    .omit({ user_id: true })
+    .partial()
+    .refine((payload) => Object.keys(payload).length > 0, {
+        message: "At least one field must be provided for update",
+    });

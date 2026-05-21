@@ -34,6 +34,8 @@ export interface ICreateEmployeePayload {
     passport_number?: string;
 }
 
+export type IUpdateEmployeePayload = Partial<Omit<ICreateEmployeePayload, "user_id">>;
+
 export interface IEmployeeQueryParams extends IQueryParams {
     department_id?: string;
     employment_status?: string;
