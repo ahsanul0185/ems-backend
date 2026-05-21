@@ -18,3 +18,8 @@ export interface IRegisterUserPayload {
     email: string;
     role: UserRole;
 }
+
+export interface IChangePasswordPayload {
+    oldPassword: string;
+    newPassword: string;
+}

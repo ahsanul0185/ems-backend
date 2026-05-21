@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { JwtPayload, SignOptions } from "jsonwebtoken";
-import { envVars } from "../config/env";
+import { env } from "../config/env";
 import { CookieUtils } from "./cookie";
 import { jwtUtils } from "./jwt";
 
@@ -9,8 +9,8 @@ import { jwtUtils } from "./jwt";
 const getAccessToken = (payload: JwtPayload) => {
     const accessToken = jwtUtils.createToken(
         payload,
-        envVars.ACCESS_TOKEN_SECRET,
-        { expiresIn: envVars.ACCESS_TOKEN_EXPIRES_IN } as SignOptions
+        env.ACCESS_TOKEN_SECRET,
+        { expiresIn: env.ACCESS_TOKEN_EXPIRES_IN } as SignOptions
     );
 
     return accessToken;
@@ -19,8 +19,8 @@ const getAccessToken = (payload: JwtPayload) => {
 const getRefreshToken = (payload: JwtPayload) => {
     const refreshToken = jwtUtils.createToken(
         payload,
-        envVars.REFRESH_TOKEN_SECRET,
-        { expiresIn: envVars.REFRESH_TOKEN_EXPIRES_IN } as SignOptions
+        env.REFRESH_TOKEN_SECRET,
+        { expiresIn: env.REFRESH_TOKEN_EXPIRES_IN } as SignOptions
     );
     return refreshToken;
 }

@@ -187,7 +187,6 @@ export const EmployeeScalarFieldEnum = {
   bank_account_number: 'bank_account_number',
   employment_type: 'employment_type',
   join_date: 'join_date',
-  probation_end_date: 'probation_end_date',
   employment_status: 'employment_status',
   address_line1: 'address_line1',
   address_line2: 'address_line2',

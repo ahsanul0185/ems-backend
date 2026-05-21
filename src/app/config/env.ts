@@ -48,31 +48,6 @@ const loadEnvVariables = (): EnvConfig => {
         'NODE_ENV',
         'PORT',
         'DATABASE_URL',
-        'BETTER_AUTH_SECRET',
-        'BETTER_AUTH_URL',
-        'ACCESS_TOKEN_SECRET',
-        'REFRESH_TOKEN_SECRET',
-        'ACCESS_TOKEN_EXPIRES_IN',
-        'REFRESH_TOKEN_EXPIRES_IN',
-        'BETTER_AUTH_SESSION_TOKEN_EXPIRES_IN',
-        'BETTER_AUTH_SESSION_TOKEN_UPDATE_AGE',
-        'EMAIL_SENDER_SMTP_USER',
-        'EMAIL_SENDER_SMTP_PASS',
-        'EMAIL_SENDER_SMTP_HOST',
-        'EMAIL_SENDER_SMTP_PORT',
-        'EMAIL_SENDER_SMTP_FROM',
-        'GOOGLE_CLIENT_ID',
-        'GOOGLE_CLIENT_SECRET',
-        'GOOGLE_CALLBACK_URL',
-        'FRONTEND_URL',
-        'CLOUDINARY_CLOUD_NAME',
-        'CLOUDINARY_API_KEY',
-        'CLOUDINARY_API_SECRET',
-        'STRIPE_SECRET_KEY',
-        'STRIPE_WEBHOOK_SECRET',
-        'ADMIN_EMAIL',
-        'ADMIN_PASSWORD',
-        'OPENROUTER_API_KEY',
     ]
 
     requireEnvVariable.forEach((variable) => {
@@ -120,4 +95,4 @@ const loadEnvVariables = (): EnvConfig => {
     }
 }
 
-export const envVars = loadEnvVariables();
+export const env = loadEnvVariables();

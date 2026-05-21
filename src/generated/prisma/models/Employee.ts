@@ -54,7 +54,6 @@ export type EmployeeMinAggregateOutputType = {
   bank_account_number: string | null
   employment_type: $Enums.EmployeeType | null
   join_date: Date | null
-  probation_end_date: Date | null
   employment_status: $Enums.EmployeeStatus | null
   address_line1: string | null
   address_line2: string | null
@@ -89,7 +88,6 @@ export type EmployeeMaxAggregateOutputType = {
   bank_account_number: string | null
   employment_type: $Enums.EmployeeType | null
   join_date: Date | null
-  probation_end_date: Date | null
   employment_status: $Enums.EmployeeStatus | null
   address_line1: string | null
   address_line2: string | null
@@ -124,7 +122,6 @@ export type EmployeeCountAggregateOutputType = {
   bank_account_number: number
   employment_type: number
   join_date: number
-  probation_end_date: number
   employment_status: number
   address_line1: number
   address_line2: number
@@ -169,7 +166,6 @@ export type EmployeeMinAggregateInputType = {
   bank_account_number?: true
   employment_type?: true
   join_date?: true
-  probation_end_date?: true
   employment_status?: true
   address_line1?: true
   address_line2?: true
@@ -204,7 +200,6 @@ export type EmployeeMaxAggregateInputType = {
   bank_account_number?: true
   employment_type?: true
   join_date?: true
-  probation_end_date?: true
   employment_status?: true
   address_line1?: true
   address_line2?: true
@@ -239,7 +234,6 @@ export type EmployeeCountAggregateInputType = {
   bank_account_number?: true
   employment_type?: true
   join_date?: true
-  probation_end_date?: true
   employment_status?: true
   address_line1?: true
   address_line2?: true
@@ -361,7 +355,6 @@ export type EmployeeGroupByOutputType = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date
-  probation_end_date: Date | null
   employment_status: $Enums.EmployeeStatus
   address_line1: string
   address_line2: string | null
@@ -419,7 +412,6 @@ export type EmployeeWhereInput = {
   bank_account_number?: Prisma.StringFilter<"Employee"> | string
   employment_type?: Prisma.EnumEmployeeTypeFilter<"Employee"> | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  probation_end_date?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFilter<"Employee"> | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFilter<"Employee"> | string
   address_line2?: Prisma.StringNullableFilter<"Employee"> | string | null
@@ -463,7 +455,6 @@ export type EmployeeOrderByWithRelationInput = {
   bank_account_number?: Prisma.SortOrder
   employment_type?: Prisma.SortOrder
   join_date?: Prisma.SortOrder
-  probation_end_date?: Prisma.SortOrderInput | Prisma.SortOrder
   employment_status?: Prisma.SortOrder
   address_line1?: Prisma.SortOrder
   address_line2?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -510,7 +501,6 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   bank_account_number?: Prisma.StringFilter<"Employee"> | string
   employment_type?: Prisma.EnumEmployeeTypeFilter<"Employee"> | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  probation_end_date?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFilter<"Employee"> | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFilter<"Employee"> | string
   address_line2?: Prisma.StringNullableFilter<"Employee"> | string | null
@@ -554,7 +544,6 @@ export type EmployeeOrderByWithAggregationInput = {
   bank_account_number?: Prisma.SortOrder
   employment_type?: Prisma.SortOrder
   join_date?: Prisma.SortOrder
-  probation_end_date?: Prisma.SortOrderInput | Prisma.SortOrder
   employment_status?: Prisma.SortOrder
   address_line1?: Prisma.SortOrder
   address_line2?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -597,7 +586,6 @@ export type EmployeeScalarWhereWithAggregatesInput = {
   bank_account_number?: Prisma.StringWithAggregatesFilter<"Employee"> | string
   employment_type?: Prisma.EnumEmployeeTypeWithAggregatesFilter<"Employee"> | $Enums.EmployeeType
   join_date?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
-  probation_end_date?: Prisma.DateTimeNullableWithAggregatesFilter<"Employee"> | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusWithAggregatesFilter<"Employee"> | $Enums.EmployeeStatus
   address_line1?: Prisma.StringWithAggregatesFilter<"Employee"> | string
   address_line2?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
@@ -630,7 +618,6 @@ export type EmployeeCreateInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -674,7 +661,6 @@ export type EmployeeUncheckedCreateInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -714,7 +700,6 @@ export type EmployeeUpdateInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -758,7 +743,6 @@ export type EmployeeUncheckedUpdateInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -800,7 +784,6 @@ export type EmployeeCreateManyInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -833,7 +816,6 @@ export type EmployeeUpdateManyMutationInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -868,7 +850,6 @@ export type EmployeeUncheckedUpdateManyInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -923,7 +904,6 @@ export type EmployeeCountOrderByAggregateInput = {
   bank_account_number?: Prisma.SortOrder
   employment_type?: Prisma.SortOrder
   join_date?: Prisma.SortOrder
-  probation_end_date?: Prisma.SortOrder
   employment_status?: Prisma.SortOrder
   address_line1?: Prisma.SortOrder
   address_line2?: Prisma.SortOrder
@@ -962,7 +942,6 @@ export type EmployeeMaxOrderByAggregateInput = {
   bank_account_number?: Prisma.SortOrder
   employment_type?: Prisma.SortOrder
   join_date?: Prisma.SortOrder
-  probation_end_date?: Prisma.SortOrder
   employment_status?: Prisma.SortOrder
   address_line1?: Prisma.SortOrder
   address_line2?: Prisma.SortOrder
@@ -997,7 +976,6 @@ export type EmployeeMinOrderByAggregateInput = {
   bank_account_number?: Prisma.SortOrder
   employment_type?: Prisma.SortOrder
   join_date?: Prisma.SortOrder
-  probation_end_date?: Prisma.SortOrder
   employment_status?: Prisma.SortOrder
   address_line1?: Prisma.SortOrder
   address_line2?: Prisma.SortOrder
@@ -1220,7 +1198,6 @@ export type EmployeeCreateWithoutAnnouncementsInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1263,7 +1240,6 @@ export type EmployeeUncheckedCreateWithoutAnnouncementsInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1318,7 +1294,6 @@ export type EmployeeUpdateWithoutAnnouncementsInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1361,7 +1336,6 @@ export type EmployeeUncheckedUpdateWithoutAnnouncementsInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1400,7 +1374,6 @@ export type EmployeeCreateWithoutAttendanceInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1443,7 +1416,6 @@ export type EmployeeUncheckedCreateWithoutAttendanceInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1498,7 +1470,6 @@ export type EmployeeUpdateWithoutAttendanceInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1541,7 +1512,6 @@ export type EmployeeUncheckedUpdateWithoutAttendanceInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1580,7 +1550,6 @@ export type EmployeeCreateWithoutUserInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1622,7 +1591,6 @@ export type EmployeeUncheckedCreateWithoutUserInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1678,7 +1646,6 @@ export type EmployeeUpdateWithoutUserInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1720,7 +1687,6 @@ export type EmployeeUncheckedUpdateWithoutUserInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1760,7 +1726,6 @@ export type EmployeeCreateWithoutDepartmentInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1802,7 +1767,6 @@ export type EmployeeUncheckedCreateWithoutDepartmentInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1873,7 +1837,6 @@ export type EmployeeScalarWhereInput = {
   bank_account_number?: Prisma.StringFilter<"Employee"> | string
   employment_type?: Prisma.EnumEmployeeTypeFilter<"Employee"> | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  probation_end_date?: Prisma.DateTimeNullableFilter<"Employee"> | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFilter<"Employee"> | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFilter<"Employee"> | string
   address_line2?: Prisma.StringNullableFilter<"Employee"> | string | null
@@ -1906,7 +1869,6 @@ export type EmployeeCreateWithoutHr_profileInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -1949,7 +1911,6 @@ export type EmployeeUncheckedCreateWithoutHr_profileInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2004,7 +1965,6 @@ export type EmployeeUpdateWithoutHr_profileInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2047,7 +2007,6 @@ export type EmployeeUncheckedUpdateWithoutHr_profileInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2086,7 +2045,6 @@ export type EmployeeCreateWithoutLeave_requestsInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2129,7 +2087,6 @@ export type EmployeeUncheckedCreateWithoutLeave_requestsInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2173,7 +2130,6 @@ export type EmployeeCreateWithoutApproved_leavesInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2216,7 +2172,6 @@ export type EmployeeUncheckedCreateWithoutApproved_leavesInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2271,7 +2226,6 @@ export type EmployeeUpdateWithoutLeave_requestsInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2314,7 +2268,6 @@ export type EmployeeUncheckedUpdateWithoutLeave_requestsInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2364,7 +2317,6 @@ export type EmployeeUpdateWithoutApproved_leavesInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2407,7 +2359,6 @@ export type EmployeeUncheckedUpdateWithoutApproved_leavesInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2446,7 +2397,6 @@ export type EmployeeCreateWithoutPayslipsInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2489,7 +2439,6 @@ export type EmployeeUncheckedCreateWithoutPayslipsInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2533,7 +2482,6 @@ export type EmployeeCreateWithoutGenerated_payslipsInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2576,7 +2524,6 @@ export type EmployeeUncheckedCreateWithoutGenerated_payslipsInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2631,7 +2578,6 @@ export type EmployeeUpdateWithoutPayslipsInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2674,7 +2620,6 @@ export type EmployeeUncheckedUpdateWithoutPayslipsInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2724,7 +2669,6 @@ export type EmployeeUpdateWithoutGenerated_payslipsInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2767,7 +2711,6 @@ export type EmployeeUncheckedUpdateWithoutGenerated_payslipsInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2807,7 +2750,6 @@ export type EmployeeCreateManyDepartmentInput = {
   bank_account_number: string
   employment_type: $Enums.EmployeeType
   join_date: Date | string
-  probation_end_date?: Date | string | null
   employment_status?: $Enums.EmployeeStatus
   address_line1: string
   address_line2?: string | null
@@ -2840,7 +2782,6 @@ export type EmployeeUpdateWithoutDepartmentInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2882,7 +2823,6 @@ export type EmployeeUncheckedUpdateWithoutDepartmentInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2923,7 +2863,6 @@ export type EmployeeUncheckedUpdateManyWithoutDepartmentInput = {
   bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
   employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
   join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  probation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
   address_line1?: Prisma.StringFieldUpdateOperationsInput | string
   address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3034,7 +2973,6 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   bank_account_number?: boolean
   employment_type?: boolean
   join_date?: boolean
-  probation_end_date?: boolean
   employment_status?: boolean
   address_line1?: boolean
   address_line2?: boolean
@@ -3079,7 +3017,6 @@ export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   bank_account_number?: boolean
   employment_type?: boolean
   join_date?: boolean
-  probation_end_date?: boolean
   employment_status?: boolean
   address_line1?: boolean
   address_line2?: boolean
@@ -3116,7 +3053,6 @@ export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   bank_account_number?: boolean
   employment_type?: boolean
   join_date?: boolean
-  probation_end_date?: boolean
   employment_status?: boolean
   address_line1?: boolean
   address_line2?: boolean
@@ -3153,7 +3089,6 @@ export type EmployeeSelectScalar = {
   bank_account_number?: boolean
   employment_type?: boolean
   join_date?: boolean
-  probation_end_date?: boolean
   employment_status?: boolean
   address_line1?: boolean
   address_line2?: boolean
@@ -3168,7 +3103,7 @@ export type EmployeeSelectScalar = {
   updated_at?: boolean
 }
 
-export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "employee_code" | "first_name" | "last_name" | "date_of_birth" | "gender" | "blood_group" | "phone" | "emergency_contact_name" | "emergency_contact_phone" | "profile_url" | "department_id" | "designation" | "salary" | "bank_name" | "bank_account_number" | "employment_type" | "join_date" | "probation_end_date" | "employment_status" | "address_line1" | "address_line2" | "city" | "state" | "zip_code" | "country" | "nid_number" | "tin_number" | "passport_number" | "created_at" | "updated_at", ExtArgs["result"]["employee"]>
+export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "employee_code" | "first_name" | "last_name" | "date_of_birth" | "gender" | "blood_group" | "phone" | "emergency_contact_name" | "emergency_contact_phone" | "profile_url" | "department_id" | "designation" | "salary" | "bank_name" | "bank_account_number" | "employment_type" | "join_date" | "employment_status" | "address_line1" | "address_line2" | "city" | "state" | "zip_code" | "country" | "nid_number" | "tin_number" | "passport_number" | "created_at" | "updated_at", ExtArgs["result"]["employee"]>
 export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
@@ -3223,7 +3158,6 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     bank_account_number: string
     employment_type: $Enums.EmployeeType
     join_date: Date
-    probation_end_date: Date | null
     employment_status: $Enums.EmployeeStatus
     address_line1: string
     address_line2: string | null
@@ -3687,7 +3621,6 @@ export interface EmployeeFieldRefs {
   readonly bank_account_number: Prisma.FieldRef<"Employee", 'String'>
   readonly employment_type: Prisma.FieldRef<"Employee", 'EmployeeType'>
   readonly join_date: Prisma.FieldRef<"Employee", 'DateTime'>
-  readonly probation_end_date: Prisma.FieldRef<"Employee", 'DateTime'>
   readonly employment_status: Prisma.FieldRef<"Employee", 'EmployeeStatus'>
   readonly address_line1: Prisma.FieldRef<"Employee", 'String'>
   readonly address_line2: Prisma.FieldRef<"Employee", 'String'>
