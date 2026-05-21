@@ -1,7 +1,10 @@
 import status from "http-status";
 import AppError from "../../errorHelpers/AppError";
 import { prisma } from "../../lib/prisma";
-import { ICreateEmployeePayload } from "./employee.interface";
+import { QueryBuilder } from "../../utils/QueryBuilder";
+import { IQueryResult } from "../../interfaces/query.interface";
+import { ICreateEmployeePayload, IEmployeeQueryParams } from "./employee.interface";
+import { Employee } from "../../../generated/prisma/client";
 
 const createEmployee = async (payload: ICreateEmployeePayload) => {
     const { user_id } = payload;
@@ -33,6 +36,57 @@ const createEmployee = async (payload: ICreateEmployeePayload) => {
 }
 
 
+const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQueryResult<Employee>> => {
+    const builder = new QueryBuilder<Employee>(
+        prisma.employee,
+        queryParams,
+        {
+            searchableFields: [
+                "first_name",
+                "last_name",
+                "phone",
+                "department.name",
+                "user.email",
+            ],
+            filterableFields: [
+                "department_id",
+                "employment_status",
+                "employment_type",
+                "designation",
+                "city",
+                "state",
+                "country",
+                "gender",
+            ],
+            defaultSelect: {
+                id: true,
+                first_name: true,
+                last_name: true,
+                phone: true,
+                designation: true,
+                employment_status: true,
+                department: {
+                    select: {
+                        name: true,
+                    }
+                },
+                user: {
+                    select: {
+                        email: true,
+                    }
+                }
+            }
+        }
+    )
+        .search()
+        .filter()
+        .sort()
+        .paginate();
+
+    return builder.execute();
+}
+
 export const employeeService = {
     createEmployee,
+    getAllEmployees,
 };

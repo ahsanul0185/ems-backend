@@ -3,6 +3,7 @@ import { catchAsync } from "../../shared/catchAsync";
 import { sendResponse } from "../../shared/sendResponse";
 import status from "http-status";
 import { employeeService } from "./employee.service";
+import { IEmployeeQueryParams } from "./employee.interface";
 
 
 
@@ -23,6 +24,24 @@ const createEmployee = catchAsync(
 )
 
 
+const getAllEmployees = catchAsync(
+    async (req: Request, res: Response) => {
+        const queryParams = req.query as IEmployeeQueryParams;
+        const result = await employeeService.getAllEmployees(queryParams);
+
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Employees retrieved successfully",
+            data: {
+                employees: result.data,
+            },
+            meta: result.meta,
+        })
+    }
+)
+
 export const employeeController = {
-    createEmployee
+    createEmployee,
+    getAllEmployees,
 };

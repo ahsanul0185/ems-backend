@@ -2,6 +2,7 @@
 
 
 import { EmployeeStatus, EmployeeType, Gender } from "../../../generated/prisma/enums";
+import { IQueryParams } from "../../interfaces/query.interface";
 
 export interface ICreateEmployeePayload {
     user_id: string;
@@ -31,5 +32,16 @@ export interface ICreateEmployeePayload {
     nid_number?: string;
     tin_number?: string;
     passport_number?: string;
+}
+
+export interface IEmployeeQueryParams extends IQueryParams {
+    department_id?: string;
+    employment_status?: string;
+    employment_type?: string;
+    designation?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    gender?: string;
 }
 

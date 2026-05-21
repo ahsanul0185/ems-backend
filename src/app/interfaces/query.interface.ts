@@ -44,6 +44,9 @@ export interface IQueryParams {
 export interface IQueryConfig {
     searchableFields?: string[];
     filterableFields?: string[];
+    defaultSortBy?: string;
+    defaultSortOrder?: 'asc' | 'desc';
+    defaultSelect?: Record<string, boolean | Record<string, unknown>>;
 }
 
 export interface PrismaStringFilter{
