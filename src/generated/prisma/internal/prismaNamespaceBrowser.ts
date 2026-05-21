@@ -51,8 +51,16 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Announcement: 'Announcement',
+  Attendance: 'Attendance',
   User: 'User',
-  Post: 'Post'
+  Session: 'Session',
+  Otp: 'Otp',
+  Department: 'Department',
+  Employee: 'Employee',
+  HRProfile: 'HRProfile',
+  LeaveRequest: 'LeaveRequest',
+  Payslip: 'Payslip'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -71,25 +79,183 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const AnnouncementScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  audience: 'audience',
+  department_id: 'department_id',
+  status: 'status',
+  is_pinned: 'is_pinned',
+  attachment_url: 'attachment_url',
+  published_at: 'published_at',
+  expires_at: 'expires_at',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AnnouncementScalarFieldEnum = (typeof AnnouncementScalarFieldEnum)[keyof typeof AnnouncementScalarFieldEnum]
+
+
+export const AttendanceScalarFieldEnum = {
+  id: 'id',
+  employee_id: 'employee_id',
+  date: 'date',
+  clock_in_time: 'clock_in_time',
+  clock_out_time: 'clock_out_time',
+  status: 'status',
+  late_minutes: 'late_minutes',
+  early_leave_minutes: 'early_leave_minutes',
+  notes: 'notes',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type AttendanceScalarFieldEnum = (typeof AttendanceScalarFieldEnum)[keyof typeof AttendanceScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name'
+  password: 'password',
+  role: 'role',
+  status: 'status',
+  is_deleted: 'is_deleted',
+  email_verified: 'email_verified',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const PostScalarFieldEnum = {
+export const SessionScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  content: 'content',
-  slug: 'slug',
-  published: 'published',
-  authorId: 'authorId'
+  user_id: 'user_id',
+  refresh_token: 'refresh_token',
+  expires_at: 'expires_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
-export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const OtpScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  code: 'code',
+  type: 'type',
+  expires_at: 'expires_at',
+  used: 'used',
+  created_at: 'created_at'
+} as const
+
+export type OtpScalarFieldEnum = (typeof OtpScalarFieldEnum)[keyof typeof OtpScalarFieldEnum]
+
+
+export const DepartmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
+
+
+export const EmployeeScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  employee_code: 'employee_code',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  date_of_birth: 'date_of_birth',
+  gender: 'gender',
+  blood_group: 'blood_group',
+  phone: 'phone',
+  emergency_contact_name: 'emergency_contact_name',
+  emergency_contact_phone: 'emergency_contact_phone',
+  profile_url: 'profile_url',
+  department_id: 'department_id',
+  designation: 'designation',
+  salary: 'salary',
+  bank_name: 'bank_name',
+  bank_account_number: 'bank_account_number',
+  employment_type: 'employment_type',
+  join_date: 'join_date',
+  probation_end_date: 'probation_end_date',
+  employment_status: 'employment_status',
+  address_line1: 'address_line1',
+  address_line2: 'address_line2',
+  city: 'city',
+  state: 'state',
+  zip_code: 'zip_code',
+  country: 'country',
+  nid_number: 'nid_number',
+  tin_number: 'tin_number',
+  passport_number: 'passport_number',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
+
+export const HRProfileScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  employee_id: 'employee_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type HRProfileScalarFieldEnum = (typeof HRProfileScalarFieldEnum)[keyof typeof HRProfileScalarFieldEnum]
+
+
+export const LeaveRequestScalarFieldEnum = {
+  id: 'id',
+  employee_id: 'employee_id',
+  title: 'title',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  total_days: 'total_days',
+  reason: 'reason',
+  attachment_url: 'attachment_url',
+  leave_type: 'leave_type',
+  status: 'status',
+  applied_at: 'applied_at',
+  rejection_reason: 'rejection_reason',
+  approved_by: 'approved_by',
+  approved_at: 'approved_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeaveRequestScalarFieldEnum = (typeof LeaveRequestScalarFieldEnum)[keyof typeof LeaveRequestScalarFieldEnum]
+
+
+export const PayslipScalarFieldEnum = {
+  id: 'id',
+  employee_id: 'employee_id',
+  pay_period_month: 'pay_period_month',
+  pay_period_year: 'pay_period_year',
+  pay_date: 'pay_date',
+  basic_salary: 'basic_salary',
+  bonus: 'bonus',
+  status: 'status',
+  deduction: 'deduction',
+  net_salary: 'net_salary',
+  generated_by: 'generated_by',
+  notes: 'notes',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PayslipScalarFieldEnum = (typeof PayslipScalarFieldEnum)[keyof typeof PayslipScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -1,0 +1,17 @@
+// department.prisma
+// Organizational department structure
+
+model Department {
+  id               String   @id @default(uuid()) @db.Uuid
+  name             String
+  description      String?
+  is_active        Boolean  @default(true)
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  // Relations
+  employees     Employee[] @relation("DepartmentEmployees")
+  announcements  Announcement[]
+
+  @@map("departments")
+}

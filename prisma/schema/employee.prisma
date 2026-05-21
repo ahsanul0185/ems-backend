@@ -1,0 +1,50 @@
+// employee.prisma
+// Core employee profile and personal information
+
+model Employee {
+  id                      String         @id @default(uuid()) @db.Uuid
+  user_id                 String         @unique @db.Uuid
+  employee_code           String         @unique
+  first_name              String
+  last_name               String
+  date_of_birth           DateTime
+  gender                  Gender
+  blood_group             String?
+  phone                   String
+  emergency_contact_name  String
+  emergency_contact_phone String
+  profile_url             String?
+  department_id           String         @db.Uuid
+  designation             String
+  salary                  Int
+  bank_name               String
+  bank_account_number     String
+  employment_type         EmployeeType
+  join_date               DateTime
+  probation_end_date      DateTime?
+  employment_status       EmployeeStatus @default(ACTIVE)
+  address_line1           String
+  address_line2           String?
+  city                    String
+  state                   String
+  zip_code                String
+  country                 String
+  nid_number              String?
+  tin_number              String?
+  passport_number         String?
+  created_at              DateTime       @default(now())
+  updated_at              DateTime       @updatedAt
+
+  // Relations
+  user               User           @relation(fields: [user_id], references: [id])
+  department         Department     @relation("DepartmentEmployees", fields: [department_id], references: [id])
+  hr_profile         HRProfile?
+  attendance         Attendance[]
+  payslips           Payslip[]
+  leave_requests     LeaveRequest[]
+  generated_payslips Payslip[]      @relation("PayslipGeneratedBy")
+  approved_leaves    LeaveRequest[] @relation("LeaveApprovedBy")
+  announcements  Announcement[] @relation("AnnouncementCreatedBy")
+
+  @@map("employees")
+}

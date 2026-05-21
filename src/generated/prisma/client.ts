@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Announcements
+ * const announcements = await prisma.announcement.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,12 +42,52 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
+ * Model Announcement
+ * 
+ */
+export type Announcement = Prisma.AnnouncementModel
+/**
+ * Model Attendance
+ * 
+ */
+export type Attendance = Prisma.AttendanceModel
+/**
  * Model User
  * 
  */
 export type User = Prisma.UserModel
 /**
- * Model Post
+ * Model Session
  * 
  */
-export type Post = Prisma.PostModel
+export type Session = Prisma.SessionModel
+/**
+ * Model Otp
+ * 
+ */
+export type Otp = Prisma.OtpModel
+/**
+ * Model Department
+ * 
+ */
+export type Department = Prisma.DepartmentModel
+/**
+ * Model Employee
+ * 
+ */
+export type Employee = Prisma.EmployeeModel
+/**
+ * Model HRProfile
+ * 
+ */
+export type HRProfile = Prisma.HRProfileModel
+/**
+ * Model LeaveRequest
+ * 
+ */
+export type LeaveRequest = Prisma.LeaveRequestModel
+/**
+ * Model Payslip
+ * 
+ */
+export type Payslip = Prisma.PayslipModel

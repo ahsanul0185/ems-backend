@@ -1,0 +1,22 @@
+// attendance.prisma
+// Daily employee attendance tracking
+
+model Attendance {
+  id                  String           @id @default(uuid()) @db.Uuid
+  employee_id         String           @db.Uuid
+  date                DateTime         @db.Date
+  clock_in_time       DateTime?
+  clock_out_time      DateTime?
+  status              AttendanceStatus
+  late_minutes        Int              @default(0)
+  early_leave_minutes Int              @default(0)
+  notes               String?
+  created_at          DateTime         @default(now())
+  updated_at          DateTime         @updatedAt
+
+  // Relations
+  employee      Employee  @relation(fields: [employee_id], references: [id])
+
+  @@unique([employee_id, date])
+  @@map("attendance")
+}

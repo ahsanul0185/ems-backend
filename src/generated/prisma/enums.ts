@@ -9,7 +9,112 @@
 * 🟢 You can import this file directly.
 */
 
+export const UserRole = {
+  ADMIN: 'ADMIN',
+  HR: 'HR',
+  EMPLOYEE: 'EMPLOYEE'
+} as const
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  DELETED: 'DELETED'
+} as const
+
+export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
+
+
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const OtpType = {
+  EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
+  PASSWORD_RESET: 'PASSWORD_RESET'
+} as const
+
+export type OtpType = (typeof OtpType)[keyof typeof OtpType]
+
+
+export const EmployeeType = {
+  FULL_TIME: 'FULL_TIME',
+  PART_TIME: 'PART_TIME',
+  CONTRACT: 'CONTRACT',
+  INTERN: 'INTERN'
+} as const
+
+export type EmployeeType = (typeof EmployeeType)[keyof typeof EmployeeType]
+
+
+export const EmployeeStatus = {
+  ACTIVE: 'ACTIVE',
+  ON_LEAVE: 'ON_LEAVE',
+  RESIGNED: 'RESIGNED',
+  TERMINATED: 'TERMINATED'
+} as const
+
+export type EmployeeStatus = (typeof EmployeeStatus)[keyof typeof EmployeeStatus]
+
+
+export const AttendanceStatus = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  LATE: 'LATE',
+  HALF_DAY: 'HALF_DAY'
+} as const
+
+export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
+
+
+export const PayslipStatus = {
+  DRAFT: 'DRAFT',
+  APPROVED: 'APPROVED',
+  PAID: 'PAID'
+} as const
+
+export type PayslipStatus = (typeof PayslipStatus)[keyof typeof PayslipStatus]
+
+
+export const LeaveType = {
+  SICK: 'SICK',
+  CASUAL: 'CASUAL',
+  ANNUAL: 'ANNUAL',
+  MATERNITY: 'MATERNITY'
+} as const
+
+export type LeaveType = (typeof LeaveType)[keyof typeof LeaveType]
+
+
+export const LeaveRequestStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type LeaveRequestStatus = (typeof LeaveRequestStatus)[keyof typeof LeaveRequestStatus]
+
+
+export const AnnouncementStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED'
+} as const
+
+export type AnnouncementStatus = (typeof AnnouncementStatus)[keyof typeof AnnouncementStatus]
+
+
+export const AnnouncementAudience = {
+  ALL: 'ALL',
+  HR: 'HR',
+  DEPARTMENT: 'DEPARTMENT',
+  EMPLOYEE: 'EMPLOYEE'
+} as const
+
+export type AnnouncementAudience = (typeof AnnouncementAudience)[keyof typeof AnnouncementAudience]

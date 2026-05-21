@@ -1,0 +1,78 @@
+// enums.prisma
+// All shared enums across the Employee Management System
+
+enum UserRole {
+  ADMIN
+  HR
+  EMPLOYEE
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  DELETED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum OtpType {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
+enum EmployeeType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERN
+}
+
+enum EmployeeStatus {
+  ACTIVE
+  ON_LEAVE
+  RESIGNED
+  TERMINATED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  HALF_DAY
+}
+
+enum PayslipStatus {
+  DRAFT
+  APPROVED
+  PAID
+}
+
+enum LeaveType {
+  SICK
+  CASUAL
+  ANNUAL
+  MATERNITY
+}
+
+enum LeaveRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+
+enum AnnouncementStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum AnnouncementAudience {
+  ALL
+  HR
+  DEPARTMENT
+  EMPLOYEE
+}
