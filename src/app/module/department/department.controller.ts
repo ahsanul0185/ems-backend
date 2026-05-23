@@ -68,9 +68,6 @@ const deleteDepartment = catchAsync(
 );
 
 
-
-
-
 export const departmentController = {
     createDepartment,
     getAllDepartments,
