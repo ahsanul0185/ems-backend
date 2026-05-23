@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import z from "zod";
+import status from "http-status";
+import AppError from "../errorHelpers/AppError";
 
 export const validateRequest = (zodSchema: z.ZodObject<any>) => {
     return (req: Request, res: Response, next: NextFunction) => {
@@ -15,7 +17,9 @@ export const validateRequest = (zodSchema: z.ZodObject<any>) => {
         const parsedResult = zodSchema.safeParse(req.body);
 
         if (!parsedResult.success) {
-            return next(parsedResult.error);
+            const firstIssue = parsedResult.error.issues[0];
+            const errorMessage = firstIssue.message;
+            throw new AppError(status.BAD_REQUEST, errorMessage);
         }
 
         // Sanitizing and updating req.body
