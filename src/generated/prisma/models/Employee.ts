@@ -430,9 +430,6 @@ export type EmployeeWhereInput = {
   attendance?: Prisma.AttendanceListRelationFilter
   payslips?: Prisma.PayslipListRelationFilter
   leave_requests?: Prisma.LeaveRequestListRelationFilter
-  generated_payslips?: Prisma.PayslipListRelationFilter
-  approved_leaves?: Prisma.LeaveRequestListRelationFilter
-  announcements?: Prisma.AnnouncementListRelationFilter
 }
 
 export type EmployeeOrderByWithRelationInput = {
@@ -473,9 +470,6 @@ export type EmployeeOrderByWithRelationInput = {
   attendance?: Prisma.AttendanceOrderByRelationAggregateInput
   payslips?: Prisma.PayslipOrderByRelationAggregateInput
   leave_requests?: Prisma.LeaveRequestOrderByRelationAggregateInput
-  generated_payslips?: Prisma.PayslipOrderByRelationAggregateInput
-  approved_leaves?: Prisma.LeaveRequestOrderByRelationAggregateInput
-  announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
 }
 
 export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
@@ -519,9 +513,6 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   attendance?: Prisma.AttendanceListRelationFilter
   payslips?: Prisma.PayslipListRelationFilter
   leave_requests?: Prisma.LeaveRequestListRelationFilter
-  generated_payslips?: Prisma.PayslipListRelationFilter
-  approved_leaves?: Prisma.LeaveRequestListRelationFilter
-  announcements?: Prisma.AnnouncementListRelationFilter
 }, "id" | "user_id" | "employee_code">
 
 export type EmployeeOrderByWithAggregationInput = {
@@ -636,9 +627,6 @@ export type EmployeeCreateInput = {
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeUncheckedCreateInput = {
@@ -677,9 +665,6 @@ export type EmployeeUncheckedCreateInput = {
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeUpdateInput = {
@@ -718,9 +703,6 @@ export type EmployeeUpdateInput = {
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeUncheckedUpdateInput = {
@@ -759,9 +741,6 @@ export type EmployeeUncheckedUpdateInput = {
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeCreateManyInput = {
@@ -994,20 +973,6 @@ export type EmployeeSumOrderByAggregateInput = {
   salary?: Prisma.SortOrder
 }
 
-export type EmployeeCreateNestedOneWithoutAnnouncementsInput = {
-  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutAnnouncementsInput, Prisma.EmployeeUncheckedCreateWithoutAnnouncementsInput>
-  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutAnnouncementsInput
-  connect?: Prisma.EmployeeWhereUniqueInput
-}
-
-export type EmployeeUpdateOneRequiredWithoutAnnouncementsNestedInput = {
-  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutAnnouncementsInput, Prisma.EmployeeUncheckedCreateWithoutAnnouncementsInput>
-  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutAnnouncementsInput
-  upsert?: Prisma.EmployeeUpsertWithoutAnnouncementsInput
-  connect?: Prisma.EmployeeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutAnnouncementsInput, Prisma.EmployeeUpdateWithoutAnnouncementsInput>, Prisma.EmployeeUncheckedUpdateWithoutAnnouncementsInput>
-}
-
 export type EmployeeCreateNestedOneWithoutAttendanceInput = {
   create?: Prisma.XOR<Prisma.EmployeeCreateWithoutAttendanceInput, Prisma.EmployeeUncheckedCreateWithoutAttendanceInput>
   connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutAttendanceInput
@@ -1128,12 +1093,6 @@ export type EmployeeCreateNestedOneWithoutLeave_requestsInput = {
   connect?: Prisma.EmployeeWhereUniqueInput
 }
 
-export type EmployeeCreateNestedOneWithoutApproved_leavesInput = {
-  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutApproved_leavesInput, Prisma.EmployeeUncheckedCreateWithoutApproved_leavesInput>
-  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutApproved_leavesInput
-  connect?: Prisma.EmployeeWhereUniqueInput
-}
-
 export type EmployeeUpdateOneRequiredWithoutLeave_requestsNestedInput = {
   create?: Prisma.XOR<Prisma.EmployeeCreateWithoutLeave_requestsInput, Prisma.EmployeeUncheckedCreateWithoutLeave_requestsInput>
   connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutLeave_requestsInput
@@ -1142,25 +1101,9 @@ export type EmployeeUpdateOneRequiredWithoutLeave_requestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutLeave_requestsInput, Prisma.EmployeeUpdateWithoutLeave_requestsInput>, Prisma.EmployeeUncheckedUpdateWithoutLeave_requestsInput>
 }
 
-export type EmployeeUpdateOneWithoutApproved_leavesNestedInput = {
-  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutApproved_leavesInput, Prisma.EmployeeUncheckedCreateWithoutApproved_leavesInput>
-  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutApproved_leavesInput
-  upsert?: Prisma.EmployeeUpsertWithoutApproved_leavesInput
-  disconnect?: Prisma.EmployeeWhereInput | boolean
-  delete?: Prisma.EmployeeWhereInput | boolean
-  connect?: Prisma.EmployeeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutApproved_leavesInput, Prisma.EmployeeUpdateWithoutApproved_leavesInput>, Prisma.EmployeeUncheckedUpdateWithoutApproved_leavesInput>
-}
-
 export type EmployeeCreateNestedOneWithoutPayslipsInput = {
   create?: Prisma.XOR<Prisma.EmployeeCreateWithoutPayslipsInput, Prisma.EmployeeUncheckedCreateWithoutPayslipsInput>
   connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutPayslipsInput
-  connect?: Prisma.EmployeeWhereUniqueInput
-}
-
-export type EmployeeCreateNestedOneWithoutGenerated_payslipsInput = {
-  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutGenerated_payslipsInput, Prisma.EmployeeUncheckedCreateWithoutGenerated_payslipsInput>
-  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutGenerated_payslipsInput
   connect?: Prisma.EmployeeWhereUniqueInput
 }
 
@@ -1170,190 +1113,6 @@ export type EmployeeUpdateOneRequiredWithoutPayslipsNestedInput = {
   upsert?: Prisma.EmployeeUpsertWithoutPayslipsInput
   connect?: Prisma.EmployeeWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutPayslipsInput, Prisma.EmployeeUpdateWithoutPayslipsInput>, Prisma.EmployeeUncheckedUpdateWithoutPayslipsInput>
-}
-
-export type EmployeeUpdateOneRequiredWithoutGenerated_payslipsNestedInput = {
-  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutGenerated_payslipsInput, Prisma.EmployeeUncheckedCreateWithoutGenerated_payslipsInput>
-  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutGenerated_payslipsInput
-  upsert?: Prisma.EmployeeUpsertWithoutGenerated_payslipsInput
-  connect?: Prisma.EmployeeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutGenerated_payslipsInput, Prisma.EmployeeUpdateWithoutGenerated_payslipsInput>, Prisma.EmployeeUncheckedUpdateWithoutGenerated_payslipsInput>
-}
-
-export type EmployeeCreateWithoutAnnouncementsInput = {
-  id?: string
-  employee_code: string
-  first_name: string
-  last_name: string
-  date_of_birth: Date | string
-  gender: $Enums.Gender
-  blood_group?: string | null
-  phone: string
-  emergency_contact_name: string
-  emergency_contact_phone: string
-  profile_url?: string | null
-  designation: string
-  salary: number
-  bank_name: string
-  bank_account_number: string
-  employment_type: $Enums.EmployeeType
-  join_date: Date | string
-  employment_status?: $Enums.EmployeeStatus
-  address_line1: string
-  address_line2?: string | null
-  city: string
-  state: string
-  zip_code: string
-  country: string
-  nid_number?: string | null
-  tin_number?: string | null
-  passport_number?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
-  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
-  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
-  attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
-  leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-}
-
-export type EmployeeUncheckedCreateWithoutAnnouncementsInput = {
-  id?: string
-  user_id: string
-  employee_code: string
-  first_name: string
-  last_name: string
-  date_of_birth: Date | string
-  gender: $Enums.Gender
-  blood_group?: string | null
-  phone: string
-  emergency_contact_name: string
-  emergency_contact_phone: string
-  profile_url?: string | null
-  department_id: string
-  designation: string
-  salary: number
-  bank_name: string
-  bank_account_number: string
-  employment_type: $Enums.EmployeeType
-  join_date: Date | string
-  employment_status?: $Enums.EmployeeStatus
-  address_line1: string
-  address_line2?: string | null
-  city: string
-  state: string
-  zip_code: string
-  country: string
-  nid_number?: string | null
-  tin_number?: string | null
-  passport_number?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
-  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
-  leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-}
-
-export type EmployeeCreateOrConnectWithoutAnnouncementsInput = {
-  where: Prisma.EmployeeWhereUniqueInput
-  create: Prisma.XOR<Prisma.EmployeeCreateWithoutAnnouncementsInput, Prisma.EmployeeUncheckedCreateWithoutAnnouncementsInput>
-}
-
-export type EmployeeUpsertWithoutAnnouncementsInput = {
-  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutAnnouncementsInput, Prisma.EmployeeUncheckedUpdateWithoutAnnouncementsInput>
-  create: Prisma.XOR<Prisma.EmployeeCreateWithoutAnnouncementsInput, Prisma.EmployeeUncheckedCreateWithoutAnnouncementsInput>
-  where?: Prisma.EmployeeWhereInput
-}
-
-export type EmployeeUpdateToOneWithWhereWithoutAnnouncementsInput = {
-  where?: Prisma.EmployeeWhereInput
-  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutAnnouncementsInput, Prisma.EmployeeUncheckedUpdateWithoutAnnouncementsInput>
-}
-
-export type EmployeeUpdateWithoutAnnouncementsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  employee_code?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  blood_group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_phone?: Prisma.StringFieldUpdateOperationsInput | string
-  profile_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designation?: Prisma.StringFieldUpdateOperationsInput | string
-  salary?: Prisma.IntFieldUpdateOperationsInput | number
-  bank_name?: Prisma.StringFieldUpdateOperationsInput | string
-  bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
-  employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
-  join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
-  address_line1?: Prisma.StringFieldUpdateOperationsInput | string
-  address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  zip_code?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  nid_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tin_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
-  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
-  attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
-  leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-}
-
-export type EmployeeUncheckedUpdateWithoutAnnouncementsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  employee_code?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  blood_group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_phone?: Prisma.StringFieldUpdateOperationsInput | string
-  profile_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  department_id?: Prisma.StringFieldUpdateOperationsInput | string
-  designation?: Prisma.StringFieldUpdateOperationsInput | string
-  salary?: Prisma.IntFieldUpdateOperationsInput | number
-  bank_name?: Prisma.StringFieldUpdateOperationsInput | string
-  bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
-  employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
-  join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
-  address_line1?: Prisma.StringFieldUpdateOperationsInput | string
-  address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  zip_code?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  nid_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tin_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
-  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
-  leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
 }
 
 export type EmployeeCreateWithoutAttendanceInput = {
@@ -1391,9 +1150,6 @@ export type EmployeeCreateWithoutAttendanceInput = {
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeUncheckedCreateWithoutAttendanceInput = {
@@ -1431,9 +1187,6 @@ export type EmployeeUncheckedCreateWithoutAttendanceInput = {
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeCreateOrConnectWithoutAttendanceInput = {
@@ -1487,9 +1240,6 @@ export type EmployeeUpdateWithoutAttendanceInput = {
   hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutAttendanceInput = {
@@ -1527,9 +1277,6 @@ export type EmployeeUncheckedUpdateWithoutAttendanceInput = {
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeCreateWithoutUserInput = {
@@ -1567,9 +1314,6 @@ export type EmployeeCreateWithoutUserInput = {
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeUncheckedCreateWithoutUserInput = {
@@ -1607,9 +1351,6 @@ export type EmployeeUncheckedCreateWithoutUserInput = {
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeCreateOrConnectWithoutUserInput = {
@@ -1663,9 +1404,6 @@ export type EmployeeUpdateWithoutUserInput = {
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutUserInput = {
@@ -1703,9 +1441,6 @@ export type EmployeeUncheckedUpdateWithoutUserInput = {
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeCreateWithoutDepartmentInput = {
@@ -1743,9 +1478,6 @@ export type EmployeeCreateWithoutDepartmentInput = {
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeUncheckedCreateWithoutDepartmentInput = {
@@ -1783,9 +1515,6 @@ export type EmployeeUncheckedCreateWithoutDepartmentInput = {
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeCreateOrConnectWithoutDepartmentInput = {
@@ -1886,9 +1615,6 @@ export type EmployeeCreateWithoutHr_profileInput = {
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeUncheckedCreateWithoutHr_profileInput = {
@@ -1926,9 +1652,6 @@ export type EmployeeUncheckedCreateWithoutHr_profileInput = {
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeCreateOrConnectWithoutHr_profileInput = {
@@ -1982,9 +1705,6 @@ export type EmployeeUpdateWithoutHr_profileInput = {
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutHr_profileInput = {
@@ -2022,9 +1742,6 @@ export type EmployeeUncheckedUpdateWithoutHr_profileInput = {
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeCreateWithoutLeave_requestsInput = {
@@ -2062,9 +1779,6 @@ export type EmployeeCreateWithoutLeave_requestsInput = {
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeUncheckedCreateWithoutLeave_requestsInput = {
@@ -2102,99 +1816,11 @@ export type EmployeeUncheckedCreateWithoutLeave_requestsInput = {
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeCreateOrConnectWithoutLeave_requestsInput = {
   where: Prisma.EmployeeWhereUniqueInput
   create: Prisma.XOR<Prisma.EmployeeCreateWithoutLeave_requestsInput, Prisma.EmployeeUncheckedCreateWithoutLeave_requestsInput>
-}
-
-export type EmployeeCreateWithoutApproved_leavesInput = {
-  id?: string
-  employee_code: string
-  first_name: string
-  last_name: string
-  date_of_birth: Date | string
-  gender: $Enums.Gender
-  blood_group?: string | null
-  phone: string
-  emergency_contact_name: string
-  emergency_contact_phone: string
-  profile_url?: string | null
-  designation: string
-  salary: number
-  bank_name: string
-  bank_account_number: string
-  employment_type: $Enums.EmployeeType
-  join_date: Date | string
-  employment_status?: $Enums.EmployeeStatus
-  address_line1: string
-  address_line2?: string | null
-  city: string
-  state: string
-  zip_code: string
-  country: string
-  nid_number?: string | null
-  tin_number?: string | null
-  passport_number?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
-  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
-  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
-  attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
-  leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
-}
-
-export type EmployeeUncheckedCreateWithoutApproved_leavesInput = {
-  id?: string
-  user_id: string
-  employee_code: string
-  first_name: string
-  last_name: string
-  date_of_birth: Date | string
-  gender: $Enums.Gender
-  blood_group?: string | null
-  phone: string
-  emergency_contact_name: string
-  emergency_contact_phone: string
-  profile_url?: string | null
-  department_id: string
-  designation: string
-  salary: number
-  bank_name: string
-  bank_account_number: string
-  employment_type: $Enums.EmployeeType
-  join_date: Date | string
-  employment_status?: $Enums.EmployeeStatus
-  address_line1: string
-  address_line2?: string | null
-  city: string
-  state: string
-  zip_code: string
-  country: string
-  nid_number?: string | null
-  tin_number?: string | null
-  passport_number?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
-  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
-  leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
-}
-
-export type EmployeeCreateOrConnectWithoutApproved_leavesInput = {
-  where: Prisma.EmployeeWhereUniqueInput
-  create: Prisma.XOR<Prisma.EmployeeCreateWithoutApproved_leavesInput, Prisma.EmployeeUncheckedCreateWithoutApproved_leavesInput>
 }
 
 export type EmployeeUpsertWithoutLeave_requestsInput = {
@@ -2243,9 +1869,6 @@ export type EmployeeUpdateWithoutLeave_requestsInput = {
   hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutLeave_requestsInput = {
@@ -2283,100 +1906,6 @@ export type EmployeeUncheckedUpdateWithoutLeave_requestsInput = {
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
-}
-
-export type EmployeeUpsertWithoutApproved_leavesInput = {
-  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutApproved_leavesInput, Prisma.EmployeeUncheckedUpdateWithoutApproved_leavesInput>
-  create: Prisma.XOR<Prisma.EmployeeCreateWithoutApproved_leavesInput, Prisma.EmployeeUncheckedCreateWithoutApproved_leavesInput>
-  where?: Prisma.EmployeeWhereInput
-}
-
-export type EmployeeUpdateToOneWithWhereWithoutApproved_leavesInput = {
-  where?: Prisma.EmployeeWhereInput
-  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutApproved_leavesInput, Prisma.EmployeeUncheckedUpdateWithoutApproved_leavesInput>
-}
-
-export type EmployeeUpdateWithoutApproved_leavesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  employee_code?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  blood_group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_phone?: Prisma.StringFieldUpdateOperationsInput | string
-  profile_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designation?: Prisma.StringFieldUpdateOperationsInput | string
-  salary?: Prisma.IntFieldUpdateOperationsInput | number
-  bank_name?: Prisma.StringFieldUpdateOperationsInput | string
-  bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
-  employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
-  join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
-  address_line1?: Prisma.StringFieldUpdateOperationsInput | string
-  address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  zip_code?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  nid_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tin_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
-  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
-  attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
-  leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
-}
-
-export type EmployeeUncheckedUpdateWithoutApproved_leavesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  employee_code?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  blood_group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_phone?: Prisma.StringFieldUpdateOperationsInput | string
-  profile_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  department_id?: Prisma.StringFieldUpdateOperationsInput | string
-  designation?: Prisma.StringFieldUpdateOperationsInput | string
-  salary?: Prisma.IntFieldUpdateOperationsInput | number
-  bank_name?: Prisma.StringFieldUpdateOperationsInput | string
-  bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
-  employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
-  join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
-  address_line1?: Prisma.StringFieldUpdateOperationsInput | string
-  address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  zip_code?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  nid_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tin_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
-  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
-  leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeCreateWithoutPayslipsInput = {
@@ -2414,9 +1943,6 @@ export type EmployeeCreateWithoutPayslipsInput = {
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeUncheckedCreateWithoutPayslipsInput = {
@@ -2454,99 +1980,11 @@ export type EmployeeUncheckedCreateWithoutPayslipsInput = {
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type EmployeeCreateOrConnectWithoutPayslipsInput = {
   where: Prisma.EmployeeWhereUniqueInput
   create: Prisma.XOR<Prisma.EmployeeCreateWithoutPayslipsInput, Prisma.EmployeeUncheckedCreateWithoutPayslipsInput>
-}
-
-export type EmployeeCreateWithoutGenerated_payslipsInput = {
-  id?: string
-  employee_code: string
-  first_name: string
-  last_name: string
-  date_of_birth: Date | string
-  gender: $Enums.Gender
-  blood_group?: string | null
-  phone: string
-  emergency_contact_name: string
-  emergency_contact_phone: string
-  profile_url?: string | null
-  designation: string
-  salary: number
-  bank_name: string
-  bank_account_number: string
-  employment_type: $Enums.EmployeeType
-  join_date: Date | string
-  employment_status?: $Enums.EmployeeStatus
-  address_line1: string
-  address_line2?: string | null
-  city: string
-  state: string
-  zip_code: string
-  country: string
-  nid_number?: string | null
-  tin_number?: string | null
-  passport_number?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
-  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
-  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
-  attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
-  leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
-}
-
-export type EmployeeUncheckedCreateWithoutGenerated_payslipsInput = {
-  id?: string
-  user_id: string
-  employee_code: string
-  first_name: string
-  last_name: string
-  date_of_birth: Date | string
-  gender: $Enums.Gender
-  blood_group?: string | null
-  phone: string
-  emergency_contact_name: string
-  emergency_contact_phone: string
-  profile_url?: string | null
-  department_id: string
-  designation: string
-  salary: number
-  bank_name: string
-  bank_account_number: string
-  employment_type: $Enums.EmployeeType
-  join_date: Date | string
-  employment_status?: $Enums.EmployeeStatus
-  address_line1: string
-  address_line2?: string | null
-  city: string
-  state: string
-  zip_code: string
-  country: string
-  nid_number?: string | null
-  tin_number?: string | null
-  passport_number?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
-  attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
-  leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
-}
-
-export type EmployeeCreateOrConnectWithoutGenerated_payslipsInput = {
-  where: Prisma.EmployeeWhereUniqueInput
-  create: Prisma.XOR<Prisma.EmployeeCreateWithoutGenerated_payslipsInput, Prisma.EmployeeUncheckedCreateWithoutGenerated_payslipsInput>
 }
 
 export type EmployeeUpsertWithoutPayslipsInput = {
@@ -2595,9 +2033,6 @@ export type EmployeeUpdateWithoutPayslipsInput = {
   hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutPayslipsInput = {
@@ -2635,100 +2070,6 @@ export type EmployeeUncheckedUpdateWithoutPayslipsInput = {
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
-}
-
-export type EmployeeUpsertWithoutGenerated_payslipsInput = {
-  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutGenerated_payslipsInput, Prisma.EmployeeUncheckedUpdateWithoutGenerated_payslipsInput>
-  create: Prisma.XOR<Prisma.EmployeeCreateWithoutGenerated_payslipsInput, Prisma.EmployeeUncheckedCreateWithoutGenerated_payslipsInput>
-  where?: Prisma.EmployeeWhereInput
-}
-
-export type EmployeeUpdateToOneWithWhereWithoutGenerated_payslipsInput = {
-  where?: Prisma.EmployeeWhereInput
-  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutGenerated_payslipsInput, Prisma.EmployeeUncheckedUpdateWithoutGenerated_payslipsInput>
-}
-
-export type EmployeeUpdateWithoutGenerated_payslipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  employee_code?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  blood_group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_phone?: Prisma.StringFieldUpdateOperationsInput | string
-  profile_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designation?: Prisma.StringFieldUpdateOperationsInput | string
-  salary?: Prisma.IntFieldUpdateOperationsInput | number
-  bank_name?: Prisma.StringFieldUpdateOperationsInput | string
-  bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
-  employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
-  join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
-  address_line1?: Prisma.StringFieldUpdateOperationsInput | string
-  address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  zip_code?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  nid_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tin_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
-  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
-  attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
-  leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
-}
-
-export type EmployeeUncheckedUpdateWithoutGenerated_payslipsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  employee_code?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
-  blood_group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
-  emergency_contact_phone?: Prisma.StringFieldUpdateOperationsInput | string
-  profile_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  department_id?: Prisma.StringFieldUpdateOperationsInput | string
-  designation?: Prisma.StringFieldUpdateOperationsInput | string
-  salary?: Prisma.IntFieldUpdateOperationsInput | number
-  bank_name?: Prisma.StringFieldUpdateOperationsInput | string
-  bank_account_number?: Prisma.StringFieldUpdateOperationsInput | string
-  employment_type?: Prisma.EnumEmployeeTypeFieldUpdateOperationsInput | $Enums.EmployeeType
-  join_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employment_status?: Prisma.EnumEmployeeStatusFieldUpdateOperationsInput | $Enums.EmployeeStatus
-  address_line1?: Prisma.StringFieldUpdateOperationsInput | string
-  address_line2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  zip_code?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  nid_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tin_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
-  attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
-  leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeCreateManyDepartmentInput = {
@@ -2799,9 +2140,6 @@ export type EmployeeUpdateWithoutDepartmentInput = {
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutDepartmentInput = {
@@ -2839,9 +2177,6 @@ export type EmployeeUncheckedUpdateWithoutDepartmentInput = {
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type EmployeeUncheckedUpdateManyWithoutDepartmentInput = {
@@ -2886,18 +2221,12 @@ export type EmployeeCountOutputType = {
   attendance: number
   payslips: number
   leave_requests: number
-  generated_payslips: number
-  approved_leaves: number
-  announcements: number
 }
 
 export type EmployeeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attendance?: boolean | EmployeeCountOutputTypeCountAttendanceArgs
   payslips?: boolean | EmployeeCountOutputTypeCountPayslipsArgs
   leave_requests?: boolean | EmployeeCountOutputTypeCountLeave_requestsArgs
-  generated_payslips?: boolean | EmployeeCountOutputTypeCountGenerated_payslipsArgs
-  approved_leaves?: boolean | EmployeeCountOutputTypeCountApproved_leavesArgs
-  announcements?: boolean | EmployeeCountOutputTypeCountAnnouncementsArgs
 }
 
 /**
@@ -2929,27 +2258,6 @@ export type EmployeeCountOutputTypeCountPayslipsArgs<ExtArgs extends runtime.Typ
  */
 export type EmployeeCountOutputTypeCountLeave_requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeaveRequestWhereInput
-}
-
-/**
- * EmployeeCountOutputType without action
- */
-export type EmployeeCountOutputTypeCountGenerated_payslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PayslipWhereInput
-}
-
-/**
- * EmployeeCountOutputType without action
- */
-export type EmployeeCountOutputTypeCountApproved_leavesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeaveRequestWhereInput
-}
-
-/**
- * EmployeeCountOutputType without action
- */
-export type EmployeeCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AnnouncementWhereInput
 }
 
 
@@ -2991,9 +2299,6 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   attendance?: boolean | Prisma.Employee$attendanceArgs<ExtArgs>
   payslips?: boolean | Prisma.Employee$payslipsArgs<ExtArgs>
   leave_requests?: boolean | Prisma.Employee$leave_requestsArgs<ExtArgs>
-  generated_payslips?: boolean | Prisma.Employee$generated_payslipsArgs<ExtArgs>
-  approved_leaves?: boolean | Prisma.Employee$approved_leavesArgs<ExtArgs>
-  announcements?: boolean | Prisma.Employee$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
@@ -3111,9 +2416,6 @@ export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   attendance?: boolean | Prisma.Employee$attendanceArgs<ExtArgs>
   payslips?: boolean | Prisma.Employee$payslipsArgs<ExtArgs>
   leave_requests?: boolean | Prisma.Employee$leave_requestsArgs<ExtArgs>
-  generated_payslips?: boolean | Prisma.Employee$generated_payslipsArgs<ExtArgs>
-  approved_leaves?: boolean | Prisma.Employee$approved_leavesArgs<ExtArgs>
-  announcements?: boolean | Prisma.Employee$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3134,9 +2436,6 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     attendance: Prisma.$AttendancePayload<ExtArgs>[]
     payslips: Prisma.$PayslipPayload<ExtArgs>[]
     leave_requests: Prisma.$LeaveRequestPayload<ExtArgs>[]
-    generated_payslips: Prisma.$PayslipPayload<ExtArgs>[]
-    approved_leaves: Prisma.$LeaveRequestPayload<ExtArgs>[]
-    announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3570,9 +2869,6 @@ export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime
   attendance<T extends Prisma.Employee$attendanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$attendanceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payslips<T extends Prisma.Employee$payslipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$payslipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayslipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leave_requests<T extends Prisma.Employee$leave_requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$leave_requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaveRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  generated_payslips<T extends Prisma.Employee$generated_payslipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$generated_payslipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayslipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  approved_leaves<T extends Prisma.Employee$approved_leavesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$approved_leavesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaveRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  announcements<T extends Prisma.Employee$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4122,78 +3418,6 @@ export type Employee$leave_requestsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.LeaveRequestScalarFieldEnum | Prisma.LeaveRequestScalarFieldEnum[]
-}
-
-/**
- * Employee.generated_payslips
- */
-export type Employee$generated_payslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Payslip
-   */
-  select?: Prisma.PayslipSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Payslip
-   */
-  omit?: Prisma.PayslipOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PayslipInclude<ExtArgs> | null
-  where?: Prisma.PayslipWhereInput
-  orderBy?: Prisma.PayslipOrderByWithRelationInput | Prisma.PayslipOrderByWithRelationInput[]
-  cursor?: Prisma.PayslipWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PayslipScalarFieldEnum | Prisma.PayslipScalarFieldEnum[]
-}
-
-/**
- * Employee.approved_leaves
- */
-export type Employee$approved_leavesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeaveRequest
-   */
-  select?: Prisma.LeaveRequestSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeaveRequest
-   */
-  omit?: Prisma.LeaveRequestOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeaveRequestInclude<ExtArgs> | null
-  where?: Prisma.LeaveRequestWhereInput
-  orderBy?: Prisma.LeaveRequestOrderByWithRelationInput | Prisma.LeaveRequestOrderByWithRelationInput[]
-  cursor?: Prisma.LeaveRequestWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeaveRequestScalarFieldEnum | Prisma.LeaveRequestScalarFieldEnum[]
-}
-
-/**
- * Employee.announcements
- */
-export type Employee$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Announcement
-   */
-  select?: Prisma.AnnouncementSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Announcement
-   */
-  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AnnouncementInclude<ExtArgs> | null
-  where?: Prisma.AnnouncementWhereInput
-  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
-  cursor?: Prisma.AnnouncementWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
 }
 
 /**

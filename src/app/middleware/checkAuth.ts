@@ -25,7 +25,7 @@ export const checkAuth = (...authRoles: UserRole[]) => async (req: Request, res:
         const userData = verifiedToken.data as any;
         const userId = userData.userId || userData.id;
 
-        const user = await prisma.user.findUnique({ where: { id: userId } });
+        const user = await prisma.user.findUnique({ where: { id: userId }, include: { employee: { select: { id: true } }, hr_profile : { select : {id : true}} } });
 
         if (!user) {
              throw new AppError(status.UNAUTHORIZED, 'Unauthorized access! User not found.');
@@ -43,6 +43,8 @@ export const checkAuth = (...authRoles: UserRole[]) => async (req: Request, res:
             userId: user.id,
             role: user.role,
             email: user.email,
+            employeeId: user.employee?.id,
+            hrProfileId: user.hr_profile?.id,
         };
 
         if (authRoles.length > 0 && !authRoles.includes(user.role as UserRole)) {

@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { validateRequest } from "../../middleware/validateRequest";
+import { checkAuth } from "../../middleware/checkAuth";
+import { UserRole } from "../../../generated/prisma/enums";
 import { userController } from "./user.controller";
-import { updateUserSchema } from "./user.validation";
+import { updateUserSchema, createHRProfileSchema } from "./user.validation";
 
 const router = Router();
 
@@ -9,5 +11,7 @@ router.get('/', userController.getAllUsers);
 router.get('/:id', userController.getUserById);
 router.put('/update/:id', validateRequest(updateUserSchema), userController.updateUser);
 router.delete('/delete/:id', userController.deleteUser);
+
+router.post('/hr-profile/create', validateRequest(createHRProfileSchema), userController.createHRProfile);
 
 export const userRoutes = router;

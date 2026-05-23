@@ -21,7 +21,7 @@ model LeaveRequest {
 
   // Relations
   employee     Employee  @relation(fields: [employee_id], references: [id])
-  approved_emp Employee? @relation("LeaveApprovedBy", fields: [approved_by], references: [id])
+  approved_emp HRProfile? @relation("LeaveApprovedBy", fields: [approved_by], references: [id])
 
   @@map("leave_requests")
 }

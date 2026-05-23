@@ -246,7 +246,7 @@ export type AnnouncementWhereInput = {
   created_by?: Prisma.UuidFilter<"Announcement"> | string
   created_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
-  creator?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
+  creator?: Prisma.XOR<Prisma.HRProfileScalarRelationFilter, Prisma.HRProfileWhereInput>
   department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
 }
 
@@ -264,7 +264,7 @@ export type AnnouncementOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  creator?: Prisma.EmployeeOrderByWithRelationInput
+  creator?: Prisma.HRProfileOrderByWithRelationInput
   department?: Prisma.DepartmentOrderByWithRelationInput
 }
 
@@ -285,7 +285,7 @@ export type AnnouncementWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.UuidFilter<"Announcement"> | string
   created_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
-  creator?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
+  creator?: Prisma.XOR<Prisma.HRProfileScalarRelationFilter, Prisma.HRProfileWhereInput>
   department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
 }, "id">
 
@@ -339,7 +339,7 @@ export type AnnouncementCreateInput = {
   expires_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  creator: Prisma.EmployeeCreateNestedOneWithoutAnnouncementsInput
+  creator: Prisma.HRProfileCreateNestedOneWithoutAnnouncementsInput
   department?: Prisma.DepartmentCreateNestedOneWithoutAnnouncementsInput
 }
 
@@ -371,7 +371,7 @@ export type AnnouncementUpdateInput = {
   expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.EmployeeUpdateOneRequiredWithoutAnnouncementsNestedInput
+  creator?: Prisma.HRProfileUpdateOneRequiredWithoutAnnouncementsNestedInput
   department?: Prisma.DepartmentUpdateOneWithoutAnnouncementsNestedInput
 }
 
@@ -619,7 +619,7 @@ export type AnnouncementCreateWithoutDepartmentInput = {
   expires_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  creator: Prisma.EmployeeCreateNestedOneWithoutAnnouncementsInput
+  creator: Prisma.HRProfileCreateNestedOneWithoutAnnouncementsInput
 }
 
 export type AnnouncementUncheckedCreateWithoutDepartmentInput = {
@@ -765,7 +765,7 @@ export type AnnouncementUpdateWithoutDepartmentInput = {
   expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.EmployeeUpdateOneRequiredWithoutAnnouncementsNestedInput
+  creator?: Prisma.HRProfileUpdateOneRequiredWithoutAnnouncementsNestedInput
 }
 
 export type AnnouncementUncheckedUpdateWithoutDepartmentInput = {
@@ -874,7 +874,7 @@ export type AnnouncementSelect<ExtArgs extends runtime.Types.Extensions.Internal
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  creator?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
@@ -892,7 +892,7 @@ export type AnnouncementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  creator?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
@@ -910,7 +910,7 @@ export type AnnouncementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  creator?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
@@ -932,22 +932,22 @@ export type AnnouncementSelectScalar = {
 
 export type AnnouncementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "audience" | "department_id" | "status" | "is_pinned" | "attachment_url" | "published_at" | "expires_at" | "created_by" | "created_at" | "updated_at", ExtArgs["result"]["announcement"]>
 export type AnnouncementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  creator?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }
 export type AnnouncementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  creator?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }
 export type AnnouncementIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  creator?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }
 
 export type $AnnouncementPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Announcement"
   objects: {
-    creator: Prisma.$EmployeePayload<ExtArgs>
+    creator: Prisma.$HRProfilePayload<ExtArgs>
     department: Prisma.$DepartmentPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1358,7 +1358,7 @@ readonly fields: AnnouncementFieldRefs;
  */
 export interface Prisma__AnnouncementClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  creator<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  creator<T extends Prisma.HRProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HRProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   department<T extends Prisma.Announcement$departmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Announcement$departmentArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

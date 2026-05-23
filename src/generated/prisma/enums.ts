@@ -87,7 +87,8 @@ export const LeaveType = {
   SICK: 'SICK',
   CASUAL: 'CASUAL',
   ANNUAL: 'ANNUAL',
-  MATERNITY: 'MATERNITY'
+  MATERNITY: 'MATERNITY',
+  OTHER: 'OTHER'
 } as const
 
 export type LeaveType = (typeof LeaveType)[keyof typeof LeaveType]

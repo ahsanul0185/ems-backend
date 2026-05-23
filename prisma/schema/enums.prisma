@@ -56,6 +56,7 @@ enum LeaveType {
   CASUAL
   ANNUAL
   MATERNITY
+  OTHER
 }
 
 enum LeaveRequestStatus {

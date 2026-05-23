@@ -90,9 +90,44 @@ const deleteUser = async (userId: string) => {
     return { user };
 };
 
+const createHRProfile = async (user_id: string, employee_id: string) => {
+        const user = await prisma.user.findUnique({ where: { id: user_id } });
+        if (!user) {
+            throw new AppError(status.NOT_FOUND, "User not found");
+        }
+
+        const employee = await prisma.employee.findUnique({ where: { id: employee_id } });
+        if (!employee) {
+            throw new AppError(status.NOT_FOUND, "Employee not found");
+        }
+
+        const existing = await prisma.hRProfile.findFirst({
+            where: {
+                OR: [
+                    { user_id },
+                    { employee_id }
+                ]
+            }
+        });
+
+        if (existing) {
+            throw new AppError(status.BAD_REQUEST, "HR profile already exists for the provided user or employee");
+        }
+
+        const hrProfile = await prisma.hRProfile.create({
+            data: {
+                user_id,
+                employee_id,
+            }
+        });
+
+        return { hrProfile };
+}
+
 export const userService = {
     getAllUsers,
     getUserById,
     updateUser,
     deleteUser,
+    createHRProfile,
 };

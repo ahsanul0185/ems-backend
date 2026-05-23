@@ -66,6 +66,23 @@ const deleteUser = catchAsync(
     }
 );
 
+const createHRProfile = catchAsync(
+    async (req: Request, res: Response) => {
+        const { user_id, employee_id } = req.body;
+
+        const result = await userService.createHRProfile(user_id, employee_id);
+
+        sendResponse(res, {
+            httpStatusCode: status.CREATED,
+            success: true,
+            message: "HR profile created successfully",
+            data: {
+                hr_profile: result.hrProfile,
+            }
+        })
+    }
+)
+
 
 
 
@@ -75,4 +92,5 @@ export const userController = {
     getUserById,
     updateUser,
     deleteUser,
+    createHRProfile,
 };

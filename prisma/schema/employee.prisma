@@ -41,9 +41,6 @@ model Employee {
   attendance         Attendance[]
   payslips           Payslip[]
   leave_requests     LeaveRequest[]
-  generated_payslips Payslip[]      @relation("PayslipGeneratedBy")
-  approved_leaves    LeaveRequest[] @relation("LeaveApprovedBy")
-  announcements  Announcement[] @relation("AnnouncementCreatedBy")
 
   @@map("employees")
 }
