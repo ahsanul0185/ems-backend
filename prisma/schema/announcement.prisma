@@ -17,7 +17,7 @@ model Announcement {
   updated_at    DateTime             @updatedAt
 
   // Relations
-  creator    HRProfile    @relation("AnnouncementCreatedBy", fields: [created_by], references: [id])
+  creator    User    @relation("AnnouncementCreatedBy", fields: [created_by], references: [id])
   department Department? @relation(fields: [department_id], references: [id])
 
   @@map("announcements")

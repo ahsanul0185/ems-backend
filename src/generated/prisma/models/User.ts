@@ -218,6 +218,7 @@ export type UserWhereInput = {
   otps?: Prisma.OtpListRelationFilter
   employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
   hr_profile?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
+  announcements?: Prisma.AnnouncementListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -234,6 +235,7 @@ export type UserOrderByWithRelationInput = {
   otps?: Prisma.OtpOrderByRelationAggregateInput
   employee?: Prisma.EmployeeOrderByWithRelationInput
   hr_profile?: Prisma.HRProfileOrderByWithRelationInput
+  announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -253,6 +255,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   otps?: Prisma.OtpListRelationFilter
   employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
   hr_profile?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
+  announcements?: Prisma.AnnouncementListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -299,6 +302,7 @@ export type UserCreateInput = {
   otps?: Prisma.OtpCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -315,6 +319,7 @@ export type UserUncheckedCreateInput = {
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUpdateInput = {
@@ -331,6 +336,7 @@ export type UserUpdateInput = {
   otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -347,6 +353,7 @@ export type UserUncheckedUpdateInput = {
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -385,6 +392,11 @@ export type UserUncheckedUpdateManyInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -421,9 +433,18 @@ export type UserMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
 }
 
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
+export type UserCreateNestedOneWithoutAnnouncementsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsInput, Prisma.UserUncheckedCreateWithoutAnnouncementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnnouncementsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAnnouncementsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsInput, Prisma.UserUncheckedCreateWithoutAnnouncementsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAnnouncementsInput
+  upsert?: Prisma.UserUpsertWithoutAnnouncementsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAnnouncementsInput, Prisma.UserUpdateWithoutAnnouncementsInput>, Prisma.UserUncheckedUpdateWithoutAnnouncementsInput>
 }
 
 export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -490,6 +511,86 @@ export type UserUpdateOneRequiredWithoutHr_profileNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHr_profileInput, Prisma.UserUpdateWithoutHr_profileInput>, Prisma.UserUncheckedUpdateWithoutHr_profileInput>
 }
 
+export type UserCreateWithoutAnnouncementsInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  is_deleted?: boolean
+  email_verified?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  session?: Prisma.SessionCreateNestedManyWithoutUserInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
+  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAnnouncementsInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  is_deleted?: boolean
+  email_verified?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAnnouncementsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsInput, Prisma.UserUncheckedCreateWithoutAnnouncementsInput>
+}
+
+export type UserUpsertWithoutAnnouncementsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAnnouncementsInput, Prisma.UserUncheckedUpdateWithoutAnnouncementsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAnnouncementsInput, Prisma.UserUncheckedCreateWithoutAnnouncementsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAnnouncementsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAnnouncementsInput, Prisma.UserUncheckedUpdateWithoutAnnouncementsInput>
+}
+
+export type UserUpdateWithoutAnnouncementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
+  hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAnnouncementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+}
+
 export type UserCreateWithoutSessionInput = {
   id?: string
   email: string
@@ -503,6 +604,7 @@ export type UserCreateWithoutSessionInput = {
   otps?: Prisma.OtpCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutSessionInput = {
@@ -518,6 +620,7 @@ export type UserUncheckedCreateWithoutSessionInput = {
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutSessionInput = {
@@ -549,6 +652,7 @@ export type UserUpdateWithoutSessionInput = {
   otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionInput = {
@@ -564,6 +668,7 @@ export type UserUncheckedUpdateWithoutSessionInput = {
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutOtpsInput = {
@@ -579,6 +684,7 @@ export type UserCreateWithoutOtpsInput = {
   session?: Prisma.SessionCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutOtpsInput = {
@@ -594,6 +700,7 @@ export type UserUncheckedCreateWithoutOtpsInput = {
   session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutOtpsInput = {
@@ -625,6 +732,7 @@ export type UserUpdateWithoutOtpsInput = {
   session?: Prisma.SessionUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOtpsInput = {
@@ -640,6 +748,7 @@ export type UserUncheckedUpdateWithoutOtpsInput = {
   session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutEmployeeInput = {
@@ -655,6 +764,7 @@ export type UserCreateWithoutEmployeeInput = {
   session?: Prisma.SessionCreateNestedManyWithoutUserInput
   otps?: Prisma.OtpCreateNestedManyWithoutUserInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutEmployeeInput = {
@@ -670,6 +780,7 @@ export type UserUncheckedCreateWithoutEmployeeInput = {
   session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutEmployeeInput = {
@@ -701,6 +812,7 @@ export type UserUpdateWithoutEmployeeInput = {
   session?: Prisma.SessionUpdateManyWithoutUserNestedInput
   otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmployeeInput = {
@@ -716,6 +828,7 @@ export type UserUncheckedUpdateWithoutEmployeeInput = {
   session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutHr_profileInput = {
@@ -731,6 +844,7 @@ export type UserCreateWithoutHr_profileInput = {
   session?: Prisma.SessionCreateNestedManyWithoutUserInput
   otps?: Prisma.OtpCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutHr_profileInput = {
@@ -746,6 +860,7 @@ export type UserUncheckedCreateWithoutHr_profileInput = {
   session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutHr_profileInput = {
@@ -777,6 +892,7 @@ export type UserUpdateWithoutHr_profileInput = {
   session?: Prisma.SessionUpdateManyWithoutUserNestedInput
   otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHr_profileInput = {
@@ -792,6 +908,7 @@ export type UserUncheckedUpdateWithoutHr_profileInput = {
   session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 
@@ -802,11 +919,13 @@ export type UserUncheckedUpdateWithoutHr_profileInput = {
 export type UserCountOutputType = {
   session: number
   otps: number
+  announcements: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   session?: boolean | UserCountOutputTypeCountSessionArgs
   otps?: boolean | UserCountOutputTypeCountOtpsArgs
+  announcements?: boolean | UserCountOutputTypeCountAnnouncementsArgs
 }
 
 /**
@@ -833,6 +952,13 @@ export type UserCountOutputTypeCountOtpsArgs<ExtArgs extends runtime.Types.Exten
   where?: Prisma.OtpWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AnnouncementWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -848,6 +974,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   otps?: boolean | Prisma.User$otpsArgs<ExtArgs>
   employee?: boolean | Prisma.User$employeeArgs<ExtArgs>
   hr_profile?: boolean | Prisma.User$hr_profileArgs<ExtArgs>
+  announcements?: boolean | Prisma.User$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -893,6 +1020,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   otps?: boolean | Prisma.User$otpsArgs<ExtArgs>
   employee?: boolean | Prisma.User$employeeArgs<ExtArgs>
   hr_profile?: boolean | Prisma.User$hr_profileArgs<ExtArgs>
+  announcements?: boolean | Prisma.User$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -905,6 +1033,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     otps: Prisma.$OtpPayload<ExtArgs>[]
     employee: Prisma.$EmployeePayload<ExtArgs> | null
     hr_profile: Prisma.$HRProfilePayload<ExtArgs> | null
+    announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1314,6 +1443,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   otps<T extends Prisma.User$otpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$otpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   employee<T extends Prisma.User$employeeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$employeeArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   hr_profile<T extends Prisma.User$hr_profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$hr_profileArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  announcements<T extends Prisma.User$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1828,6 +1958,30 @@ export type User$hr_profileArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.HRProfileInclude<ExtArgs> | null
   where?: Prisma.HRProfileWhereInput
+}
+
+/**
+ * User.announcements
+ */
+export type User$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Announcement
+   */
+  select?: Prisma.AnnouncementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Announcement
+   */
+  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AnnouncementInclude<ExtArgs> | null
+  where?: Prisma.AnnouncementWhereInput
+  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
+  cursor?: Prisma.AnnouncementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
 }
 
 /**

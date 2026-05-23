@@ -76,9 +76,7 @@ const createHRProfile = catchAsync(
             httpStatusCode: status.CREATED,
             success: true,
             message: "HR profile created successfully",
-            data: {
-                hr_profile: result.hrProfile,
-            }
+            data:  result.hrProfile
         })
     }
 )

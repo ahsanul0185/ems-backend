@@ -81,9 +81,7 @@ const getAllEmployees = catchAsync(
             httpStatusCode: status.OK,
             success: true,
             message: "Employees retrieved successfully",
-            data: {
-                employees: result.data,
-            },
+            data: result.data,
             meta: result.meta,
         })
     }

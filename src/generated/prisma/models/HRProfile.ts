@@ -186,7 +186,6 @@ export type HRProfileWhereInput = {
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   approved_leaves?: Prisma.LeaveRequestListRelationFilter
   generated_payslips?: Prisma.PayslipListRelationFilter
-  announcements?: Prisma.AnnouncementListRelationFilter
 }
 
 export type HRProfileOrderByWithRelationInput = {
@@ -199,7 +198,6 @@ export type HRProfileOrderByWithRelationInput = {
   employee?: Prisma.EmployeeOrderByWithRelationInput
   approved_leaves?: Prisma.LeaveRequestOrderByRelationAggregateInput
   generated_payslips?: Prisma.PayslipOrderByRelationAggregateInput
-  announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
 }
 
 export type HRProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -215,7 +213,6 @@ export type HRProfileWhereUniqueInput = Prisma.AtLeast<{
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   approved_leaves?: Prisma.LeaveRequestListRelationFilter
   generated_payslips?: Prisma.PayslipListRelationFilter
-  announcements?: Prisma.AnnouncementListRelationFilter
 }, "id" | "user_id" | "employee_id">
 
 export type HRProfileOrderByWithAggregationInput = {
@@ -248,7 +245,6 @@ export type HRProfileCreateInput = {
   employee: Prisma.EmployeeCreateNestedOneWithoutHr_profileInput
   approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
   generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileUncheckedCreateInput = {
@@ -259,7 +255,6 @@ export type HRProfileUncheckedCreateInput = {
   updated_at?: Date | string
   approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
   generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileUpdateInput = {
@@ -270,7 +265,6 @@ export type HRProfileUpdateInput = {
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutHr_profileNestedInput
   approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
   generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileUncheckedUpdateInput = {
@@ -281,7 +275,6 @@ export type HRProfileUncheckedUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
   generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileCreateManyInput = {
@@ -304,11 +297,6 @@ export type HRProfileUncheckedUpdateManyInput = {
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type HRProfileScalarRelationFilter = {
-  is?: Prisma.HRProfileWhereInput
-  isNot?: Prisma.HRProfileWhereInput
 }
 
 export type HRProfileNullableScalarRelationFilter = {
@@ -340,18 +328,9 @@ export type HRProfileMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
 }
 
-export type HRProfileCreateNestedOneWithoutAnnouncementsInput = {
-  create?: Prisma.XOR<Prisma.HRProfileCreateWithoutAnnouncementsInput, Prisma.HRProfileUncheckedCreateWithoutAnnouncementsInput>
-  connectOrCreate?: Prisma.HRProfileCreateOrConnectWithoutAnnouncementsInput
-  connect?: Prisma.HRProfileWhereUniqueInput
-}
-
-export type HRProfileUpdateOneRequiredWithoutAnnouncementsNestedInput = {
-  create?: Prisma.XOR<Prisma.HRProfileCreateWithoutAnnouncementsInput, Prisma.HRProfileUncheckedCreateWithoutAnnouncementsInput>
-  connectOrCreate?: Prisma.HRProfileCreateOrConnectWithoutAnnouncementsInput
-  upsert?: Prisma.HRProfileUpsertWithoutAnnouncementsInput
-  connect?: Prisma.HRProfileWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.HRProfileUpdateToOneWithWhereWithoutAnnouncementsInput, Prisma.HRProfileUpdateWithoutAnnouncementsInput>, Prisma.HRProfileUncheckedUpdateWithoutAnnouncementsInput>
+export type HRProfileScalarRelationFilter = {
+  is?: Prisma.HRProfileWhereInput
+  isNot?: Prisma.HRProfileWhereInput
 }
 
 export type HRProfileCreateNestedOneWithoutUserInput = {
@@ -448,62 +427,6 @@ export type HRProfileUpdateOneRequiredWithoutGenerated_payslipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.HRProfileUpdateToOneWithWhereWithoutGenerated_payslipsInput, Prisma.HRProfileUpdateWithoutGenerated_payslipsInput>, Prisma.HRProfileUncheckedUpdateWithoutGenerated_payslipsInput>
 }
 
-export type HRProfileCreateWithoutAnnouncementsInput = {
-  id?: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutHr_profileInput
-  employee: Prisma.EmployeeCreateNestedOneWithoutHr_profileInput
-  approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-}
-
-export type HRProfileUncheckedCreateWithoutAnnouncementsInput = {
-  id?: string
-  user_id: string
-  employee_id: string
-  created_at?: Date | string
-  updated_at?: Date | string
-  approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-}
-
-export type HRProfileCreateOrConnectWithoutAnnouncementsInput = {
-  where: Prisma.HRProfileWhereUniqueInput
-  create: Prisma.XOR<Prisma.HRProfileCreateWithoutAnnouncementsInput, Prisma.HRProfileUncheckedCreateWithoutAnnouncementsInput>
-}
-
-export type HRProfileUpsertWithoutAnnouncementsInput = {
-  update: Prisma.XOR<Prisma.HRProfileUpdateWithoutAnnouncementsInput, Prisma.HRProfileUncheckedUpdateWithoutAnnouncementsInput>
-  create: Prisma.XOR<Prisma.HRProfileCreateWithoutAnnouncementsInput, Prisma.HRProfileUncheckedCreateWithoutAnnouncementsInput>
-  where?: Prisma.HRProfileWhereInput
-}
-
-export type HRProfileUpdateToOneWithWhereWithoutAnnouncementsInput = {
-  where?: Prisma.HRProfileWhereInput
-  data: Prisma.XOR<Prisma.HRProfileUpdateWithoutAnnouncementsInput, Prisma.HRProfileUncheckedUpdateWithoutAnnouncementsInput>
-}
-
-export type HRProfileUpdateWithoutAnnouncementsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutHr_profileNestedInput
-  employee?: Prisma.EmployeeUpdateOneRequiredWithoutHr_profileNestedInput
-  approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-}
-
-export type HRProfileUncheckedUpdateWithoutAnnouncementsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.StringFieldUpdateOperationsInput | string
-  employee_id?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-}
-
 export type HRProfileCreateWithoutUserInput = {
   id?: string
   created_at?: Date | string
@@ -511,7 +434,6 @@ export type HRProfileCreateWithoutUserInput = {
   employee: Prisma.EmployeeCreateNestedOneWithoutHr_profileInput
   approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
   generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileUncheckedCreateWithoutUserInput = {
@@ -521,7 +443,6 @@ export type HRProfileUncheckedCreateWithoutUserInput = {
   updated_at?: Date | string
   approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
   generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileCreateOrConnectWithoutUserInput = {
@@ -547,7 +468,6 @@ export type HRProfileUpdateWithoutUserInput = {
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutHr_profileNestedInput
   approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
   generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileUncheckedUpdateWithoutUserInput = {
@@ -557,7 +477,6 @@ export type HRProfileUncheckedUpdateWithoutUserInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
   generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileCreateWithoutEmployeeInput = {
@@ -567,7 +486,6 @@ export type HRProfileCreateWithoutEmployeeInput = {
   user: Prisma.UserCreateNestedOneWithoutHr_profileInput
   approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
   generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileUncheckedCreateWithoutEmployeeInput = {
@@ -577,7 +495,6 @@ export type HRProfileUncheckedCreateWithoutEmployeeInput = {
   updated_at?: Date | string
   approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
   generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileCreateOrConnectWithoutEmployeeInput = {
@@ -603,7 +520,6 @@ export type HRProfileUpdateWithoutEmployeeInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutHr_profileNestedInput
   approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
   generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileUncheckedUpdateWithoutEmployeeInput = {
@@ -613,7 +529,6 @@ export type HRProfileUncheckedUpdateWithoutEmployeeInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
   generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileCreateWithoutApproved_leavesInput = {
@@ -623,7 +538,6 @@ export type HRProfileCreateWithoutApproved_leavesInput = {
   user: Prisma.UserCreateNestedOneWithoutHr_profileInput
   employee: Prisma.EmployeeCreateNestedOneWithoutHr_profileInput
   generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileUncheckedCreateWithoutApproved_leavesInput = {
@@ -633,7 +547,6 @@ export type HRProfileUncheckedCreateWithoutApproved_leavesInput = {
   created_at?: Date | string
   updated_at?: Date | string
   generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGenerated_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileCreateOrConnectWithoutApproved_leavesInput = {
@@ -659,7 +572,6 @@ export type HRProfileUpdateWithoutApproved_leavesInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutHr_profileNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutHr_profileNestedInput
   generated_payslips?: Prisma.PayslipUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileUncheckedUpdateWithoutApproved_leavesInput = {
@@ -669,7 +581,6 @@ export type HRProfileUncheckedUpdateWithoutApproved_leavesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGenerated_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileCreateWithoutGenerated_payslipsInput = {
@@ -679,7 +590,6 @@ export type HRProfileCreateWithoutGenerated_payslipsInput = {
   user: Prisma.UserCreateNestedOneWithoutHr_profileInput
   employee: Prisma.EmployeeCreateNestedOneWithoutHr_profileInput
   approved_leaves?: Prisma.LeaveRequestCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileUncheckedCreateWithoutGenerated_payslipsInput = {
@@ -689,7 +599,6 @@ export type HRProfileUncheckedCreateWithoutGenerated_payslipsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   approved_leaves?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
 }
 
 export type HRProfileCreateOrConnectWithoutGenerated_payslipsInput = {
@@ -715,7 +624,6 @@ export type HRProfileUpdateWithoutGenerated_payslipsInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutHr_profileNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutHr_profileNestedInput
   approved_leaves?: Prisma.LeaveRequestUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
 }
 
 export type HRProfileUncheckedUpdateWithoutGenerated_payslipsInput = {
@@ -725,7 +633,6 @@ export type HRProfileUncheckedUpdateWithoutGenerated_payslipsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approved_leaves?: Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
 }
 
 
@@ -736,13 +643,11 @@ export type HRProfileUncheckedUpdateWithoutGenerated_payslipsInput = {
 export type HRProfileCountOutputType = {
   approved_leaves: number
   generated_payslips: number
-  announcements: number
 }
 
 export type HRProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   approved_leaves?: boolean | HRProfileCountOutputTypeCountApproved_leavesArgs
   generated_payslips?: boolean | HRProfileCountOutputTypeCountGenerated_payslipsArgs
-  announcements?: boolean | HRProfileCountOutputTypeCountAnnouncementsArgs
 }
 
 /**
@@ -769,13 +674,6 @@ export type HRProfileCountOutputTypeCountGenerated_payslipsArgs<ExtArgs extends 
   where?: Prisma.PayslipWhereInput
 }
 
-/**
- * HRProfileCountOutputType without action
- */
-export type HRProfileCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AnnouncementWhereInput
-}
-
 
 export type HRProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -787,7 +685,6 @@ export type HRProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   approved_leaves?: boolean | Prisma.HRProfile$approved_leavesArgs<ExtArgs>
   generated_payslips?: boolean | Prisma.HRProfile$generated_payslipsArgs<ExtArgs>
-  announcements?: boolean | Prisma.HRProfile$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.HRProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["hRProfile"]>
 
@@ -825,7 +722,6 @@ export type HRProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   approved_leaves?: boolean | Prisma.HRProfile$approved_leavesArgs<ExtArgs>
   generated_payslips?: boolean | Prisma.HRProfile$generated_payslipsArgs<ExtArgs>
-  announcements?: boolean | Prisma.HRProfile$announcementsArgs<ExtArgs>
   _count?: boolean | Prisma.HRProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type HRProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -844,7 +740,6 @@ export type $HRProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     employee: Prisma.$EmployeePayload<ExtArgs>
     approved_leaves: Prisma.$LeaveRequestPayload<ExtArgs>[]
     generated_payslips: Prisma.$PayslipPayload<ExtArgs>[]
-    announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1250,7 +1145,6 @@ export interface Prisma__HRProfileClient<T, Null = never, ExtArgs extends runtim
   employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   approved_leaves<T extends Prisma.HRProfile$approved_leavesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HRProfile$approved_leavesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaveRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   generated_payslips<T extends Prisma.HRProfile$generated_payslipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HRProfile$generated_payslipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayslipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  announcements<T extends Prisma.HRProfile$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HRProfile$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1731,30 +1625,6 @@ export type HRProfile$generated_payslipsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.PayslipScalarFieldEnum | Prisma.PayslipScalarFieldEnum[]
-}
-
-/**
- * HRProfile.announcements
- */
-export type HRProfile$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Announcement
-   */
-  select?: Prisma.AnnouncementSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Announcement
-   */
-  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AnnouncementInclude<ExtArgs> | null
-  where?: Prisma.AnnouncementWhereInput
-  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
-  cursor?: Prisma.AnnouncementWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
 }
 
 /**

@@ -246,7 +246,7 @@ export type AnnouncementWhereInput = {
   created_by?: Prisma.UuidFilter<"Announcement"> | string
   created_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
-  creator?: Prisma.XOR<Prisma.HRProfileScalarRelationFilter, Prisma.HRProfileWhereInput>
+  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
 }
 
@@ -264,7 +264,7 @@ export type AnnouncementOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  creator?: Prisma.HRProfileOrderByWithRelationInput
+  creator?: Prisma.UserOrderByWithRelationInput
   department?: Prisma.DepartmentOrderByWithRelationInput
 }
 
@@ -285,7 +285,7 @@ export type AnnouncementWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.UuidFilter<"Announcement"> | string
   created_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
-  creator?: Prisma.XOR<Prisma.HRProfileScalarRelationFilter, Prisma.HRProfileWhereInput>
+  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   department?: Prisma.XOR<Prisma.DepartmentNullableScalarRelationFilter, Prisma.DepartmentWhereInput> | null
 }, "id">
 
@@ -339,7 +339,7 @@ export type AnnouncementCreateInput = {
   expires_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  creator: Prisma.HRProfileCreateNestedOneWithoutAnnouncementsInput
+  creator: Prisma.UserCreateNestedOneWithoutAnnouncementsInput
   department?: Prisma.DepartmentCreateNestedOneWithoutAnnouncementsInput
 }
 
@@ -371,7 +371,7 @@ export type AnnouncementUpdateInput = {
   expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.HRProfileUpdateOneRequiredWithoutAnnouncementsNestedInput
+  creator?: Prisma.UserUpdateOneRequiredWithoutAnnouncementsNestedInput
   department?: Prisma.DepartmentUpdateOneWithoutAnnouncementsNestedInput
 }
 
@@ -523,48 +523,6 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type AnnouncementCreateNestedManyWithoutDepartmentInput = {
-  create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput> | Prisma.AnnouncementCreateWithoutDepartmentInput[] | Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput[]
-  connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput | Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput[]
-  createMany?: Prisma.AnnouncementCreateManyDepartmentInputEnvelope
-  connect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-}
-
-export type AnnouncementUncheckedCreateNestedManyWithoutDepartmentInput = {
-  create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput> | Prisma.AnnouncementCreateWithoutDepartmentInput[] | Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput[]
-  connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput | Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput[]
-  createMany?: Prisma.AnnouncementCreateManyDepartmentInputEnvelope
-  connect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-}
-
-export type AnnouncementUpdateManyWithoutDepartmentNestedInput = {
-  create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput> | Prisma.AnnouncementCreateWithoutDepartmentInput[] | Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput[]
-  connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput | Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput[]
-  upsert?: Prisma.AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput | Prisma.AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput[]
-  createMany?: Prisma.AnnouncementCreateManyDepartmentInputEnvelope
-  set?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-  disconnect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-  delete?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-  connect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-  update?: Prisma.AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput | Prisma.AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput[]
-  updateMany?: Prisma.AnnouncementUpdateManyWithWhereWithoutDepartmentInput | Prisma.AnnouncementUpdateManyWithWhereWithoutDepartmentInput[]
-  deleteMany?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
-}
-
-export type AnnouncementUncheckedUpdateManyWithoutDepartmentNestedInput = {
-  create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput> | Prisma.AnnouncementCreateWithoutDepartmentInput[] | Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput[]
-  connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput | Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput[]
-  upsert?: Prisma.AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput | Prisma.AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput[]
-  createMany?: Prisma.AnnouncementCreateManyDepartmentInputEnvelope
-  set?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-  disconnect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-  delete?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-  connect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
-  update?: Prisma.AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput | Prisma.AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput[]
-  updateMany?: Prisma.AnnouncementUpdateManyWithWhereWithoutDepartmentInput | Prisma.AnnouncementUpdateManyWithWhereWithoutDepartmentInput[]
-  deleteMany?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
-}
-
 export type AnnouncementCreateNestedManyWithoutCreatorInput = {
   create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutCreatorInput, Prisma.AnnouncementUncheckedCreateWithoutCreatorInput> | Prisma.AnnouncementCreateWithoutCreatorInput[] | Prisma.AnnouncementUncheckedCreateWithoutCreatorInput[]
   connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutCreatorInput | Prisma.AnnouncementCreateOrConnectWithoutCreatorInput[]
@@ -607,79 +565,46 @@ export type AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput = {
   deleteMany?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
 }
 
-export type AnnouncementCreateWithoutDepartmentInput = {
-  id?: string
-  title: string
-  content: string
-  audience?: $Enums.AnnouncementAudience
-  status?: $Enums.AnnouncementStatus
-  is_pinned?: boolean
-  attachment_url?: string | null
-  published_at?: Date | string | null
-  expires_at?: Date | string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  creator: Prisma.HRProfileCreateNestedOneWithoutAnnouncementsInput
+export type AnnouncementCreateNestedManyWithoutDepartmentInput = {
+  create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput> | Prisma.AnnouncementCreateWithoutDepartmentInput[] | Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput[]
+  connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput | Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput[]
+  createMany?: Prisma.AnnouncementCreateManyDepartmentInputEnvelope
+  connect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
 }
 
-export type AnnouncementUncheckedCreateWithoutDepartmentInput = {
-  id?: string
-  title: string
-  content: string
-  audience?: $Enums.AnnouncementAudience
-  status?: $Enums.AnnouncementStatus
-  is_pinned?: boolean
-  attachment_url?: string | null
-  published_at?: Date | string | null
-  expires_at?: Date | string | null
-  created_by: string
-  created_at?: Date | string
-  updated_at?: Date | string
+export type AnnouncementUncheckedCreateNestedManyWithoutDepartmentInput = {
+  create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput> | Prisma.AnnouncementCreateWithoutDepartmentInput[] | Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput[]
+  connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput | Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput[]
+  createMany?: Prisma.AnnouncementCreateManyDepartmentInputEnvelope
+  connect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
 }
 
-export type AnnouncementCreateOrConnectWithoutDepartmentInput = {
-  where: Prisma.AnnouncementWhereUniqueInput
-  create: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput>
+export type AnnouncementUpdateManyWithoutDepartmentNestedInput = {
+  create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput> | Prisma.AnnouncementCreateWithoutDepartmentInput[] | Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput[]
+  connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput | Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput[]
+  upsert?: Prisma.AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput | Prisma.AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput[]
+  createMany?: Prisma.AnnouncementCreateManyDepartmentInputEnvelope
+  set?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
+  disconnect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
+  delete?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
+  connect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
+  update?: Prisma.AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput | Prisma.AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput[]
+  updateMany?: Prisma.AnnouncementUpdateManyWithWhereWithoutDepartmentInput | Prisma.AnnouncementUpdateManyWithWhereWithoutDepartmentInput[]
+  deleteMany?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
 }
 
-export type AnnouncementCreateManyDepartmentInputEnvelope = {
-  data: Prisma.AnnouncementCreateManyDepartmentInput | Prisma.AnnouncementCreateManyDepartmentInput[]
-  skipDuplicates?: boolean
-}
-
-export type AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput = {
-  where: Prisma.AnnouncementWhereUniqueInput
-  update: Prisma.XOR<Prisma.AnnouncementUpdateWithoutDepartmentInput, Prisma.AnnouncementUncheckedUpdateWithoutDepartmentInput>
-  create: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput>
-}
-
-export type AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput = {
-  where: Prisma.AnnouncementWhereUniqueInput
-  data: Prisma.XOR<Prisma.AnnouncementUpdateWithoutDepartmentInput, Prisma.AnnouncementUncheckedUpdateWithoutDepartmentInput>
-}
-
-export type AnnouncementUpdateManyWithWhereWithoutDepartmentInput = {
-  where: Prisma.AnnouncementScalarWhereInput
-  data: Prisma.XOR<Prisma.AnnouncementUpdateManyMutationInput, Prisma.AnnouncementUncheckedUpdateManyWithoutDepartmentInput>
-}
-
-export type AnnouncementScalarWhereInput = {
-  AND?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
-  OR?: Prisma.AnnouncementScalarWhereInput[]
-  NOT?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
-  id?: Prisma.UuidFilter<"Announcement"> | string
-  title?: Prisma.StringFilter<"Announcement"> | string
-  content?: Prisma.StringFilter<"Announcement"> | string
-  audience?: Prisma.EnumAnnouncementAudienceFilter<"Announcement"> | $Enums.AnnouncementAudience
-  department_id?: Prisma.UuidNullableFilter<"Announcement"> | string | null
-  status?: Prisma.EnumAnnouncementStatusFilter<"Announcement"> | $Enums.AnnouncementStatus
-  is_pinned?: Prisma.BoolFilter<"Announcement"> | boolean
-  attachment_url?: Prisma.StringNullableFilter<"Announcement"> | string | null
-  published_at?: Prisma.DateTimeNullableFilter<"Announcement"> | Date | string | null
-  expires_at?: Prisma.DateTimeNullableFilter<"Announcement"> | Date | string | null
-  created_by?: Prisma.UuidFilter<"Announcement"> | string
-  created_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
-  updated_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
+export type AnnouncementUncheckedUpdateManyWithoutDepartmentNestedInput = {
+  create?: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput> | Prisma.AnnouncementCreateWithoutDepartmentInput[] | Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput[]
+  connectOrCreate?: Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput | Prisma.AnnouncementCreateOrConnectWithoutDepartmentInput[]
+  upsert?: Prisma.AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput | Prisma.AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput[]
+  createMany?: Prisma.AnnouncementCreateManyDepartmentInputEnvelope
+  set?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
+  disconnect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
+  delete?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
+  connect?: Prisma.AnnouncementWhereUniqueInput | Prisma.AnnouncementWhereUniqueInput[]
+  update?: Prisma.AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput | Prisma.AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput[]
+  updateMany?: Prisma.AnnouncementUpdateManyWithWhereWithoutDepartmentInput | Prisma.AnnouncementUpdateManyWithWhereWithoutDepartmentInput[]
+  deleteMany?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
 }
 
 export type AnnouncementCreateWithoutCreatorInput = {
@@ -738,7 +663,41 @@ export type AnnouncementUpdateManyWithWhereWithoutCreatorInput = {
   data: Prisma.XOR<Prisma.AnnouncementUpdateManyMutationInput, Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorInput>
 }
 
-export type AnnouncementCreateManyDepartmentInput = {
+export type AnnouncementScalarWhereInput = {
+  AND?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
+  OR?: Prisma.AnnouncementScalarWhereInput[]
+  NOT?: Prisma.AnnouncementScalarWhereInput | Prisma.AnnouncementScalarWhereInput[]
+  id?: Prisma.UuidFilter<"Announcement"> | string
+  title?: Prisma.StringFilter<"Announcement"> | string
+  content?: Prisma.StringFilter<"Announcement"> | string
+  audience?: Prisma.EnumAnnouncementAudienceFilter<"Announcement"> | $Enums.AnnouncementAudience
+  department_id?: Prisma.UuidNullableFilter<"Announcement"> | string | null
+  status?: Prisma.EnumAnnouncementStatusFilter<"Announcement"> | $Enums.AnnouncementStatus
+  is_pinned?: Prisma.BoolFilter<"Announcement"> | boolean
+  attachment_url?: Prisma.StringNullableFilter<"Announcement"> | string | null
+  published_at?: Prisma.DateTimeNullableFilter<"Announcement"> | Date | string | null
+  expires_at?: Prisma.DateTimeNullableFilter<"Announcement"> | Date | string | null
+  created_by?: Prisma.UuidFilter<"Announcement"> | string
+  created_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"Announcement"> | Date | string
+}
+
+export type AnnouncementCreateWithoutDepartmentInput = {
+  id?: string
+  title: string
+  content: string
+  audience?: $Enums.AnnouncementAudience
+  status?: $Enums.AnnouncementStatus
+  is_pinned?: boolean
+  attachment_url?: string | null
+  published_at?: Date | string | null
+  expires_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  creator: Prisma.UserCreateNestedOneWithoutAnnouncementsInput
+}
+
+export type AnnouncementUncheckedCreateWithoutDepartmentInput = {
   id?: string
   title: string
   content: string
@@ -753,49 +712,30 @@ export type AnnouncementCreateManyDepartmentInput = {
   updated_at?: Date | string
 }
 
-export type AnnouncementUpdateWithoutDepartmentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
-  status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
-  is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  published_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  creator?: Prisma.HRProfileUpdateOneRequiredWithoutAnnouncementsNestedInput
+export type AnnouncementCreateOrConnectWithoutDepartmentInput = {
+  where: Prisma.AnnouncementWhereUniqueInput
+  create: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput>
 }
 
-export type AnnouncementUncheckedUpdateWithoutDepartmentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
-  status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
-  is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  published_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_by?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type AnnouncementCreateManyDepartmentInputEnvelope = {
+  data: Prisma.AnnouncementCreateManyDepartmentInput | Prisma.AnnouncementCreateManyDepartmentInput[]
+  skipDuplicates?: boolean
 }
 
-export type AnnouncementUncheckedUpdateManyWithoutDepartmentInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
-  status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
-  is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  published_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  created_by?: Prisma.StringFieldUpdateOperationsInput | string
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+export type AnnouncementUpsertWithWhereUniqueWithoutDepartmentInput = {
+  where: Prisma.AnnouncementWhereUniqueInput
+  update: Prisma.XOR<Prisma.AnnouncementUpdateWithoutDepartmentInput, Prisma.AnnouncementUncheckedUpdateWithoutDepartmentInput>
+  create: Prisma.XOR<Prisma.AnnouncementCreateWithoutDepartmentInput, Prisma.AnnouncementUncheckedCreateWithoutDepartmentInput>
+}
+
+export type AnnouncementUpdateWithWhereUniqueWithoutDepartmentInput = {
+  where: Prisma.AnnouncementWhereUniqueInput
+  data: Prisma.XOR<Prisma.AnnouncementUpdateWithoutDepartmentInput, Prisma.AnnouncementUncheckedUpdateWithoutDepartmentInput>
+}
+
+export type AnnouncementUpdateManyWithWhereWithoutDepartmentInput = {
+  where: Prisma.AnnouncementScalarWhereInput
+  data: Prisma.XOR<Prisma.AnnouncementUpdateManyMutationInput, Prisma.AnnouncementUncheckedUpdateManyWithoutDepartmentInput>
 }
 
 export type AnnouncementCreateManyCreatorInput = {
@@ -858,6 +798,66 @@ export type AnnouncementUncheckedUpdateManyWithoutCreatorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type AnnouncementCreateManyDepartmentInput = {
+  id?: string
+  title: string
+  content: string
+  audience?: $Enums.AnnouncementAudience
+  status?: $Enums.AnnouncementStatus
+  is_pinned?: boolean
+  attachment_url?: string | null
+  published_at?: Date | string | null
+  expires_at?: Date | string | null
+  created_by: string
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type AnnouncementUpdateWithoutDepartmentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
+  is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  published_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutAnnouncementsNestedInput
+}
+
+export type AnnouncementUncheckedUpdateWithoutDepartmentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
+  is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  published_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AnnouncementUncheckedUpdateManyWithoutDepartmentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
+  is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  published_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expires_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 
 export type AnnouncementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -874,7 +874,7 @@ export type AnnouncementSelect<ExtArgs extends runtime.Types.Extensions.Internal
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
@@ -892,7 +892,7 @@ export type AnnouncementSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
@@ -910,7 +910,7 @@ export type AnnouncementSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   created_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }, ExtArgs["result"]["announcement"]>
 
@@ -932,22 +932,22 @@ export type AnnouncementSelectScalar = {
 
 export type AnnouncementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "audience" | "department_id" | "status" | "is_pinned" | "attachment_url" | "published_at" | "expires_at" | "created_by" | "created_at" | "updated_at", ExtArgs["result"]["announcement"]>
 export type AnnouncementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }
 export type AnnouncementIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }
 export type AnnouncementIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  creator?: boolean | Prisma.HRProfileDefaultArgs<ExtArgs>
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.Announcement$departmentArgs<ExtArgs>
 }
 
 export type $AnnouncementPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Announcement"
   objects: {
-    creator: Prisma.$HRProfilePayload<ExtArgs>
+    creator: Prisma.$UserPayload<ExtArgs>
     department: Prisma.$DepartmentPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1358,7 +1358,7 @@ readonly fields: AnnouncementFieldRefs;
  */
 export interface Prisma__AnnouncementClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  creator<T extends Prisma.HRProfileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HRProfileDefaultArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  creator<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   department<T extends Prisma.Announcement$departmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Announcement$departmentArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

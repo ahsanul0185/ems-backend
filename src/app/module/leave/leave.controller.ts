@@ -25,9 +25,7 @@ const applyLeave = catchAsync(
             httpStatusCode: status.CREATED,
             success: true,
             message: "Leave applied successfully",
-            data: {
-                leave: result.leave,
-            }
+            data: result.leave,
         })
     }
 )
@@ -47,9 +45,7 @@ const getMyLeaves = catchAsync(
             httpStatusCode: status.OK,
             success: true,
             message: "Leaves retrieved successfully",
-            data: {
-                leaves: result.data,
-            },
+            data: result.data,
             meta: result.meta,
         })
     }
@@ -64,9 +60,7 @@ const getAllLeaves = catchAsync(
             httpStatusCode: status.OK,
             success: true,
             message: "Leaves retrieved successfully",
-            data: {
-                leaves: result.data,
-            },
+            data: result.data,
             meta: result.meta,
         })
     }
@@ -81,9 +75,7 @@ const getLeaveById = catchAsync(
             httpStatusCode: status.OK,
             success: true,
             message: "Leave retrieved successfully",
-            data: {
-                leave: result.leave,
-            }
+            data: result.leave,
         })
     }
 )
@@ -103,9 +95,7 @@ const approveLeave = catchAsync(
             httpStatusCode: status.OK,
             success: true,
             message: "Leave approved successfully",
-            data: {
-                leave: result.leave,
-            }
+            data: result.leave,
         })
     }
 )
@@ -126,9 +116,7 @@ const rejectLeave = catchAsync(
             httpStatusCode: status.OK,
             success: true,
             message: "Leave rejected successfully",
-            data: {
-                leave: result.leave,
-            }
+            data: result.leave,
         })
     }
 )
