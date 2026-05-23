@@ -5,6 +5,7 @@ import { departmentRoutes } from "../module/department/department.route";
 import { userRoutes } from "../module/user/user.route";
 import { leaveRoutes } from "../module/leave/leave.route";
 import { payslipRoutes } from "../module/payslip/payslip.route";
+import { announcementRoutes } from "../module/announcement/announcement.route";
 
 const router = Router();
 
@@ -14,5 +15,6 @@ router.use("/departments", departmentRoutes);
 router.use("/users", userRoutes);
 router.use("/leaves", leaveRoutes);
 router.use("/payslips", payslipRoutes);
+router.use("/announcements", announcementRoutes);
 
 export const IndexRoutes = router;
