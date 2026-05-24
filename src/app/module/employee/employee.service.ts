@@ -148,6 +148,8 @@ const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQuer
                 phone: true,
                 designation: true,
                 employment_status: true,
+                gender: true,
+                employment_type: true,
                 department: {
                     select: {
                         name: true,
@@ -156,6 +158,7 @@ const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQuer
                 user: {
                     select: {
                         email: true,
+                        
                     }
                 }
             }

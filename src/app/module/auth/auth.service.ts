@@ -150,8 +150,17 @@ const getNewToken = async (refreshToken: string) => {
     };
 }
 
-const getMe = async () => { 
-    return {};
+const getMe = async (userId: string) => { 
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+
+    if (!user) {
+        throw new AppError(status.NOT_FOUND, "User not found");
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...userWithoutPassword } = user;
+
+    return userWithoutPassword;
 }
 
 const changePassword = async (userId: string, payload: IChangePasswordPayload) => {
