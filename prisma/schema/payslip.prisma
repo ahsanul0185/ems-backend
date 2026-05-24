@@ -4,7 +4,7 @@
 model Payslip {
   id               String        @id @default(uuid()) @db.Uuid
   employee_id      String        @db.Uuid
-  pay_period_month Int           // 1–12
+  pay_period_month Int // 1–12
   pay_period_year  Int
   pay_date         DateTime
   basic_salary     Int
@@ -18,7 +18,7 @@ model Payslip {
   updated_at       DateTime      @updatedAt
 
   // Relations
-  employee      Employee @relation(fields: [employee_id], references: [id])
+  employee      Employee  @relation(fields: [employee_id], references: [id])
   generated_emp HRProfile @relation("PayslipGeneratedBy", fields: [generated_by], references: [id])
 
   @@unique([employee_id, pay_period_month, pay_period_year])

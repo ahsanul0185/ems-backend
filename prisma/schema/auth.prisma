@@ -12,40 +12,38 @@ model User {
   updated_at     DateTime   @updatedAt
 
   // Relations
-  employee   Employee?
-  hr_profile HRProfile?
-  announcements  Announcement[] @relation("AnnouncementCreatedBy")
+  employee      Employee?
+  hr_profile    HRProfile?
+  announcements Announcement[] @relation("AnnouncementCreatedBy")
 
   @@map("users")
 }
 
-
 model Session {
   id            String   @id @default(cuid())
   user_id       String   @db.Uuid
-  refresh_token  String   // store hashed
+  refresh_token String // store hashed
   expires_at    DateTime
 
-  user          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("sessions")
 }
 
 model Otp {
-  id        String   @id @default(cuid())
-  user_id   String   @db.Uuid
-  code      String   // store hashed
-  type      OtpType
+  id         String   @id @default(cuid())
+  user_id    String   @db.Uuid
+  code       String // store hashed
+  type       OtpType
   expires_at DateTime
-  used      Boolean  @default(false)
+  used       Boolean  @default(false)
 
-  user      User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
 
   @@map("otps")
 }
-

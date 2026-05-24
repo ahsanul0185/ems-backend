@@ -29,11 +29,13 @@ export type AggregateAttendance = {
 export type AttendanceAvgAggregateOutputType = {
   late_minutes: number | null
   early_leave_minutes: number | null
+  work_minutes: number | null
 }
 
 export type AttendanceSumAggregateOutputType = {
   late_minutes: number | null
   early_leave_minutes: number | null
+  work_minutes: number | null
 }
 
 export type AttendanceMinAggregateOutputType = {
@@ -45,7 +47,14 @@ export type AttendanceMinAggregateOutputType = {
   status: $Enums.AttendanceStatus | null
   late_minutes: number | null
   early_leave_minutes: number | null
+  work_minutes: number | null
   notes: string | null
+  is_informed: boolean | null
+  informed_reason: string | null
+  informed_at: Date | null
+  informed_by: string | null
+  is_auto_clocked_out: boolean | null
+  leave_request_id: string | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -59,7 +68,14 @@ export type AttendanceMaxAggregateOutputType = {
   status: $Enums.AttendanceStatus | null
   late_minutes: number | null
   early_leave_minutes: number | null
+  work_minutes: number | null
   notes: string | null
+  is_informed: boolean | null
+  informed_reason: string | null
+  informed_at: Date | null
+  informed_by: string | null
+  is_auto_clocked_out: boolean | null
+  leave_request_id: string | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -73,7 +89,14 @@ export type AttendanceCountAggregateOutputType = {
   status: number
   late_minutes: number
   early_leave_minutes: number
+  work_minutes: number
   notes: number
+  is_informed: number
+  informed_reason: number
+  informed_at: number
+  informed_by: number
+  is_auto_clocked_out: number
+  leave_request_id: number
   created_at: number
   updated_at: number
   _all: number
@@ -83,11 +106,13 @@ export type AttendanceCountAggregateOutputType = {
 export type AttendanceAvgAggregateInputType = {
   late_minutes?: true
   early_leave_minutes?: true
+  work_minutes?: true
 }
 
 export type AttendanceSumAggregateInputType = {
   late_minutes?: true
   early_leave_minutes?: true
+  work_minutes?: true
 }
 
 export type AttendanceMinAggregateInputType = {
@@ -99,7 +124,14 @@ export type AttendanceMinAggregateInputType = {
   status?: true
   late_minutes?: true
   early_leave_minutes?: true
+  work_minutes?: true
   notes?: true
+  is_informed?: true
+  informed_reason?: true
+  informed_at?: true
+  informed_by?: true
+  is_auto_clocked_out?: true
+  leave_request_id?: true
   created_at?: true
   updated_at?: true
 }
@@ -113,7 +145,14 @@ export type AttendanceMaxAggregateInputType = {
   status?: true
   late_minutes?: true
   early_leave_minutes?: true
+  work_minutes?: true
   notes?: true
+  is_informed?: true
+  informed_reason?: true
+  informed_at?: true
+  informed_by?: true
+  is_auto_clocked_out?: true
+  leave_request_id?: true
   created_at?: true
   updated_at?: true
 }
@@ -127,7 +166,14 @@ export type AttendanceCountAggregateInputType = {
   status?: true
   late_minutes?: true
   early_leave_minutes?: true
+  work_minutes?: true
   notes?: true
+  is_informed?: true
+  informed_reason?: true
+  informed_at?: true
+  informed_by?: true
+  is_auto_clocked_out?: true
+  leave_request_id?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -228,7 +274,14 @@ export type AttendanceGroupByOutputType = {
   status: $Enums.AttendanceStatus
   late_minutes: number
   early_leave_minutes: number
+  work_minutes: number
   notes: string | null
+  is_informed: boolean
+  informed_reason: string | null
+  informed_at: Date | null
+  informed_by: string | null
+  is_auto_clocked_out: boolean
+  leave_request_id: string | null
   created_at: Date
   updated_at: Date
   _count: AttendanceCountAggregateOutputType | null
@@ -265,10 +318,19 @@ export type AttendanceWhereInput = {
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFilter<"Attendance"> | number
   early_leave_minutes?: Prisma.IntFilter<"Attendance"> | number
+  work_minutes?: Prisma.IntFilter<"Attendance"> | number
   notes?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
+  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
+  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
   created_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
+  informed_by_hr?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
+  leave_request?: Prisma.XOR<Prisma.LeaveRequestNullableScalarRelationFilter, Prisma.LeaveRequestWhereInput> | null
 }
 
 export type AttendanceOrderByWithRelationInput = {
@@ -280,10 +342,19 @@ export type AttendanceOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  informed_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  informed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  informed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
+  informed_by_hr?: Prisma.HRProfileOrderByWithRelationInput
+  leave_request?: Prisma.LeaveRequestOrderByWithRelationInput
 }
 
 export type AttendanceWhereUniqueInput = Prisma.AtLeast<{
@@ -299,10 +370,19 @@ export type AttendanceWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFilter<"Attendance"> | number
   early_leave_minutes?: Prisma.IntFilter<"Attendance"> | number
+  work_minutes?: Prisma.IntFilter<"Attendance"> | number
   notes?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
+  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
+  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
   created_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
+  informed_by_hr?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
+  leave_request?: Prisma.XOR<Prisma.LeaveRequestNullableScalarRelationFilter, Prisma.LeaveRequestWhereInput> | null
 }, "id" | "employee_id_date">
 
 export type AttendanceOrderByWithAggregationInput = {
@@ -314,7 +394,14 @@ export type AttendanceOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  informed_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  informed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  informed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.AttendanceCountOrderByAggregateInput
@@ -336,7 +423,14 @@ export type AttendanceScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumAttendanceStatusWithAggregatesFilter<"Attendance"> | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntWithAggregatesFilter<"Attendance"> | number
   early_leave_minutes?: Prisma.IntWithAggregatesFilter<"Attendance"> | number
+  work_minutes?: Prisma.IntWithAggregatesFilter<"Attendance"> | number
   notes?: Prisma.StringNullableWithAggregatesFilter<"Attendance"> | string | null
+  is_informed?: Prisma.BoolWithAggregatesFilter<"Attendance"> | boolean
+  informed_reason?: Prisma.StringNullableWithAggregatesFilter<"Attendance"> | string | null
+  informed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Attendance"> | Date | string | null
+  informed_by?: Prisma.UuidNullableWithAggregatesFilter<"Attendance"> | string | null
+  is_auto_clocked_out?: Prisma.BoolWithAggregatesFilter<"Attendance"> | boolean
+  leave_request_id?: Prisma.UuidNullableWithAggregatesFilter<"Attendance"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Attendance"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Attendance"> | Date | string
 }
@@ -349,10 +443,17 @@ export type AttendanceCreateInput = {
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
+  work_minutes?: number
   notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  is_auto_clocked_out?: boolean
   created_at?: Date | string
   updated_at?: Date | string
   employee: Prisma.EmployeeCreateNestedOneWithoutAttendanceInput
+  informed_by_hr?: Prisma.HRProfileCreateNestedOneWithoutAttendances_informedInput
+  leave_request?: Prisma.LeaveRequestCreateNestedOneWithoutAttendancesInput
 }
 
 export type AttendanceUncheckedCreateInput = {
@@ -364,7 +465,14 @@ export type AttendanceUncheckedCreateInput = {
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
+  work_minutes?: number
   notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  is_auto_clocked_out?: boolean
+  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -377,10 +485,17 @@ export type AttendanceUpdateInput = {
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendanceNestedInput
+  informed_by_hr?: Prisma.HRProfileUpdateOneWithoutAttendances_informedNestedInput
+  leave_request?: Prisma.LeaveRequestUpdateOneWithoutAttendancesNestedInput
 }
 
 export type AttendanceUncheckedUpdateInput = {
@@ -392,7 +507,14 @@ export type AttendanceUncheckedUpdateInput = {
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -406,7 +528,14 @@ export type AttendanceCreateManyInput = {
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
+  work_minutes?: number
   notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  is_auto_clocked_out?: boolean
+  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -419,7 +548,12 @@ export type AttendanceUpdateManyMutationInput = {
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -433,7 +567,14 @@ export type AttendanceUncheckedUpdateManyInput = {
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -452,7 +593,14 @@ export type AttendanceCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  informed_reason?: Prisma.SortOrder
+  informed_at?: Prisma.SortOrder
+  informed_by?: Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -460,6 +608,7 @@ export type AttendanceCountOrderByAggregateInput = {
 export type AttendanceAvgOrderByAggregateInput = {
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
 }
 
 export type AttendanceMaxOrderByAggregateInput = {
@@ -471,7 +620,14 @@ export type AttendanceMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  informed_reason?: Prisma.SortOrder
+  informed_at?: Prisma.SortOrder
+  informed_by?: Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -485,7 +641,14 @@ export type AttendanceMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  informed_reason?: Prisma.SortOrder
+  informed_at?: Prisma.SortOrder
+  informed_by?: Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -493,6 +656,7 @@ export type AttendanceMinOrderByAggregateInput = {
 export type AttendanceSumOrderByAggregateInput = {
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
 }
 
 export type AttendanceListRelationFilter = {
@@ -559,6 +723,90 @@ export type AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput = {
   deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
 }
 
+export type AttendanceCreateNestedManyWithoutInformed_by_hrInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutInformed_by_hrInput, Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput> | Prisma.AttendanceCreateWithoutInformed_by_hrInput[] | Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutInformed_by_hrInput | Prisma.AttendanceCreateOrConnectWithoutInformed_by_hrInput[]
+  createMany?: Prisma.AttendanceCreateManyInformed_by_hrInputEnvelope
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+}
+
+export type AttendanceUncheckedCreateNestedManyWithoutInformed_by_hrInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutInformed_by_hrInput, Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput> | Prisma.AttendanceCreateWithoutInformed_by_hrInput[] | Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutInformed_by_hrInput | Prisma.AttendanceCreateOrConnectWithoutInformed_by_hrInput[]
+  createMany?: Prisma.AttendanceCreateManyInformed_by_hrInputEnvelope
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+}
+
+export type AttendanceUpdateManyWithoutInformed_by_hrNestedInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutInformed_by_hrInput, Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput> | Prisma.AttendanceCreateWithoutInformed_by_hrInput[] | Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutInformed_by_hrInput | Prisma.AttendanceCreateOrConnectWithoutInformed_by_hrInput[]
+  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutInformed_by_hrInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutInformed_by_hrInput[]
+  createMany?: Prisma.AttendanceCreateManyInformed_by_hrInputEnvelope
+  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutInformed_by_hrInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutInformed_by_hrInput[]
+  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutInformed_by_hrInput | Prisma.AttendanceUpdateManyWithWhereWithoutInformed_by_hrInput[]
+  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
+}
+
+export type AttendanceUncheckedUpdateManyWithoutInformed_by_hrNestedInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutInformed_by_hrInput, Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput> | Prisma.AttendanceCreateWithoutInformed_by_hrInput[] | Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutInformed_by_hrInput | Prisma.AttendanceCreateOrConnectWithoutInformed_by_hrInput[]
+  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutInformed_by_hrInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutInformed_by_hrInput[]
+  createMany?: Prisma.AttendanceCreateManyInformed_by_hrInputEnvelope
+  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutInformed_by_hrInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutInformed_by_hrInput[]
+  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutInformed_by_hrInput | Prisma.AttendanceUpdateManyWithWhereWithoutInformed_by_hrInput[]
+  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
+}
+
+export type AttendanceCreateNestedManyWithoutLeave_requestInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutLeave_requestInput, Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput> | Prisma.AttendanceCreateWithoutLeave_requestInput[] | Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutLeave_requestInput | Prisma.AttendanceCreateOrConnectWithoutLeave_requestInput[]
+  createMany?: Prisma.AttendanceCreateManyLeave_requestInputEnvelope
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+}
+
+export type AttendanceUncheckedCreateNestedManyWithoutLeave_requestInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutLeave_requestInput, Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput> | Prisma.AttendanceCreateWithoutLeave_requestInput[] | Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutLeave_requestInput | Prisma.AttendanceCreateOrConnectWithoutLeave_requestInput[]
+  createMany?: Prisma.AttendanceCreateManyLeave_requestInputEnvelope
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+}
+
+export type AttendanceUpdateManyWithoutLeave_requestNestedInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutLeave_requestInput, Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput> | Prisma.AttendanceCreateWithoutLeave_requestInput[] | Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutLeave_requestInput | Prisma.AttendanceCreateOrConnectWithoutLeave_requestInput[]
+  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutLeave_requestInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutLeave_requestInput[]
+  createMany?: Prisma.AttendanceCreateManyLeave_requestInputEnvelope
+  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutLeave_requestInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutLeave_requestInput[]
+  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutLeave_requestInput | Prisma.AttendanceUpdateManyWithWhereWithoutLeave_requestInput[]
+  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
+}
+
+export type AttendanceUncheckedUpdateManyWithoutLeave_requestNestedInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutLeave_requestInput, Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput> | Prisma.AttendanceCreateWithoutLeave_requestInput[] | Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutLeave_requestInput | Prisma.AttendanceCreateOrConnectWithoutLeave_requestInput[]
+  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutLeave_requestInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutLeave_requestInput[]
+  createMany?: Prisma.AttendanceCreateManyLeave_requestInputEnvelope
+  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutLeave_requestInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutLeave_requestInput[]
+  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutLeave_requestInput | Prisma.AttendanceUpdateManyWithWhereWithoutLeave_requestInput[]
+  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
+}
+
 export type AttendanceCreateWithoutEmployeeInput = {
   id?: string
   date: Date | string
@@ -567,9 +815,16 @@ export type AttendanceCreateWithoutEmployeeInput = {
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
+  work_minutes?: number
   notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  is_auto_clocked_out?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  informed_by_hr?: Prisma.HRProfileCreateNestedOneWithoutAttendances_informedInput
+  leave_request?: Prisma.LeaveRequestCreateNestedOneWithoutAttendancesInput
 }
 
 export type AttendanceUncheckedCreateWithoutEmployeeInput = {
@@ -580,7 +835,14 @@ export type AttendanceUncheckedCreateWithoutEmployeeInput = {
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
+  work_minutes?: number
   notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  is_auto_clocked_out?: boolean
+  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -623,9 +885,148 @@ export type AttendanceScalarWhereInput = {
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFilter<"Attendance"> | number
   early_leave_minutes?: Prisma.IntFilter<"Attendance"> | number
+  work_minutes?: Prisma.IntFilter<"Attendance"> | number
   notes?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
+  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
+  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
   created_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
+}
+
+export type AttendanceCreateWithoutInformed_by_hrInput = {
+  id?: string
+  date: Date | string
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
+  status: $Enums.AttendanceStatus
+  late_minutes?: number
+  early_leave_minutes?: number
+  work_minutes?: number
+  notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  is_auto_clocked_out?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  employee: Prisma.EmployeeCreateNestedOneWithoutAttendanceInput
+  leave_request?: Prisma.LeaveRequestCreateNestedOneWithoutAttendancesInput
+}
+
+export type AttendanceUncheckedCreateWithoutInformed_by_hrInput = {
+  id?: string
+  employee_id: string
+  date: Date | string
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
+  status: $Enums.AttendanceStatus
+  late_minutes?: number
+  early_leave_minutes?: number
+  work_minutes?: number
+  notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  is_auto_clocked_out?: boolean
+  leave_request_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type AttendanceCreateOrConnectWithoutInformed_by_hrInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.AttendanceCreateWithoutInformed_by_hrInput, Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput>
+}
+
+export type AttendanceCreateManyInformed_by_hrInputEnvelope = {
+  data: Prisma.AttendanceCreateManyInformed_by_hrInput | Prisma.AttendanceCreateManyInformed_by_hrInput[]
+  skipDuplicates?: boolean
+}
+
+export type AttendanceUpsertWithWhereUniqueWithoutInformed_by_hrInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  update: Prisma.XOR<Prisma.AttendanceUpdateWithoutInformed_by_hrInput, Prisma.AttendanceUncheckedUpdateWithoutInformed_by_hrInput>
+  create: Prisma.XOR<Prisma.AttendanceCreateWithoutInformed_by_hrInput, Prisma.AttendanceUncheckedCreateWithoutInformed_by_hrInput>
+}
+
+export type AttendanceUpdateWithWhereUniqueWithoutInformed_by_hrInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  data: Prisma.XOR<Prisma.AttendanceUpdateWithoutInformed_by_hrInput, Prisma.AttendanceUncheckedUpdateWithoutInformed_by_hrInput>
+}
+
+export type AttendanceUpdateManyWithWhereWithoutInformed_by_hrInput = {
+  where: Prisma.AttendanceScalarWhereInput
+  data: Prisma.XOR<Prisma.AttendanceUpdateManyMutationInput, Prisma.AttendanceUncheckedUpdateManyWithoutInformed_by_hrInput>
+}
+
+export type AttendanceCreateWithoutLeave_requestInput = {
+  id?: string
+  date: Date | string
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
+  status: $Enums.AttendanceStatus
+  late_minutes?: number
+  early_leave_minutes?: number
+  work_minutes?: number
+  notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  is_auto_clocked_out?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  employee: Prisma.EmployeeCreateNestedOneWithoutAttendanceInput
+  informed_by_hr?: Prisma.HRProfileCreateNestedOneWithoutAttendances_informedInput
+}
+
+export type AttendanceUncheckedCreateWithoutLeave_requestInput = {
+  id?: string
+  employee_id: string
+  date: Date | string
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
+  status: $Enums.AttendanceStatus
+  late_minutes?: number
+  early_leave_minutes?: number
+  work_minutes?: number
+  notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  is_auto_clocked_out?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type AttendanceCreateOrConnectWithoutLeave_requestInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.AttendanceCreateWithoutLeave_requestInput, Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput>
+}
+
+export type AttendanceCreateManyLeave_requestInputEnvelope = {
+  data: Prisma.AttendanceCreateManyLeave_requestInput | Prisma.AttendanceCreateManyLeave_requestInput[]
+  skipDuplicates?: boolean
+}
+
+export type AttendanceUpsertWithWhereUniqueWithoutLeave_requestInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  update: Prisma.XOR<Prisma.AttendanceUpdateWithoutLeave_requestInput, Prisma.AttendanceUncheckedUpdateWithoutLeave_requestInput>
+  create: Prisma.XOR<Prisma.AttendanceCreateWithoutLeave_requestInput, Prisma.AttendanceUncheckedCreateWithoutLeave_requestInput>
+}
+
+export type AttendanceUpdateWithWhereUniqueWithoutLeave_requestInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  data: Prisma.XOR<Prisma.AttendanceUpdateWithoutLeave_requestInput, Prisma.AttendanceUncheckedUpdateWithoutLeave_requestInput>
+}
+
+export type AttendanceUpdateManyWithWhereWithoutLeave_requestInput = {
+  where: Prisma.AttendanceScalarWhereInput
+  data: Prisma.XOR<Prisma.AttendanceUpdateManyMutationInput, Prisma.AttendanceUncheckedUpdateManyWithoutLeave_requestInput>
 }
 
 export type AttendanceCreateManyEmployeeInput = {
@@ -636,7 +1037,14 @@ export type AttendanceCreateManyEmployeeInput = {
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
+  work_minutes?: number
   notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  is_auto_clocked_out?: boolean
+  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -649,9 +1057,16 @@ export type AttendanceUpdateWithoutEmployeeInput = {
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_by_hr?: Prisma.HRProfileUpdateOneWithoutAttendances_informedNestedInput
+  leave_request?: Prisma.LeaveRequestUpdateOneWithoutAttendancesNestedInput
 }
 
 export type AttendanceUncheckedUpdateWithoutEmployeeInput = {
@@ -662,7 +1077,14 @@ export type AttendanceUncheckedUpdateWithoutEmployeeInput = {
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -675,7 +1097,174 @@ export type AttendanceUncheckedUpdateManyWithoutEmployeeInput = {
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AttendanceCreateManyInformed_by_hrInput = {
+  id?: string
+  employee_id: string
+  date: Date | string
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
+  status: $Enums.AttendanceStatus
+  late_minutes?: number
+  early_leave_minutes?: number
+  work_minutes?: number
+  notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  is_auto_clocked_out?: boolean
+  leave_request_id?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type AttendanceUpdateWithoutInformed_by_hrInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendanceNestedInput
+  leave_request?: Prisma.LeaveRequestUpdateOneWithoutAttendancesNestedInput
+}
+
+export type AttendanceUncheckedUpdateWithoutInformed_by_hrInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  employee_id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AttendanceUncheckedUpdateManyWithoutInformed_by_hrInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  employee_id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AttendanceCreateManyLeave_requestInput = {
+  id?: string
+  employee_id: string
+  date: Date | string
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
+  status: $Enums.AttendanceStatus
+  late_minutes?: number
+  early_leave_minutes?: number
+  work_minutes?: number
+  notes?: string | null
+  is_informed?: boolean
+  informed_reason?: string | null
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  is_auto_clocked_out?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type AttendanceUpdateWithoutLeave_requestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendanceNestedInput
+  informed_by_hr?: Prisma.HRProfileUpdateOneWithoutAttendances_informedNestedInput
+}
+
+export type AttendanceUncheckedUpdateWithoutLeave_requestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  employee_id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AttendanceUncheckedUpdateManyWithoutLeave_requestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  employee_id?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+  late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -691,10 +1280,19 @@ export type AttendanceSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   status?: boolean
   late_minutes?: boolean
   early_leave_minutes?: boolean
+  work_minutes?: boolean
   notes?: boolean
+  is_informed?: boolean
+  informed_reason?: boolean
+  informed_at?: boolean
+  informed_by?: boolean
+  is_auto_clocked_out?: boolean
+  leave_request_id?: boolean
   created_at?: boolean
   updated_at?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
+  leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
 }, ExtArgs["result"]["attendance"]>
 
 export type AttendanceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -706,10 +1304,19 @@ export type AttendanceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   status?: boolean
   late_minutes?: boolean
   early_leave_minutes?: boolean
+  work_minutes?: boolean
   notes?: boolean
+  is_informed?: boolean
+  informed_reason?: boolean
+  informed_at?: boolean
+  informed_by?: boolean
+  is_auto_clocked_out?: boolean
+  leave_request_id?: boolean
   created_at?: boolean
   updated_at?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
+  leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
 }, ExtArgs["result"]["attendance"]>
 
 export type AttendanceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -721,10 +1328,19 @@ export type AttendanceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   status?: boolean
   late_minutes?: boolean
   early_leave_minutes?: boolean
+  work_minutes?: boolean
   notes?: boolean
+  is_informed?: boolean
+  informed_reason?: boolean
+  informed_at?: boolean
+  informed_by?: boolean
+  is_auto_clocked_out?: boolean
+  leave_request_id?: boolean
   created_at?: boolean
   updated_at?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
+  leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
 }, ExtArgs["result"]["attendance"]>
 
 export type AttendanceSelectScalar = {
@@ -736,26 +1352,41 @@ export type AttendanceSelectScalar = {
   status?: boolean
   late_minutes?: boolean
   early_leave_minutes?: boolean
+  work_minutes?: boolean
   notes?: boolean
+  is_informed?: boolean
+  informed_reason?: boolean
+  informed_at?: boolean
+  informed_by?: boolean
+  is_auto_clocked_out?: boolean
+  leave_request_id?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type AttendanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employee_id" | "date" | "clock_in_time" | "clock_out_time" | "status" | "late_minutes" | "early_leave_minutes" | "notes" | "created_at" | "updated_at", ExtArgs["result"]["attendance"]>
+export type AttendanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employee_id" | "date" | "clock_in_time" | "clock_out_time" | "status" | "late_minutes" | "early_leave_minutes" | "work_minutes" | "notes" | "is_informed" | "informed_reason" | "informed_at" | "informed_by" | "is_auto_clocked_out" | "leave_request_id" | "created_at" | "updated_at", ExtArgs["result"]["attendance"]>
 export type AttendanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
+  leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
 }
 export type AttendanceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
+  leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
 }
 export type AttendanceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
+  informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
+  leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
 }
 
 export type $AttendancePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Attendance"
   objects: {
     employee: Prisma.$EmployeePayload<ExtArgs>
+    informed_by_hr: Prisma.$HRProfilePayload<ExtArgs> | null
+    leave_request: Prisma.$LeaveRequestPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -766,7 +1397,14 @@ export type $AttendancePayload<ExtArgs extends runtime.Types.Extensions.Internal
     status: $Enums.AttendanceStatus
     late_minutes: number
     early_leave_minutes: number
+    work_minutes: number
     notes: string | null
+    is_informed: boolean
+    informed_reason: string | null
+    informed_at: Date | null
+    informed_by: string | null
+    is_auto_clocked_out: boolean
+    leave_request_id: string | null
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["attendance"]>
@@ -1164,6 +1802,8 @@ readonly fields: AttendanceFieldRefs;
 export interface Prisma__AttendanceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  informed_by_hr<T extends Prisma.Attendance$informed_by_hrArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Attendance$informed_by_hrArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  leave_request<T extends Prisma.Attendance$leave_requestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Attendance$leave_requestArgs<ExtArgs>>): Prisma.Prisma__LeaveRequestClient<runtime.Types.Result.GetResult<Prisma.$LeaveRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1201,7 +1841,14 @@ export interface AttendanceFieldRefs {
   readonly status: Prisma.FieldRef<"Attendance", 'AttendanceStatus'>
   readonly late_minutes: Prisma.FieldRef<"Attendance", 'Int'>
   readonly early_leave_minutes: Prisma.FieldRef<"Attendance", 'Int'>
+  readonly work_minutes: Prisma.FieldRef<"Attendance", 'Int'>
   readonly notes: Prisma.FieldRef<"Attendance", 'String'>
+  readonly is_informed: Prisma.FieldRef<"Attendance", 'Boolean'>
+  readonly informed_reason: Prisma.FieldRef<"Attendance", 'String'>
+  readonly informed_at: Prisma.FieldRef<"Attendance", 'DateTime'>
+  readonly informed_by: Prisma.FieldRef<"Attendance", 'String'>
+  readonly is_auto_clocked_out: Prisma.FieldRef<"Attendance", 'Boolean'>
+  readonly leave_request_id: Prisma.FieldRef<"Attendance", 'String'>
   readonly created_at: Prisma.FieldRef<"Attendance", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Attendance", 'DateTime'>
 }
@@ -1602,6 +2249,44 @@ export type AttendanceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Attendances to delete.
    */
   limit?: number
+}
+
+/**
+ * Attendance.informed_by_hr
+ */
+export type Attendance$informed_by_hrArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HRProfile
+   */
+  select?: Prisma.HRProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HRProfile
+   */
+  omit?: Prisma.HRProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HRProfileInclude<ExtArgs> | null
+  where?: Prisma.HRProfileWhereInput
+}
+
+/**
+ * Attendance.leave_request
+ */
+export type Attendance$leave_requestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeaveRequest
+   */
+  select?: Prisma.LeaveRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeaveRequest
+   */
+  omit?: Prisma.LeaveRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeaveRequestInclude<ExtArgs> | null
+  where?: Prisma.LeaveRequestWhereInput
 }
 
 /**

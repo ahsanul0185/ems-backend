@@ -41,8 +41,8 @@ enum EmployeeStatus {
 enum AttendanceStatus {
   PRESENT
   ABSENT
-  LATE
-  HALF_DAY
+  INFORMED
+  ON_LEAVE
 }
 
 enum PayslipStatus {
@@ -65,7 +65,6 @@ enum LeaveRequestStatus {
   REJECTED
   CANCELLED
 }
-
 
 enum AnnouncementStatus {
   DRAFT

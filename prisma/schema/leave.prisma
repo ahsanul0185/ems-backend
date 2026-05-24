@@ -20,8 +20,9 @@ model LeaveRequest {
   updated_at       DateTime           @updatedAt
 
   // Relations
-  employee     Employee  @relation(fields: [employee_id], references: [id])
-  approved_emp HRProfile? @relation("LeaveApprovedBy", fields: [approved_by], references: [id])
+  employee     Employee     @relation(fields: [employee_id], references: [id])
+  approved_emp HRProfile?   @relation("LeaveApprovedBy", fields: [approved_by], references: [id])
+  attendances  Attendance[]
 
   @@map("leave_requests")
 }

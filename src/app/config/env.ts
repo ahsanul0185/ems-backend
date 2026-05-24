@@ -39,6 +39,8 @@ interface EnvConfig {
     ADMIN_EMAIL: string;
     ADMIN_PASSWORD: string;
     OPENROUTER_API_KEY: string;
+    SHIFT_START_TIME: string;
+    SHIFT_END_TIME: string;
 }
 
 
@@ -92,6 +94,8 @@ const loadEnvVariables = (): EnvConfig => {
         ADMIN_EMAIL: process.env.ADMIN_EMAIL as string,
         ADMIN_PASSWORD: process.env.ADMIN_PASSWORD as string,
         OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY as string,
+        SHIFT_START_TIME: process.env.SHIFT_START_TIME as string || "09:00",
+        SHIFT_END_TIME: process.env.SHIFT_END_TIME as string || "17:00",
     }
 }
 

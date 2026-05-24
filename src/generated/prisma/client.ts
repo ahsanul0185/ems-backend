@@ -77,6 +77,11 @@ export type Department = Prisma.DepartmentModel
  */
 export type Employee = Prisma.EmployeeModel
 /**
+ * Model Holiday
+ * 
+ */
+export type Holiday = Prisma.HolidayModel
+/**
  * Model HRProfile
  * 
  */

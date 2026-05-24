@@ -10,12 +10,24 @@ model Attendance {
   status              AttendanceStatus
   late_minutes        Int              @default(0)
   early_leave_minutes Int              @default(0)
+  work_minutes        Int              @default(0)
   notes               String?
-  created_at          DateTime         @default(now())
-  updated_at          DateTime         @updatedAt
+
+  is_informed     Boolean   @default(false)
+  informed_reason String?
+  informed_at     DateTime?
+  informed_by     String?   @db.Uuid
+
+  is_auto_clocked_out Boolean @default(false)
+  leave_request_id    String? @db.Uuid
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   // Relations
-  employee      Employee  @relation(fields: [employee_id], references: [id])
+  employee       Employee      @relation(fields: [employee_id], references: [id])
+  informed_by_hr HRProfile?    @relation("AttendanceInformedBy", fields: [informed_by], references: [id])
+  leave_request  LeaveRequest? @relation(fields: [leave_request_id], references: [id])
 
   @@unique([employee_id, date])
   @@map("attendance")

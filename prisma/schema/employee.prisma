@@ -35,12 +35,12 @@ model Employee {
   updated_at              DateTime       @updatedAt
 
   // Relations
-  user               User           @relation(fields: [user_id], references: [id])
-  department         Department     @relation("DepartmentEmployees", fields: [department_id], references: [id])
-  hr_profile         HRProfile?
-  attendance         Attendance[]
-  payslips           Payslip[]
-  leave_requests     LeaveRequest[]
+  user           User           @relation(fields: [user_id], references: [id])
+  department     Department     @relation("DepartmentEmployees", fields: [department_id], references: [id])
+  hr_profile     HRProfile?
+  attendance     Attendance[]
+  payslips       Payslip[]
+  leave_requests LeaveRequest[]
 
   @@map("employees")
 }

@@ -58,6 +58,7 @@ export const ModelName = {
   Otp: 'Otp',
   Department: 'Department',
   Employee: 'Employee',
+  Holiday: 'Holiday',
   HRProfile: 'HRProfile',
   LeaveRequest: 'LeaveRequest',
   Payslip: 'Payslip'
@@ -107,7 +108,14 @@ export const AttendanceScalarFieldEnum = {
   status: 'status',
   late_minutes: 'late_minutes',
   early_leave_minutes: 'early_leave_minutes',
+  work_minutes: 'work_minutes',
   notes: 'notes',
+  is_informed: 'is_informed',
+  informed_reason: 'informed_reason',
+  informed_at: 'informed_at',
+  informed_by: 'informed_by',
+  is_auto_clocked_out: 'is_auto_clocked_out',
+  leave_request_id: 'leave_request_id',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -202,6 +210,19 @@ export const EmployeeScalarFieldEnum = {
 } as const
 
 export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
+
+export const HolidayScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  date: 'date',
+  description: 'description',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type HolidayScalarFieldEnum = (typeof HolidayScalarFieldEnum)[keyof typeof HolidayScalarFieldEnum]
 
 
 export const HRProfileScalarFieldEnum = {

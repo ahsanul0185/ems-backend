@@ -1,0 +1,16 @@
+// holiday.prisma
+
+model Holiday {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  date        DateTime @db.Date
+  description String?
+  created_by  String   @db.Uuid
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  created_by_hr HRProfile @relation("HolidayCreatedBy", fields: [created_by], references: [id])
+
+  @@unique([date])
+  @@map("holidays")
+}

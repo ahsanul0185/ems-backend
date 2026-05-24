@@ -9,10 +9,12 @@ model HRProfile {
   updated_at  DateTime @updatedAt
 
   // Relations
-  user     User     @relation(fields: [user_id], references: [id])
-  employee Employee @relation(fields: [employee_id], references: [id])
-  approved_leaves    LeaveRequest[] @relation("LeaveApprovedBy")
-  generated_payslips Payslip[]      @relation("PayslipGeneratedBy")
+  user                 User           @relation(fields: [user_id], references: [id])
+  employee             Employee       @relation(fields: [employee_id], references: [id])
+  approved_leaves      LeaveRequest[] @relation("LeaveApprovedBy")
+  generated_payslips   Payslip[]      @relation("PayslipGeneratedBy")
+  holidays_created     Holiday[]      @relation("HolidayCreatedBy")
+  attendances_informed Attendance[]   @relation("AttendanceInformedBy")
 
   @@map("hr_profiles")
 }

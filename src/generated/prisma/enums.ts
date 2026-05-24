@@ -67,8 +67,8 @@ export type EmployeeStatus = (typeof EmployeeStatus)[keyof typeof EmployeeStatus
 export const AttendanceStatus = {
   PRESENT: 'PRESENT',
   ABSENT: 'ABSENT',
-  LATE: 'LATE',
-  HALF_DAY: 'HALF_DAY'
+  INFORMED: 'INFORMED',
+  ON_LEAVE: 'ON_LEAVE'
 } as const
 
 export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
