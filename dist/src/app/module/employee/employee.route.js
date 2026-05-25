@@ -1,0 +1,11 @@
+import { Router } from 'express';
+import { validateRequest } from '../../middleware/validateRequest';
+import { employeeController } from './employee.controller';
+import { createEmployeeZodSchema, updateEmployeeZodSchema } from './employee.validation';
+const router = Router();
+router.get('/', employeeController.getAllEmployees);
+router.get('/:id', employeeController.getEmployeeById);
+router.post('/create', validateRequest(createEmployeeZodSchema), employeeController.createEmployee);
+router.put('/update/:id', validateRequest(updateEmployeeZodSchema), employeeController.updateEmployee);
+router.delete('delete/:id', employeeController.deleteEmployee);
+export const employeeRoutes = router;
