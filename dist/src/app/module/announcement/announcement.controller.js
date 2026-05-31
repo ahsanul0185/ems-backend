@@ -1,75 +1,81 @@
-import status from "http-status";
-import { catchAsync } from "../../shared/catchAsync";
-import { sendResponse } from "../../shared/sendResponse";
-import { announcementService } from "./announcement.service";
-const getAllAnnouncements = catchAsync(async (req, res) => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.announcementController = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const catchAsync_1 = require("../../shared/catchAsync");
+const sendResponse_1 = require("../../shared/sendResponse");
+const announcement_service_1 = require("./announcement.service");
+const getAllAnnouncements = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const queryParams = req.query;
     const user = req.user;
-    const result = await announcementService.getAllAnnouncements(queryParams, {
+    const result = await announcement_service_1.announcementService.getAllAnnouncements(queryParams, {
         role: user.role,
         employeeId: user.employeeId,
     });
-    sendResponse(res, {
-        httpStatusCode: status.OK,
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Announcements retrieved successfully",
         data: result.data,
         meta: result.meta,
     });
 });
-const createAnnouncement = catchAsync(async (req, res) => {
+const createAnnouncement = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const payload = req.body;
     const createdBy = req.user.userId;
-    const result = await announcementService.createAnnouncement(payload, createdBy);
-    sendResponse(res, {
-        httpStatusCode: status.CREATED,
+    const result = await announcement_service_1.announcementService.createAnnouncement(payload, createdBy);
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.CREATED,
         success: true,
         message: "Announcement created successfully",
         data: result.announcement,
     });
 });
-const getAnnouncementById = catchAsync(async (req, res) => {
+const getAnnouncementById = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const announcementId = req.params.id;
-    const result = await announcementService.getAnnouncementById(announcementId);
-    sendResponse(res, {
-        httpStatusCode: status.OK,
+    const result = await announcement_service_1.announcementService.getAnnouncementById(announcementId);
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Announcement retrieved successfully",
         data: result.announcement,
     });
 });
-const updateAnnouncement = catchAsync(async (req, res) => {
+const updateAnnouncement = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const announcementId = req.params.id;
     const payload = req.body;
-    const result = await announcementService.updateAnnouncement(announcementId, payload);
-    sendResponse(res, {
-        httpStatusCode: status.OK,
+    const result = await announcement_service_1.announcementService.updateAnnouncement(announcementId, payload);
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Announcement updated successfully",
         data: result.announcement,
     });
 });
-const deleteAnnouncement = catchAsync(async (req, res) => {
+const deleteAnnouncement = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const announcementId = req.params.id;
-    const result = await announcementService.deleteAnnouncement(announcementId);
-    sendResponse(res, {
-        httpStatusCode: status.OK,
+    const result = await announcement_service_1.announcementService.deleteAnnouncement(announcementId);
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Announcement deleted successfully",
         data: result.announcement,
     });
 });
-const publishAnnouncement = catchAsync(async (req, res) => {
+const publishAnnouncement = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const announcementId = req.params.id;
-    const result = await announcementService.publishAnnouncement(announcementId);
-    sendResponse(res, {
-        httpStatusCode: status.OK,
+    const result = await announcement_service_1.announcementService.publishAnnouncement(announcementId);
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Announcement published successfully",
         data: result.announcement,
     });
 });
-export const announcementController = {
+exports.announcementController = {
     getAllAnnouncements,
     createAnnouncement,
     getAnnouncementById,

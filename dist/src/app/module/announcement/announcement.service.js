@@ -1,10 +1,16 @@
-import status from "http-status";
-import AppError from "../../errorHelpers/AppError";
-import { prisma } from "../../lib/prisma";
-import { QueryBuilder } from "../../utils/QueryBuilder";
-import { AnnouncementStatus, AnnouncementAudience, UserRole } from "../../../generated/prisma/client";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.announcementService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
+const prisma_1 = require("../../lib/prisma");
+const QueryBuilder_1 = require("../../utils/QueryBuilder");
+const client_1 = require("../../../generated/prisma/client");
 const createAnnouncement = async (payload, createdBy) => {
-    const announcement = await prisma.announcement.create({
+    const announcement = await prisma_1.prisma.announcement.create({
         data: {
             ...payload,
             created_by: createdBy,
@@ -13,26 +19,26 @@ const createAnnouncement = async (payload, createdBy) => {
     return { announcement };
 };
 const buildAudienceFilter = async (user) => {
-    if (user.role === UserRole.ADMIN) {
+    if (user.role === client_1.UserRole.ADMIN) {
         return undefined;
     }
     const filters = [
-        { audience: AnnouncementAudience.ALL },
+        { audience: client_1.AnnouncementAudience.ALL },
     ];
-    if (user.role === UserRole.HR) {
-        filters.push({ audience: AnnouncementAudience.HR });
+    if (user.role === client_1.UserRole.HR) {
+        filters.push({ audience: client_1.AnnouncementAudience.HR });
     }
     else {
-        filters.push({ audience: AnnouncementAudience.EMPLOYEE });
+        filters.push({ audience: client_1.AnnouncementAudience.EMPLOYEE });
     }
     if (user.employeeId) {
-        const employee = await prisma.employee.findUnique({
+        const employee = await prisma_1.prisma.employee.findUnique({
             where: { id: user.employeeId },
             select: { department_id: true },
         });
         if (employee?.department_id) {
             filters.push({
-                audience: AnnouncementAudience.DEPARTMENT,
+                audience: client_1.AnnouncementAudience.DEPARTMENT,
                 department_id: employee.department_id,
             });
         }
@@ -40,7 +46,7 @@ const buildAudienceFilter = async (user) => {
     return { OR: filters };
 };
 const getAllAnnouncements = async (queryParams, user) => {
-    const builder = new QueryBuilder(prisma.announcement, queryParams, {
+    const builder = new QueryBuilder_1.QueryBuilder(prisma_1.prisma.announcement, queryParams, {
         searchableFields: ["title", "content"],
         filterableFields: ["status", "audience", "department_id", "created_by"],
         defaultSelect: {
@@ -78,13 +84,13 @@ const getAllAnnouncements = async (queryParams, user) => {
     if (audienceFilter) {
         builder.where(audienceFilter);
     }
-    if (user.role !== UserRole.ADMIN) {
-        builder.where({ status: AnnouncementStatus.PUBLISHED });
+    if (user.role !== client_1.UserRole.ADMIN) {
+        builder.where({ status: client_1.AnnouncementStatus.PUBLISHED });
     }
     return builder.execute();
 };
 const getAnnouncementById = async (announcementId) => {
-    const announcement = await prisma.announcement.findUnique({
+    const announcement = await prisma_1.prisma.announcement.findUnique({
         where: { id: announcementId },
         include: {
             creator: true,
@@ -92,47 +98,47 @@ const getAnnouncementById = async (announcementId) => {
         },
     });
     if (!announcement) {
-        throw new AppError(status.NOT_FOUND, "Announcement not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Announcement not found");
     }
     return { announcement };
 };
 const updateAnnouncement = async (announcementId, payload) => {
-    const announcement = await prisma.announcement.findUnique({ where: { id: announcementId } });
+    const announcement = await prisma_1.prisma.announcement.findUnique({ where: { id: announcementId } });
     if (!announcement) {
-        throw new AppError(status.NOT_FOUND, "Announcement not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Announcement not found");
     }
-    const updated = await prisma.announcement.update({
+    const updated = await prisma_1.prisma.announcement.update({
         where: { id: announcementId },
         data: payload,
     });
     return { announcement: updated };
 };
 const deleteAnnouncement = async (announcementId) => {
-    const announcement = await prisma.announcement.findUnique({ where: { id: announcementId } });
+    const announcement = await prisma_1.prisma.announcement.findUnique({ where: { id: announcementId } });
     if (!announcement) {
-        throw new AppError(status.NOT_FOUND, "Announcement not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Announcement not found");
     }
-    await prisma.announcement.delete({ where: { id: announcementId } });
+    await prisma_1.prisma.announcement.delete({ where: { id: announcementId } });
     return { announcement };
 };
 const publishAnnouncement = async (announcementId) => {
-    const announcement = await prisma.announcement.findUnique({ where: { id: announcementId } });
+    const announcement = await prisma_1.prisma.announcement.findUnique({ where: { id: announcementId } });
     if (!announcement) {
-        throw new AppError(status.NOT_FOUND, "Announcement not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Announcement not found");
     }
-    if (announcement.status === AnnouncementStatus.PUBLISHED) {
-        throw new AppError(status.BAD_REQUEST, "Announcement is already published");
+    if (announcement.status === client_1.AnnouncementStatus.PUBLISHED) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Announcement is already published");
     }
-    const updated = await prisma.announcement.update({
+    const updated = await prisma_1.prisma.announcement.update({
         where: { id: announcementId },
         data: {
-            status: AnnouncementStatus.PUBLISHED,
+            status: client_1.AnnouncementStatus.PUBLISHED,
             published_at: new Date(),
         },
     });
     return { announcement: updated };
 };
-export const announcementService = {
+exports.announcementService = {
     createAnnouncement,
     getAllAnnouncements,
     getAnnouncementById,

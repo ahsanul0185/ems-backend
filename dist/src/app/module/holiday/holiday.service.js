@@ -1,9 +1,15 @@
-import status from "http-status";
-import AppError from "../../errorHelpers/AppError";
-import { prisma } from "../../lib/prisma";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.holidayService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
+const prisma_1 = require("../../lib/prisma");
 const createHoliday = async (payload, hrProfileId) => {
     if (!hrProfileId) {
-        throw new AppError(status.BAD_REQUEST, "created_by (HR Profile ID) is required");
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "created_by (HR Profile ID) is required");
     }
     const { name, description, date, from, to } = payload;
     const datesToCreate = [];
@@ -19,10 +25,10 @@ const createHoliday = async (payload, hrProfileId) => {
         }
     }
     if (datesToCreate.length === 0) {
-        throw new AppError(status.BAD_REQUEST, "Invalid date parameters");
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Invalid date parameters");
     }
     // Check for existing holidays
-    const existingHolidays = await prisma.holiday.findMany({
+    const existingHolidays = await prisma_1.prisma.holiday.findMany({
         where: {
             date: {
                 in: datesToCreate,
@@ -31,7 +37,7 @@ const createHoliday = async (payload, hrProfileId) => {
     });
     if (existingHolidays.length > 0) {
         const takenDates = existingHolidays.map(h => h.date.toISOString().split('T')[0]).join(", ");
-        throw new AppError(status.CONFLICT, `Holidays already exist for dates: ${takenDates}`);
+        throw new AppError_1.default(http_status_1.default.CONFLICT, `Holidays already exist for dates: ${takenDates}`);
     }
     // Create holidays
     const holidaysData = datesToCreate.map(d => ({
@@ -40,7 +46,7 @@ const createHoliday = async (payload, hrProfileId) => {
         date: d,
         created_by: hrProfileId,
     }));
-    const result = await prisma.holiday.createMany({
+    const result = await prisma_1.prisma.holiday.createMany({
         data: holidaysData,
     });
     return {
@@ -48,14 +54,14 @@ const createHoliday = async (payload, hrProfileId) => {
     };
 };
 const getAllHolidays = async () => {
-    const holidays = await prisma.holiday.findMany({
+    const holidays = await prisma_1.prisma.holiday.findMany({
         orderBy: {
             date: 'asc'
         }
     });
     return holidays;
 };
-export const holidayService = {
+exports.holidayService = {
     createHoliday,
     getAllHolidays,
 };

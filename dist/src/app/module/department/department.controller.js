@@ -1,48 +1,54 @@
-import { catchAsync } from "../../shared/catchAsync";
-import { sendResponse } from "../../shared/sendResponse";
-import { departmentService } from "./department.service";
-import status from "http-status";
-const createDepartment = catchAsync(async (req, res) => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.departmentController = void 0;
+const catchAsync_1 = require("../../shared/catchAsync");
+const sendResponse_1 = require("../../shared/sendResponse");
+const department_service_1 = require("./department.service");
+const http_status_1 = __importDefault(require("http-status"));
+const createDepartment = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const payload = req.body;
-    const result = await departmentService.createDepartment(payload);
-    sendResponse(res, {
-        httpStatusCode: status.CREATED,
+    const result = await department_service_1.departmentService.createDepartment(payload);
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.CREATED,
         success: true,
         message: "Department created successfully",
         data: result
     });
 });
-const getAllDepartments = catchAsync(async (req, res) => {
-    const result = await departmentService.getAllDepartments();
-    sendResponse(res, {
-        httpStatusCode: status.OK,
+const getAllDepartments = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const result = await department_service_1.departmentService.getAllDepartments();
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Departments fetched successfully",
         data: result,
     });
 });
-const updateDepartment = catchAsync(async (req, res) => {
+const updateDepartment = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const departmentId = req.params.id;
     const payload = req.body;
-    const result = await departmentService.updateDepartment(departmentId, payload);
-    sendResponse(res, {
-        httpStatusCode: status.OK,
+    const result = await department_service_1.departmentService.updateDepartment(departmentId, payload);
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Department updated successfully",
         data: result,
     });
 });
-const deleteDepartment = catchAsync(async (req, res) => {
+const deleteDepartment = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const departmentId = req.params.id;
-    const result = await departmentService.deleteDepartment(departmentId);
-    sendResponse(res, {
-        httpStatusCode: status.OK,
+    const result = await department_service_1.departmentService.deleteDepartment(departmentId);
+    (0, sendResponse_1.sendResponse)(res, {
+        httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Department deleted successfully",
         data: result,
     });
 });
-export const departmentController = {
+exports.departmentController = {
     createDepartment,
     getAllDepartments,
     updateDepartment,

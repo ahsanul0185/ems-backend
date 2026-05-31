@@ -1,15 +1,21 @@
-import status from "http-status";
-import AppError from "../../errorHelpers/AppError";
-import { prisma } from "../../lib/prisma";
-import { QueryBuilder } from "../../utils/QueryBuilder";
-import { LeaveRequestStatus } from "../../../generated/prisma/client";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.leaveService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
+const prisma_1 = require("../../lib/prisma");
+const QueryBuilder_1 = require("../../utils/QueryBuilder");
+const client_1 = require("../../../generated/prisma/client");
 const applyLeave = async (payload) => {
     const { employee_id } = payload;
-    const employee = await prisma.employee.findUnique({ where: { id: employee_id } });
+    const employee = await prisma_1.prisma.employee.findUnique({ where: { id: employee_id } });
     if (!employee) {
-        throw new AppError(status.NOT_FOUND, "Employee not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Employee not found");
     }
-    const leave = await prisma.leaveRequest.create({
+    const leave = await prisma_1.prisma.leaveRequest.create({
         data: {
             employee_id,
             title: payload.title,
@@ -24,7 +30,7 @@ const applyLeave = async (payload) => {
     return { leave };
 };
 const getMyLeaves = async (employeeId, queryParams) => {
-    const builder = new QueryBuilder(prisma.leaveRequest, queryParams, {
+    const builder = new QueryBuilder_1.QueryBuilder(prisma_1.prisma.leaveRequest, queryParams, {
         searchableFields: ["title", "reason"],
         filterableFields: ["status", "leave_type", "employee_id"],
         defaultSelect: {
@@ -47,17 +53,17 @@ const getMyLeaves = async (employeeId, queryParams) => {
     return builder.execute();
 };
 const getLeaveById = async (leaveId) => {
-    const leave = await prisma.leaveRequest.findUnique({
+    const leave = await prisma_1.prisma.leaveRequest.findUnique({
         where: { id: leaveId },
         include: { employee: true, approved_emp: true },
     });
     if (!leave) {
-        throw new AppError(status.NOT_FOUND, "Leave request not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Leave request not found");
     }
     return { leave };
 };
 const getAllLeaves = async (queryParams) => {
-    const builder = new QueryBuilder(prisma.leaveRequest, queryParams, {
+    const builder = new QueryBuilder_1.QueryBuilder(prisma_1.prisma.leaveRequest, queryParams, {
         searchableFields: ["title", "reason", "employee.first_name", "employee.last_name"],
         filterableFields: ["status", "leave_type", "employee_id"],
         defaultSelect: {
@@ -87,17 +93,17 @@ const getAllLeaves = async (queryParams) => {
     return builder.execute();
 };
 const approveLeave = async (leaveId, approverId) => {
-    const leave = await prisma.leaveRequest.findUnique({ where: { id: leaveId } });
+    const leave = await prisma_1.prisma.leaveRequest.findUnique({ where: { id: leaveId } });
     if (!leave) {
-        throw new AppError(status.NOT_FOUND, "Leave request not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Leave request not found");
     }
-    if (leave.status !== LeaveRequestStatus.PENDING) {
-        throw new AppError(status.BAD_REQUEST, "Only pending requests can be approved");
+    if (leave.status !== client_1.LeaveRequestStatus.PENDING) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Only pending requests can be approved");
     }
-    const updated = await prisma.leaveRequest.update({
+    const updated = await prisma_1.prisma.leaveRequest.update({
         where: { id: leaveId },
         data: {
-            status: LeaveRequestStatus.APPROVED,
+            status: client_1.LeaveRequestStatus.APPROVED,
             approved_by: approverId,
             approved_at: new Date(),
         }
@@ -105,17 +111,17 @@ const approveLeave = async (leaveId, approverId) => {
     return { leave: updated };
 };
 const rejectLeave = async (leaveId, rejectorId, rejectionReason) => {
-    const leave = await prisma.leaveRequest.findUnique({ where: { id: leaveId } });
+    const leave = await prisma_1.prisma.leaveRequest.findUnique({ where: { id: leaveId } });
     if (!leave) {
-        throw new AppError(status.NOT_FOUND, "Leave request not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Leave request not found");
     }
-    if (leave.status !== LeaveRequestStatus.PENDING) {
-        throw new AppError(status.BAD_REQUEST, "Only pending requests can be rejected");
+    if (leave.status !== client_1.LeaveRequestStatus.PENDING) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Only pending requests can be rejected");
     }
-    const updated = await prisma.leaveRequest.update({
+    const updated = await prisma_1.prisma.leaveRequest.update({
         where: { id: leaveId },
         data: {
-            status: LeaveRequestStatus.REJECTED,
+            status: client_1.LeaveRequestStatus.REJECTED,
             rejection_reason: rejectionReason,
             approved_by: rejectorId,
             approved_at: new Date(),
@@ -124,25 +130,25 @@ const rejectLeave = async (leaveId, rejectorId, rejectionReason) => {
     return { leave: updated };
 };
 const cancelLeave = async (leaveId, employeeId) => {
-    const leave = await prisma.leaveRequest.findUnique({ where: { id: leaveId } });
+    const leave = await prisma_1.prisma.leaveRequest.findUnique({ where: { id: leaveId } });
     if (!leave) {
-        throw new AppError(status.NOT_FOUND, "Leave request not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Leave request not found");
     }
     if (employeeId && leave.employee_id !== employeeId) {
-        throw new AppError(status.FORBIDDEN, "You are not allowed to cancel this leave request");
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "You are not allowed to cancel this leave request");
     }
-    if (leave.status !== LeaveRequestStatus.PENDING) {
-        throw new AppError(status.BAD_REQUEST, "Only pending requests can be cancelled");
+    if (leave.status !== client_1.LeaveRequestStatus.PENDING) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Only pending requests can be cancelled");
     }
-    const updated = await prisma.leaveRequest.update({
+    const updated = await prisma_1.prisma.leaveRequest.update({
         where: { id: leaveId },
         data: {
-            status: LeaveRequestStatus.CANCELLED,
+            status: client_1.LeaveRequestStatus.CANCELLED,
         }
     });
     return { leave: updated };
 };
-export const leaveService = {
+exports.leaveService = {
     applyLeave,
     getMyLeaves,
     getLeaveById,

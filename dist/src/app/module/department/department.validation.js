@@ -1,11 +1,17 @@
-import z from "zod";
-export const createDepartmentZodSchema = z.object({
-    name: z.string("Department name is required"),
-    description: z.string().optional(),
-    is_active: z.boolean().optional(),
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.updateDepartmentZodSchema = exports.createDepartmentZodSchema = void 0;
+const zod_1 = __importDefault(require("zod"));
+exports.createDepartmentZodSchema = zod_1.default.object({
+    name: zod_1.default.string("Department name is required"),
+    description: zod_1.default.string().optional(),
+    is_active: zod_1.default.boolean().optional(),
 });
-export const updateDepartmentZodSchema = z.object({
-    name: z.string().optional(),
-    description: z.string().optional(),
-    is_active: z.boolean().optional(),
+exports.updateDepartmentZodSchema = zod_1.default.object({
+    name: zod_1.default.string().optional(),
+    description: zod_1.default.string().optional(),
+    is_active: zod_1.default.boolean().optional(),
 });

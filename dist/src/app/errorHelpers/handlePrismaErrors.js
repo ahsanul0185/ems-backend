@@ -1,41 +1,47 @@
-import status from "http-status";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.handlerPrismaClientRustPanicError = exports.handlerPrismaClientInitializationError = exports.handlePrismaClientValidationError = exports.handlePrismaClientUnknownError = exports.handlePrismaClientKnownRequestError = void 0;
+const http_status_1 = __importDefault(require("http-status"));
 const getStatusCodeFromPrismaError = (errorCode) => {
     if (errorCode === "P2002") {
-        return status.CONFLICT;
+        return http_status_1.default.CONFLICT;
     }
     if (["P2025", "P2001", "P2015", "P2018"].includes(errorCode)) {
-        return status.NOT_FOUND;
+        return http_status_1.default.NOT_FOUND;
     }
     if (["P1000", "P6002"].includes(errorCode)) {
-        return status.UNAUTHORIZED;
+        return http_status_1.default.UNAUTHORIZED;
     }
     if (["P1010", "P6010"].includes(errorCode)) {
-        return status.FORBIDDEN;
+        return http_status_1.default.FORBIDDEN;
     }
     if (errorCode === "P6003") {
-        return status.PAYMENT_REQUIRED;
+        return http_status_1.default.PAYMENT_REQUIRED;
     }
     if (["P1008", "P2004", "P6004"].includes(errorCode)) {
-        return status.GATEWAY_TIMEOUT;
+        return http_status_1.default.GATEWAY_TIMEOUT;
     }
     if (errorCode === "P5011") {
-        return status.TOO_MANY_REQUESTS;
+        return http_status_1.default.TOO_MANY_REQUESTS;
     }
     if (errorCode === "P6009") {
         return 413;
     }
     if (errorCode.startsWith("P1") || ["P2024", "P2037", "P6008"].includes(errorCode)) {
-        return status.SERVICE_UNAVAILABLE;
+        return http_status_1.default.SERVICE_UNAVAILABLE;
     }
     if (errorCode.startsWith("P2")) {
-        return status.BAD_REQUEST;
+        return http_status_1.default.BAD_REQUEST;
     }
     if (errorCode.startsWith("P3") || errorCode.startsWith("P4")) {
-        return status.INTERNAL_SERVER_ERROR;
+        return http_status_1.default.INTERNAL_SERVER_ERROR;
     }
-    return status.INTERNAL_SERVER_ERROR;
+    return http_status_1.default.INTERNAL_SERVER_ERROR;
 };
-export const handlePrismaClientKnownRequestError = (error) => {
+const handlePrismaClientKnownRequestError = (error) => {
     const statusCode = getStatusCodeFromPrismaError(error.code);
     const meta = error.meta;
     const modelName = meta?.modelName;
@@ -127,7 +133,8 @@ export const handlePrismaClientKnownRequestError = (error) => {
         errorSources,
     };
 };
-export const handlePrismaClientUnknownError = (error) => {
+exports.handlePrismaClientKnownRequestError = handlePrismaClientKnownRequestError;
+const handlePrismaClientUnknownError = (error) => {
     const cleanMessage = error.message
         .replace(/Invalid `.*?` invocation:?\s*/i, "")
         .split("\n")
@@ -135,12 +142,13 @@ export const handlePrismaClientUnknownError = (error) => {
         .filter((l) => l.length > 0)[0] ?? "An unknown database error occurred";
     return {
         success: false,
-        statusCode: status.INTERNAL_SERVER_ERROR,
+        statusCode: http_status_1.default.INTERNAL_SERVER_ERROR,
         message: cleanMessage,
         errorSources: [{ path: "database", message: cleanMessage }],
     };
 };
-export const handlePrismaClientValidationError = (error) => {
+exports.handlePrismaClientUnknownError = handlePrismaClientUnknownError;
+const handlePrismaClientValidationError = (error) => {
     const cleanMessage = error.message
         .replace(/Invalid `.*?` invocation:?\s*/i, "")
         .split("\n")
@@ -151,15 +159,16 @@ export const handlePrismaClientValidationError = (error) => {
     const mainMessage = cleanMessage.find((l) => !l.includes("Argument") && !l.includes("→") && l.length > 10) ?? cleanMessage[0] ?? "Invalid data provided for this operation";
     return {
         success: false,
-        statusCode: status.BAD_REQUEST,
+        statusCode: http_status_1.default.BAD_REQUEST,
         message: "Validation failed — check the data you submitted",
         errorSources: [{ path: fieldName, message: mainMessage }],
     };
 };
-export const handlerPrismaClientInitializationError = (error) => {
+exports.handlePrismaClientValidationError = handlePrismaClientValidationError;
+const handlerPrismaClientInitializationError = (error) => {
     const statusCode = error.errorCode
         ? getStatusCodeFromPrismaError(error.errorCode)
-        : status.SERVICE_UNAVAILABLE;
+        : http_status_1.default.SERVICE_UNAVAILABLE;
     const mainMessage = error.message
         .split("\n")
         .map((l) => l.trim())
@@ -171,9 +180,10 @@ export const handlerPrismaClientInitializationError = (error) => {
         errorSources: [{ path: error.errorCode ?? "initialization", message: mainMessage }],
     };
 };
-export const handlerPrismaClientRustPanicError = () => ({
+exports.handlerPrismaClientInitializationError = handlerPrismaClientInitializationError;
+const handlerPrismaClientRustPanicError = () => ({
     success: false,
-    statusCode: status.INTERNAL_SERVER_ERROR,
+    statusCode: http_status_1.default.INTERNAL_SERVER_ERROR,
     message: "A critical database engine error occurred. Please contact support.",
     errorSources: [
         {
@@ -182,3 +192,4 @@ export const handlerPrismaClientRustPanicError = () => ({
         },
     ],
 });
+exports.handlerPrismaClientRustPanicError = handlerPrismaClientRustPanicError;

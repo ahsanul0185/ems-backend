@@ -4,12 +4,13 @@ import express, { Application, Request, Response } from "express";
 import { IndexRoutes } from "./app/routes";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import { notFound } from "./app/middleware/notFound";
+import { env } from "./app/config/env";
 
 const app: Application = express();
 
 // Middlewares
 app.use(cors({
-    origin: ["http://localhost:3000"],
+    origin: [env.FRONTEND_URL, "http://localhost:3000"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"]

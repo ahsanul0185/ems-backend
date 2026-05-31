@@ -1,17 +1,20 @@
-import { env } from "../config/env";
-import { CookieUtils } from "./cookie";
-import { jwtUtils } from "./jwt";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.tokenUtils = void 0;
+const env_1 = require("../config/env");
+const cookie_1 = require("./cookie");
+const jwt_1 = require("./jwt");
 //Creating access token
 const getAccessToken = (payload) => {
-    const accessToken = jwtUtils.createToken(payload, env.ACCESS_TOKEN_SECRET, { expiresIn: env.ACCESS_TOKEN_EXPIRES_IN });
+    const accessToken = jwt_1.jwtUtils.createToken(payload, env_1.env.ACCESS_TOKEN_SECRET, { expiresIn: env_1.env.ACCESS_TOKEN_EXPIRES_IN });
     return accessToken;
 };
 const getRefreshToken = (payload) => {
-    const refreshToken = jwtUtils.createToken(payload, env.REFRESH_TOKEN_SECRET, { expiresIn: env.REFRESH_TOKEN_EXPIRES_IN });
+    const refreshToken = jwt_1.jwtUtils.createToken(payload, env_1.env.REFRESH_TOKEN_SECRET, { expiresIn: env_1.env.REFRESH_TOKEN_EXPIRES_IN });
     return refreshToken;
 };
 const setAccessTokenCookie = (res, token) => {
-    CookieUtils.setCookie(res, 'accessToken', token, {
+    cookie_1.CookieUtils.setCookie(res, 'accessToken', token, {
         httpOnly: true,
         secure: true,
         sameSite: "none",
@@ -21,7 +24,7 @@ const setAccessTokenCookie = (res, token) => {
     });
 };
 const setRefreshTokenCookie = (res, token) => {
-    CookieUtils.setCookie(res, 'refreshToken', token, {
+    cookie_1.CookieUtils.setCookie(res, 'refreshToken', token, {
         httpOnly: true,
         secure: true,
         sameSite: "none",
@@ -30,7 +33,7 @@ const setRefreshTokenCookie = (res, token) => {
         maxAge: 60 * 60 * 24 * 1000 * 7,
     });
 };
-export const tokenUtils = {
+exports.tokenUtils = {
     getAccessToken,
     getRefreshToken,
     setAccessTokenCookie,

@@ -1,7 +1,13 @@
-import status from "http-status";
-import AppError from "../../errorHelpers/AppError";
-import { prisma } from "../../lib/prisma";
-import { EmployeeStatus, UserRole, UserStatus } from "../../../generated/prisma/enums";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
+const prisma_1 = require("../../lib/prisma");
+const enums_1 = require("../../../generated/prisma/enums");
 const userSelectFields = {
     id: true,
     email: true,
@@ -12,14 +18,14 @@ const userSelectFields = {
     email_verified: true,
 };
 const getAllUsers = async () => {
-    const users = await prisma.user.findMany({
+    const users = await prisma_1.prisma.user.findMany({
         where: { is_deleted: false },
         select: userSelectFields,
     });
     return { users };
 };
 const getUserById = async (userId) => {
-    const user = await prisma.user.findUnique({
+    const user = await prisma_1.prisma.user.findUnique({
         where: { id: userId, is_deleted: false },
         select: {
             ...userSelectFields,
@@ -28,18 +34,18 @@ const getUserById = async (userId) => {
         },
     });
     if (!user) {
-        throw new AppError(status.NOT_FOUND, "User not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "User not found");
     }
     return user;
 };
 const updateUser = async (userId, payload) => {
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma_1.prisma.user.findUnique({
         where: { id: userId, is_deleted: false },
     });
     if (!existingUser) {
-        throw new AppError(status.NOT_FOUND, "User not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "User not found");
     }
-    const user = await prisma.user.update({
+    const user = await prisma_1.prisma.user.update({
         where: { id: userId },
         data: payload,
         select: userSelectFields,
@@ -47,7 +53,7 @@ const updateUser = async (userId, payload) => {
     return { user };
 };
 const deleteUser = async (userId) => {
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma_1.prisma.user.findUnique({
         where: { id: userId, is_deleted: false },
         include: {
             employee: true,
@@ -55,18 +61,18 @@ const deleteUser = async (userId) => {
         },
     });
     if (!existingUser) {
-        throw new AppError(status.NOT_FOUND, "User not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "User not found");
     }
-    const user = await prisma.$transaction(async (tx) => {
+    const user = await prisma_1.prisma.$transaction(async (tx) => {
         const updatedUser = await tx.user.update({
             where: { id: userId },
-            data: { is_deleted: true, status: UserStatus.DELETED },
+            data: { is_deleted: true, status: enums_1.UserStatus.DELETED },
             select: userSelectFields,
         });
-        if (existingUser.role === UserRole.EMPLOYEE && existingUser.employee?.id) {
+        if (existingUser.role === enums_1.UserRole.EMPLOYEE && existingUser.employee?.id) {
             await tx.employee.update({
                 where: { id: existingUser.employee.id },
-                data: { employment_status: EmployeeStatus.TERMINATED },
+                data: { employment_status: enums_1.EmployeeStatus.TERMINATED },
             });
         }
         return updatedUser;
@@ -74,15 +80,15 @@ const deleteUser = async (userId) => {
     return { user };
 };
 const createHRProfile = async (user_id, employee_id) => {
-    const user = await prisma.user.findUnique({ where: { id: user_id } });
+    const user = await prisma_1.prisma.user.findUnique({ where: { id: user_id } });
     if (!user) {
-        throw new AppError(status.NOT_FOUND, "User not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "User not found");
     }
-    const employee = await prisma.employee.findUnique({ where: { id: employee_id } });
+    const employee = await prisma_1.prisma.employee.findUnique({ where: { id: employee_id } });
     if (!employee) {
-        throw new AppError(status.NOT_FOUND, "Employee not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Employee not found");
     }
-    const existing = await prisma.hRProfile.findFirst({
+    const existing = await prisma_1.prisma.hRProfile.findFirst({
         where: {
             OR: [
                 { user_id },
@@ -91,23 +97,23 @@ const createHRProfile = async (user_id, employee_id) => {
         }
     });
     if (existing) {
-        throw new AppError(status.BAD_REQUEST, "HR profile already exists for the provided user or employee");
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "HR profile already exists for the provided user or employee");
     }
-    const [hrProfile] = await prisma.$transaction([
-        prisma.hRProfile.create({
+    const [hrProfile] = await prisma_1.prisma.$transaction([
+        prisma_1.prisma.hRProfile.create({
             data: {
                 user_id,
                 employee_id,
             }
         }),
-        prisma.user.update({
+        prisma_1.prisma.user.update({
             where: { id: user_id },
-            data: { role: UserRole.HR }
+            data: { role: enums_1.UserRole.HR }
         })
     ]);
     return { hrProfile };
 };
-export const userService = {
+exports.userService = {
     getAllUsers,
     getUserById,
     updateUser,

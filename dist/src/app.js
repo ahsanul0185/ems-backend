@@ -1,25 +1,31 @@
-import cookieParser from "cookie-parser";
-import cors from "cors";
-import express from "express";
-import { IndexRoutes } from "./app/routes";
-import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
-import { notFound } from "./app/middleware/notFound";
-const app = express();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const cors_1 = __importDefault(require("cors"));
+const express_1 = __importDefault(require("express"));
+const routes_1 = require("./app/routes");
+const globalErrorHandler_1 = require("./app/middleware/globalErrorHandler");
+const notFound_1 = require("./app/middleware/notFound");
+const env_1 = require("./app/config/env");
+const app = (0, express_1.default)();
 // Middlewares
-app.use(cors({
-    origin: ["http://localhost:3000"],
+app.use((0, cors_1.default)({
+    origin: [env_1.env.FRONTEND_URL, "http://localhost:3000"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use("/api/v1", IndexRoutes);
+app.use((0, cookie_parser_1.default)());
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use("/api/v1", routes_1.IndexRoutes);
 // Basic entry route
 app.get('/', (req, res) => {
     res.status(200).send("EMS API Running.");
 });
-app.use(globalErrorHandler);
-app.use(notFound);
-export default app;
+app.use(globalErrorHandler_1.globalErrorHandler);
+app.use(notFound_1.notFound);
+exports.default = app;

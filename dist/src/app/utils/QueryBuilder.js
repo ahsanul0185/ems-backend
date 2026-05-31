@@ -1,5 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.QueryBuilder = void 0;
 // T = Model Type
-export class QueryBuilder {
+class QueryBuilder {
     model;
     queryParams;
     config;
@@ -361,3 +364,4 @@ export class QueryBuilder {
         return Object.keys(rangeQuery).length > 0 ? rangeQuery : value;
     }
 }
+exports.QueryBuilder = QueryBuilder;

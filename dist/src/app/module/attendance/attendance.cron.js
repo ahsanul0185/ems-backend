@@ -1,29 +1,35 @@
-import cron from "node-cron";
-import { prisma } from "../../lib/prisma";
-import { AttendanceStatus, EmployeeStatus, LeaveRequestStatus } from "../../../generated/prisma/client";
-import { isWeekend } from "./attendance.utils";
-import { env } from "../../config/env";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.initializeCrons = void 0;
+const node_cron_1 = __importDefault(require("node-cron"));
+const prisma_1 = require("../../lib/prisma");
+const client_1 = require("../../../generated/prisma/client");
+const attendance_utils_1 = require("./attendance.utils");
+const env_1 = require("../../config/env");
 const cronClockIn = async () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    if (isWeekend(today))
+    if ((0, attendance_utils_1.isWeekend)(today))
         return;
-    const holiday = await prisma.holiday.findFirst({ where: { date: today } });
+    const holiday = await prisma_1.prisma.holiday.findFirst({ where: { date: today } });
     if (holiday)
         return;
     // 1. Fetch everything you need in 3 queries — no loop queries
     const [activeEmployees, existingRecords, activeLeaves] = await Promise.all([
-        prisma.employee.findMany({
-            where: { employment_status: EmployeeStatus.ACTIVE },
+        prisma_1.prisma.employee.findMany({
+            where: { employment_status: client_1.EmployeeStatus.ACTIVE },
             select: { id: true }, // only pull what you need
         }),
-        prisma.attendance.findMany({
+        prisma_1.prisma.attendance.findMany({
             where: { date: today },
             select: { employee_id: true },
         }),
-        prisma.leaveRequest.findMany({
+        prisma_1.prisma.leaveRequest.findMany({
             where: {
-                status: LeaveRequestStatus.APPROVED,
+                status: client_1.LeaveRequestStatus.APPROVED,
                 start_date: { lte: today },
                 end_date: { gte: today },
             },
@@ -43,7 +49,7 @@ const cronClockIn = async () => {
             onLeaveData.push({
                 employee_id: emp.id,
                 date: today,
-                status: AttendanceStatus.ON_LEAVE,
+                status: client_1.AttendanceStatus.ON_LEAVE,
                 leave_request_id: leaveId,
             });
         }
@@ -51,32 +57,32 @@ const cronClockIn = async () => {
             softAbsentData.push({
                 employee_id: emp.id,
                 date: today,
-                status: AttendanceStatus.ABSENT,
+                status: client_1.AttendanceStatus.ABSENT,
                 is_auto_clocked_out: false,
             });
         }
     }
     // 4. Two bulk inserts instead of 400 individual creates
     await Promise.all([
-        prisma.attendance.createMany({ data: onLeaveData, skipDuplicates: true }),
-        prisma.attendance.createMany({ data: softAbsentData, skipDuplicates: true }),
+        prisma_1.prisma.attendance.createMany({ data: onLeaveData, skipDuplicates: true }),
+        prisma_1.prisma.attendance.createMany({ data: softAbsentData, skipDuplicates: true }),
     ]);
     console.log(`Cron 1 done — ${onLeaveData.length} ON_LEAVE, ${softAbsentData.length} ABSENT created`);
 };
 const cronClockOut = async () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    if (isWeekend(today))
+    if ((0, attendance_utils_1.isWeekend)(today))
         return;
-    const holiday = await prisma.holiday.findFirst({ where: { date: today } });
+    const holiday = await prisma_1.prisma.holiday.findFirst({ where: { date: today } });
     if (holiday)
         return;
-    const [endHour, endMinute] = env.SHIFT_END_TIME.split(":").map(Number);
+    const [endHour, endMinute] = env_1.env.SHIFT_END_TIME.split(":").map(Number);
     const shiftEnd = new Date(today);
     shiftEnd.setHours(endHour || 17, endMinute || 0, 0, 0);
     // 1. Fetch both sets in parallel
     const [missingClockOut, softAbsents] = await Promise.all([
-        prisma.attendance.findMany({
+        prisma_1.prisma.attendance.findMany({
             where: {
                 date: today,
                 clock_in_time: { not: null },
@@ -84,10 +90,10 @@ const cronClockOut = async () => {
                 is_informed: false,
             },
         }),
-        prisma.attendance.findMany({
+        prisma_1.prisma.attendance.findMany({
             where: {
                 date: today,
-                status: AttendanceStatus.ABSENT,
+                status: client_1.AttendanceStatus.ABSENT,
                 is_auto_clocked_out: false,
                 clock_in_time: null,
             },
@@ -96,7 +102,7 @@ const cronClockOut = async () => {
     ]);
     // 2. Bulk update soft absents — same value for all, one query
     if (softAbsents.length > 0) {
-        await prisma.attendance.updateMany({
+        await prisma_1.prisma.attendance.updateMany({
             where: { id: { in: softAbsents.map(r => r.id) } },
             data: { is_auto_clocked_out: true },
         });
@@ -108,11 +114,11 @@ const cronClockOut = async () => {
             const workMinutes = record.clock_in_time
                 ? Math.floor((shiftEnd.getTime() - record.clock_in_time.getTime()) / (1000 * 60))
                 : 0;
-            return prisma.attendance.update({
+            return prisma_1.prisma.attendance.update({
                 where: { id: record.id },
                 data: {
                     clock_out_time: shiftEnd,
-                    status: AttendanceStatus.ABSENT,
+                    status: client_1.AttendanceStatus.ABSENT,
                     is_auto_clocked_out: true,
                     work_minutes: workMinutes,
                     notes: record.notes
@@ -124,15 +130,16 @@ const cronClockOut = async () => {
     }
     console.log(`Cron 2 done — ${missingClockOut.length} auto closed, ${softAbsents.length} absents finalized`);
 };
-export const initializeCrons = () => {
+const initializeCrons = () => {
     // Parse shift start and end times from env
-    const [startHour, startMinute] = env.SHIFT_START_TIME.split(":").map(Number);
-    const [endHour, endMinute] = env.SHIFT_END_TIME.split(":").map(Number);
+    const [startHour, startMinute] = env_1.env.SHIFT_START_TIME.split(":").map(Number);
+    const [endHour, endMinute] = env_1.env.SHIFT_END_TIME.split(":").map(Number);
     // Schedule cron 1 (15 minutes after shift start)
     let cron1Minute = (startMinute + 15) % 60;
     let cron1Hour = startHour + Math.floor((startMinute + 15) / 60);
-    cron.schedule(`${cron1Minute} ${cron1Hour} * * *`, cronClockIn);
+    node_cron_1.default.schedule(`${cron1Minute} ${cron1Hour} * * *`, cronClockIn);
     // Schedule cron 2 (exactly at shift end)
-    cron.schedule(`${endMinute} ${endHour} * * *`, cronClockOut);
+    node_cron_1.default.schedule(`${endMinute} ${endHour} * * *`, cronClockOut);
     console.log(`Attendance cron jobs initialized at ${cron1Hour}:${cron1Minute.toString().padStart(2, '0')} and ${endHour}:${endMinute.toString().padStart(2, '0')}`);
 };
+exports.initializeCrons = initializeCrons;

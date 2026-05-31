@@ -1,42 +1,54 @@
-import status from "http-status";
-import AppError from "../../errorHelpers/AppError";
-import { prisma } from "../../lib/prisma";
-import { QueryBuilder } from "../../utils/QueryBuilder";
-import { EmployeeStatus } from "../../../generated/prisma/client";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.employeeService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
+const prisma_1 = require("../../lib/prisma");
+const QueryBuilder_1 = require("../../utils/QueryBuilder");
+const client_1 = require("../../../generated/prisma/client");
+const bcrypt_1 = require("../../utils/bcrypt");
 const createEmployee = async (payload) => {
-    const { user_id } = payload;
-    const employee_code = "EMP-" + user_id.slice(-6).toUpperCase();
-    const existingEmployee = await prisma.employee.findFirst({
-        where: {
-            OR: [
-                { user_id },
-                { employee_code }
-            ]
-        }
+    const { email, password, ...employeeData } = payload;
+    const isUserExist = await prisma_1.prisma.user.findUnique({
+        where: { email }
     });
-    if (existingEmployee) {
-        throw new AppError(status.BAD_REQUEST, "Employee already exists for this user or employee code");
+    if (isUserExist) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "User already exists with this email");
     }
-    const employee = await prisma.employee.create({
-        data: {
-            ...payload,
-            employee_code,
-        },
+    const hashedPassword = await bcrypt_1.bcryptUtils.hash(password);
+    const result = await prisma_1.prisma.$transaction(async (tx) => {
+        const user = await tx.user.create({
+            data: {
+                email,
+                password: hashedPassword,
+                role: client_1.UserRole.EMPLOYEE,
+            },
+        });
+        const employee_code = "EMP-" + user.id.slice(-6).toUpperCase();
+        const employee = await tx.employee.create({
+            data: {
+                ...employeeData,
+                user_id: user.id,
+                employee_code,
+            },
+        });
+        return { employee };
     });
-    return {
-        employee,
-    };
+    return { employee: result.employee };
 };
 const updateEmployee = async (employeeId, payload) => {
-    const existingEmployee = await prisma.employee.findUnique({
+    const existingEmployee = await prisma_1.prisma.employee.findUnique({
         where: {
             id: employeeId,
         },
     });
     if (!existingEmployee) {
-        throw new AppError(status.NOT_FOUND, "Employee not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Employee not found");
     }
-    const employee = await prisma.employee.update({
+    const employee = await prisma_1.prisma.employee.update({
         where: {
             id: employeeId,
         },
@@ -47,7 +59,7 @@ const updateEmployee = async (employeeId, payload) => {
     };
 };
 const getEmployeeById = async (employeeId) => {
-    const employee = await prisma.employee.findUnique({
+    const employee = await prisma_1.prisma.employee.findUnique({
         where: {
             id: employeeId,
         },
@@ -60,22 +72,22 @@ const getEmployeeById = async (employeeId) => {
         },
     });
     if (!employee) {
-        throw new AppError(status.NOT_FOUND, "Employee not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Employee not found");
     }
     return {
         employee,
     };
 };
 const deleteEmployee = async (employeeId) => {
-    const employee = await prisma.employee.findUnique({
+    const employee = await prisma_1.prisma.employee.findUnique({
         where: {
             id: employeeId,
         },
     });
     if (!employee) {
-        throw new AppError(status.NOT_FOUND, "Employee not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Employee not found");
     }
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma_1.prisma.$transaction(async (tx) => {
         const updatedUser = await tx.user.update({
             where: {
                 id: employee.user_id,
@@ -89,7 +101,7 @@ const deleteEmployee = async (employeeId) => {
                 id: employeeId,
             },
             data: {
-                employment_status: EmployeeStatus.INACTIVE,
+                employment_status: client_1.EmployeeStatus.INACTIVE,
             },
         });
         return { updatedEmployee, updatedUser };
@@ -99,7 +111,10 @@ const deleteEmployee = async (employeeId) => {
     };
 };
 const getAllEmployees = async (queryParams) => {
-    const builder = new QueryBuilder(prisma.employee, queryParams, {
+    const statusFilter = queryParams.employment_status
+        ? { employment_status: queryParams.employment_status }
+        : { employment_status: { not: client_1.EmployeeStatus.INACTIVE } };
+    const builder = new QueryBuilder_1.QueryBuilder(prisma_1.prisma.employee, queryParams, {
         searchableFields: [
             "first_name",
             "last_name",
@@ -109,13 +124,13 @@ const getAllEmployees = async (queryParams) => {
         ],
         filterableFields: [
             "department_id",
-            "employment_status",
             "employment_type",
             "designation",
             "city",
             "state",
             "country",
             "gender",
+            // employment_status removed — handled manually via .where()
         ],
         defaultSelect: {
             id: true,
@@ -127,24 +142,21 @@ const getAllEmployees = async (queryParams) => {
             gender: true,
             employment_type: true,
             department: {
-                select: {
-                    name: true,
-                }
+                select: { name: true }
             },
             user: {
-                select: {
-                    email: true,
-                }
+                select: { email: true }
             }
         }
     })
+        .where(statusFilter) // <-- applies before search/filter/sort
         .search()
         .filter()
         .sort()
         .paginate();
     return builder.execute();
 };
-export const employeeService = {
+exports.employeeService = {
     createEmployee,
     updateEmployee,
     getEmployeeById,

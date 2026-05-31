@@ -1,18 +1,24 @@
-import status from "http-status";
-import AppError from "../../errorHelpers/AppError";
-import { prisma } from "../../lib/prisma";
-import { QueryBuilder } from "../../utils/QueryBuilder";
-import { PayslipStatus } from "../../../generated/prisma/client";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.payslipService = void 0;
+const http_status_1 = __importDefault(require("http-status"));
+const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
+const prisma_1 = require("../../lib/prisma");
+const QueryBuilder_1 = require("../../utils/QueryBuilder");
+const client_1 = require("../../../generated/prisma/client");
 const generatePayslip = async (payload, generatedBy) => {
-    const employee = await prisma.employee.findUnique({ where: { id: payload.employee_id } });
+    const employee = await prisma_1.prisma.employee.findUnique({ where: { id: payload.employee_id } });
     if (!employee) {
-        throw new AppError(status.NOT_FOUND, "Employee not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Employee not found");
     }
-    const hrProfile = await prisma.hRProfile.findUnique({ where: { id: generatedBy } });
+    const hrProfile = await prisma_1.prisma.hRProfile.findUnique({ where: { id: generatedBy } });
     if (!hrProfile) {
-        throw new AppError(status.FORBIDDEN, "Authenticated HR profile not found");
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "Authenticated HR profile not found");
     }
-    const existingPayslip = await prisma.payslip.findFirst({
+    const existingPayslip = await prisma_1.prisma.payslip.findFirst({
         where: {
             employee_id: payload.employee_id,
             pay_period_month: payload.pay_period_month,
@@ -20,9 +26,9 @@ const generatePayslip = async (payload, generatedBy) => {
         }
     });
     if (existingPayslip) {
-        throw new AppError(status.BAD_REQUEST, "Payslip already exists for this employee and pay period");
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Payslip already exists for this employee and pay period");
     }
-    const payslip = await prisma.payslip.create({
+    const payslip = await prisma_1.prisma.payslip.create({
         data: {
             ...payload,
             generated_by: generatedBy,
@@ -31,7 +37,7 @@ const generatePayslip = async (payload, generatedBy) => {
     return { payslip };
 };
 const getMyPayslips = async (employeeId, queryParams) => {
-    const builder = new QueryBuilder(prisma.payslip, queryParams, {
+    const builder = new QueryBuilder_1.QueryBuilder(prisma_1.prisma.payslip, queryParams, {
         searchableFields: ["notes"],
         filterableFields: ["status", "employee_id", "pay_period_month", "pay_period_year"],
         defaultSelect: {
@@ -56,19 +62,19 @@ const getMyPayslips = async (employeeId, queryParams) => {
     return builder.execute();
 };
 const getMyPayslipById = async (payslipId, employeeId) => {
-    const payslip = await prisma.payslip.findFirst({
+    const payslip = await prisma_1.prisma.payslip.findFirst({
         where: {
             id: payslipId,
             employee_id: employeeId,
         },
     });
     if (!payslip) {
-        throw new AppError(status.NOT_FOUND, "Payslip not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Payslip not found");
     }
     return { payslip };
 };
 const getAllPayslips = async (queryParams) => {
-    const builder = new QueryBuilder(prisma.payslip, queryParams, {
+    const builder = new QueryBuilder_1.QueryBuilder(prisma_1.prisma.payslip, queryParams, {
         searchableFields: ["notes", "employee.first_name", "employee.last_name"],
         filterableFields: ["status", "employee_id", "pay_period_month", "pay_period_year"],
         defaultSelect: {
@@ -99,7 +105,7 @@ const getAllPayslips = async (queryParams) => {
     return builder.execute();
 };
 const getPayslipById = async (payslipId) => {
-    const payslip = await prisma.payslip.findUnique({
+    const payslip = await prisma_1.prisma.payslip.findUnique({
         where: { id: payslipId },
         include: {
             employee: true,
@@ -107,43 +113,43 @@ const getPayslipById = async (payslipId) => {
         },
     });
     if (!payslip) {
-        throw new AppError(status.NOT_FOUND, "Payslip not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Payslip not found");
     }
     return { payslip };
 };
 const approvePayslip = async (payslipId) => {
-    const payslip = await prisma.payslip.findUnique({ where: { id: payslipId } });
+    const payslip = await prisma_1.prisma.payslip.findUnique({ where: { id: payslipId } });
     if (!payslip) {
-        throw new AppError(status.NOT_FOUND, "Payslip not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Payslip not found");
     }
-    if (payslip.status !== PayslipStatus.DRAFT) {
-        throw new AppError(status.BAD_REQUEST, "Only draft payslips can be approved");
+    if (payslip.status !== client_1.PayslipStatus.DRAFT) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Only draft payslips can be approved");
     }
-    const updated = await prisma.payslip.update({
+    const updated = await prisma_1.prisma.payslip.update({
         where: { id: payslipId },
         data: {
-            status: PayslipStatus.APPROVED,
+            status: client_1.PayslipStatus.APPROVED,
         }
     });
     return { payslip: updated };
 };
 const markPaidPayslip = async (payslipId) => {
-    const payslip = await prisma.payslip.findUnique({ where: { id: payslipId } });
+    const payslip = await prisma_1.prisma.payslip.findUnique({ where: { id: payslipId } });
     if (!payslip) {
-        throw new AppError(status.NOT_FOUND, "Payslip not found");
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Payslip not found");
     }
-    if (payslip.status !== PayslipStatus.APPROVED) {
-        throw new AppError(status.BAD_REQUEST, "Only approved payslips can be marked as paid");
+    if (payslip.status !== client_1.PayslipStatus.APPROVED) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Only approved payslips can be marked as paid");
     }
-    const updated = await prisma.payslip.update({
+    const updated = await prisma_1.prisma.payslip.update({
         where: { id: payslipId },
         data: {
-            status: PayslipStatus.PAID,
+            status: client_1.PayslipStatus.PAID,
         }
     });
     return { payslip: updated };
 };
-export const payslipService = {
+exports.payslipService = {
     generatePayslip,
     getMyPayslips,
     getMyPayslipById,
