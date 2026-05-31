@@ -131,6 +131,10 @@ const deleteEmployee = async (employeeId: string) => {
 }
 
 const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQueryResult<Employee>> => {
+    const statusFilter = queryParams.employment_status
+        ? { employment_status: queryParams.employment_status as EmployeeStatus }
+        : { employment_status: { not: EmployeeStatus.INACTIVE } };
+
     const builder = new QueryBuilder<Employee>(
         prisma.employee,
         queryParams,
@@ -144,13 +148,13 @@ const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQuer
             ],
             filterableFields: [
                 "department_id",
-                "employment_status",
                 "employment_type",
                 "designation",
                 "city",
                 "state",
                 "country",
                 "gender",
+                // employment_status removed — handled manually via .where()
             ],
             defaultSelect: {
                 id: true,
@@ -162,26 +166,22 @@ const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQuer
                 gender: true,
                 employment_type: true,
                 department: {
-                    select: {
-                        name: true,
-                    }
+                    select: { name: true }
                 },
                 user: {
-                    select: {
-                        email: true,
-                        
-                    }
+                    select: { email: true }
                 }
             }
         }
     )
+        .where(statusFilter)  // <-- applies before search/filter/sort
         .search()
         .filter()
         .sort()
         .paginate();
 
     return builder.execute();
-}
+};
 
 export const employeeService = {
     createEmployee,
