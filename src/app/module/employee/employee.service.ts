@@ -4,36 +4,47 @@ import { prisma } from "../../lib/prisma";
 import { QueryBuilder } from "../../utils/QueryBuilder";
 import { IQueryResult } from "../../interfaces/query.interface";
 import { ICreateEmployeePayload, IEmployeeQueryParams, IUpdateEmployeePayload } from "./employee.interface";
-import { Employee, EmployeeStatus } from "../../../generated/prisma/client";
+import { Employee, EmployeeStatus, UserRole } from "../../../generated/prisma/client";
+import { bcryptUtils } from "../../utils/bcrypt";
+
 
 const createEmployee = async (payload: ICreateEmployeePayload) => {
-    const { user_id } = payload;
-    const employee_code = "EMP-" + user_id.slice(-6).toUpperCase();
+    const { email, password, ...employeeData } = payload;
 
-    const existingEmployee = await prisma.employee.findFirst({
-        where: {
-            OR: [
-                { user_id },
-                { employee_code }
-            ]
-        }
+    const isUserExist = await prisma.user.findUnique({
+        where: { email }
     });
 
-    if (existingEmployee) {
-        throw new AppError(status.BAD_REQUEST, "Employee already exists for this user or employee code");
+    if (isUserExist) {
+        throw new AppError(status.BAD_REQUEST, "User already exists with this email");
     }
 
-    const employee = await prisma.employee.create({
-        data: {
-            ...payload,
-            employee_code,
-        },
+    const hashedPassword = await bcryptUtils.hash(password);
+
+    const result = await prisma.$transaction(async (tx) => {
+        const user = await tx.user.create({
+            data: {
+                email,
+                password: hashedPassword,
+                role: UserRole.EMPLOYEE,
+            },
+        });
+
+        const employee_code = "EMP-" + user.id.slice(-6).toUpperCase();
+
+        const employee = await tx.employee.create({
+            data: {
+                ...employeeData,
+                user_id: user.id,
+                employee_code,
+            },
+        });
+
+        return { employee };
     });
 
-    return {
-        employee,
-    };
-}
+    return { employee: result.employee };
+};
 
 const updateEmployee = async (employeeId: string, payload: IUpdateEmployeePayload) => {
     const existingEmployee = await prisma.employee.findUnique({

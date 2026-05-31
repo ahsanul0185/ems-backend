@@ -9,7 +9,11 @@ const parseDate = z.preprocess((value) => {
 }, z.date());
 
 export const createEmployeeZodSchema = z.object({
-    user_id: z.string().uuid("user_id must be a valid UUID"),
+    // Auth credentials (used to create the user account)
+    email: z.string().email("email must be a valid email address"),
+    password: z.string().min(8, "password must be at least 8 characters"),
+
+    // Employee profile fields (no user_id — it's generated internally)
     first_name: z.string().min(1, "first_name is required"),
     last_name: z.string().min(1, "last_name is required"),
     date_of_birth: parseDate,
@@ -19,7 +23,7 @@ export const createEmployeeZodSchema = z.object({
     emergency_contact_name: z.string().min(1, "emergency_contact_name is required"),
     emergency_contact_phone: z.string().min(7, "emergency_contact_phone must be at least 7 characters"),
     profile_url: z.string().url("profile_url must be a valid URL").optional(),
-    department_id: z.string("department_id is required"),
+    department_id: z.string().min(1, "department_id is required"),
     designation: z.string().min(1, "designation is required"),
     salary: z.number().int("salary must be an integer").nonnegative("salary must be a positive number"),
     bank_name: z.string().min(1, "bank_name is required"),
@@ -39,7 +43,7 @@ export const createEmployeeZodSchema = z.object({
 });
 
 export const updateEmployeeZodSchema = createEmployeeZodSchema
-    .omit({ user_id: true })
+    .omit({ email: true, password: true })
     .partial()
     .refine((payload) => Object.keys(payload).length > 0, {
         message: "At least one field must be provided for update",
