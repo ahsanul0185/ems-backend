@@ -163,6 +163,33 @@ const getMe = async (userId: string) => {
     return userWithoutPassword;
 }
 
+const getMyProfile = async (userId: string) => { 
+    const user = await prisma.user.findUnique({ 
+        where: { id: userId },
+        select: {
+            id: true,
+            email: true,
+            role: true,
+            status: true,
+            email_verified: true,
+            created_at: true,
+            updated_at: true,
+            employee: {
+                include: {
+                    department: true,
+                    hr_profile: true,
+                }
+            }
+        }
+    });
+
+    if (!user) {
+        throw new AppError(status.NOT_FOUND, "User not found");
+    }
+
+    return user;
+}
+
 const changePassword = async (userId: string, payload: IChangePasswordPayload) => {
     const { oldPassword, newPassword } = payload;
     const user = await prisma.user.findUnique({ where: { id: userId } });
@@ -212,6 +239,7 @@ export const authService = {
     createUser,
     loginUser,
     getMe,
+    getMyProfile,
     getNewToken,
     changePassword,
     logoutUser,

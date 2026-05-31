@@ -9,6 +9,6 @@ router.get('/', employeeController.getAllEmployees);
 router.get('/:id', employeeController.getEmployeeById);
 router.post('/create', validateRequest(createEmployeeZodSchema), employeeController.createEmployee);
 router.put('/update/:id', validateRequest(updateEmployeeZodSchema), employeeController.updateEmployee);
-router.delete('delete/:id', employeeController.deleteEmployee);
+router.delete('/delete/:id', employeeController.deleteEmployee);
 
 export const employeeRoutes = router;

@@ -63,6 +63,22 @@ const getMe = catchAsync(
     }
 )
 
+
+const getMyProfile = catchAsync(
+    async (req: Request, res: Response) => {
+        const userId = req.user.userId;
+
+        const result = await authService.getMyProfile(userId);
+
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "User profile fetched successfully",
+            data: result,
+        })
+    }
+)
+
 const getNewToken = catchAsync(
     async (req: Request, res: Response) => {
         const refreshToken = req.cookies.refreshToken;
@@ -135,6 +151,7 @@ export const authController = {
     createUser,
     loginUser,
     getMe,
+    getMyProfile,
     getNewToken,
     changePassword,
     logoutUser,
