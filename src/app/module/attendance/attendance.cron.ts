@@ -154,13 +154,15 @@ export const initializeCrons = () => {
     const endHour = Number.isNaN(endHourRaw) ? 17 : endHourRaw;
     const endMinute = Number.isNaN(endMinuteRaw) ? 0 : endMinuteRaw;
 
-    // Schedule cron 1 (15 minutes after shift start)
-    const cron1Minute = (startMinute + 15) % 60;
-    const cron1Hour = startHour + Math.floor((startMinute + 15) / 60);
+    const offsetMinutes = env.CRON_CHECKIN_OFFSET_MINUTES;
+
+    // Schedule cron 1 (offset minutes after shift start)
+    const cron1Minute = (startMinute + offsetMinutes) % 60;
+    const cron1Hour = startHour + Math.floor((startMinute + offsetMinutes) / 60);
     cron.schedule(`${cron1Minute} ${cron1Hour} * * *`, cronClockIn);
 
     // Schedule cron 2 (exactly at shift end)
     cron.schedule(`${endMinute} ${endHour} * * *`, cronClockOut);
 
-    console.log(`Attendance cron jobs initialized at ${cron1Hour}:${cron1Minute.toString().padStart(2, "0")} and ${endHour}:${endMinute.toString().padStart(2, "0")}`);
+    console.log(`Attendance cron jobs initialized at ${cron1Hour}:${cron1Minute.toString().padStart(2, "0")} (+${offsetMinutes}min after shift start) and ${endHour}:${endMinute.toString().padStart(2, "0")}`);
 };

@@ -41,6 +41,7 @@ interface EnvConfig {
     OPENROUTER_API_KEY: string;
     SHIFT_START_TIME: string;
     SHIFT_END_TIME: string;
+    CRON_CHECKIN_OFFSET_MINUTES: number;
 }
 
 
@@ -96,6 +97,7 @@ const loadEnvVariables = (): EnvConfig => {
         OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY as string,
         SHIFT_START_TIME: process.env.SHIFT_START_TIME as string || "09:00",
         SHIFT_END_TIME: process.env.SHIFT_END_TIME as string || "17:00",
+        CRON_CHECKIN_OFFSET_MINUTES: Number(process.env.CRON_CHECKIN_OFFSET_MINUTES) || 15,
     }
 }
 
