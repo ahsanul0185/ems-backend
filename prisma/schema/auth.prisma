@@ -1,20 +1,18 @@
 model User {
-  id             String     @id @default(uuid()) @db.Uuid
-  email          String     @unique
+  id             String         @id @default(uuid()) @db.Uuid
+  email          String         @unique
   password       String
-  role           UserRole   @default(EMPLOYEE)
-  status         UserStatus @default(ACTIVE)
-  is_deleted     Boolean    @default(false)
-  email_verified Boolean    @default(false)
-  session        Session[]
+  role           UserRole       @default(EMPLOYEE)
+  status         UserStatus     @default(ACTIVE)
+  is_deleted     Boolean        @default(false)
+  email_verified Boolean        @default(false)
+  created_at     DateTime       @default(now())
+  updated_at     DateTime       @updatedAt
+  announcements  Announcement[] @relation("AnnouncementCreatedBy")
+  employee       Employee?
+  hr_profile     HRProfile?
   otps           Otp[]
-  created_at     DateTime   @default(now())
-  updated_at     DateTime   @updatedAt
-
-  // Relations
-  employee      Employee?
-  hr_profile    HRProfile?
-  announcements Announcement[] @relation("AnnouncementCreatedBy")
+  session        Session[]
 
   @@map("users")
 }
@@ -22,13 +20,11 @@ model User {
 model Session {
   id            String   @id @default(cuid())
   user_id       String   @db.Uuid
-  refresh_token String // store hashed
+  refresh_token String
   expires_at    DateTime
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  user          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -36,14 +32,12 @@ model Session {
 model Otp {
   id         String   @id @default(cuid())
   user_id    String   @db.Uuid
-  code       String // store hashed
+  code       String
   type       OtpType
   expires_at DateTime
   used       Boolean  @default(false)
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
   created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("otps")
 }

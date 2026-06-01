@@ -124,7 +124,7 @@ const approveLeave = async (leaveId: string, approverId: string) => {
         where: { id: leaveId },
         data: {
             status: LeaveRequestStatus.APPROVED,
-            approved_by: approverId,
+            // approved_by: approverId,
             approved_at: new Date(),
         }
     });
@@ -148,7 +148,7 @@ const rejectLeave = async (leaveId: string, rejectorId: string, rejectionReason:
         data: {
             status: LeaveRequestStatus.REJECTED,
             rejection_reason: rejectionReason,
-            approved_by: rejectorId,
+            // approved_by: rejectorId,
             approved_at: new Date(),
         }
     });

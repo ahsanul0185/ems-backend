@@ -1,6 +1,3 @@
-// employee.prisma
-// Core employee profile and personal information
-
 model Employee {
   id                      String         @id @default(uuid()) @db.Uuid
   user_id                 String         @unique @db.Uuid
@@ -33,14 +30,12 @@ model Employee {
   passport_number         String?
   created_at              DateTime       @default(now())
   updated_at              DateTime       @updatedAt
-
-  // Relations
-  user           User           @relation(fields: [user_id], references: [id])
-  department     Department     @relation("DepartmentEmployees", fields: [department_id], references: [id])
-  hr_profile     HRProfile?
-  attendance     Attendance[]
-  payslips       Payslip[]
-  leave_requests LeaveRequest[]
+  attendance              Attendance[]
+  department              Department     @relation("DepartmentEmployees", fields: [department_id], references: [id])
+  user                    User           @relation(fields: [user_id], references: [id])
+  hr_profile              HRProfile?
+  leave_requests          LeaveRequest[]
+  payslips                Payslip[]
 
   @@map("employees")
 }

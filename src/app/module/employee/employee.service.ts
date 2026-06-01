@@ -158,6 +158,7 @@ const getAllEmployees = async (queryParams: IEmployeeQueryParams): Promise<IQuer
             ],
             defaultSelect: {
                 id: true,
+                employee_code: true,
                 first_name: true,
                 last_name: true,
                 phone: true,

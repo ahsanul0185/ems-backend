@@ -15,7 +15,7 @@ router.put("/:id/cancel", checkAuth(), leaveController.cancelLeave);
 
 router.get("/", checkAuth(), leaveController.getAllLeaves);
 router.get("/:id", checkAuth(UserRole.HR, UserRole.ADMIN), leaveController.getLeaveById);
-router.put("/:id/approve", checkAuth(), leaveController.approveLeave);
-router.put("/:id/reject", checkAuth(), validateRequest(rejectLeaveZodSchema), leaveController.rejectLeave);
+router.put("/:id/approve", checkAuth(UserRole.HR, UserRole.ADMIN), leaveController.approveLeave);
+router.put("/:id/reject", checkAuth(UserRole.HR, UserRole.ADMIN), validateRequest(rejectLeaveZodSchema), leaveController.rejectLeave);
 
 export const leaveRoutes = router;
