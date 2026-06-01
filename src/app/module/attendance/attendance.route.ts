@@ -8,8 +8,8 @@ import { attendanceValidation } from "./attendance.validation";
 const router = Router();
 
 // Employee routes
-router.post("/clock-in", checkAuth() , attendanceController.clockIn);
-router.post("/clock-out", checkAuth(), attendanceController.clockOut);
+router.post("/clock-in", checkAuth(), validateRequest(attendanceValidation.clockInSchema), attendanceController.clockIn);
+router.post("/clock-out", checkAuth(), validateRequest(attendanceValidation.clockOutSchema), attendanceController.clockOut);
 // router.get("/today", checkAuth(), attendanceController.getTodayAttendance);
 router.get("/me", checkAuth(UserRole.EMPLOYEE), attendanceController.getMyAttendance);
 

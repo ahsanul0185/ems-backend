@@ -3,8 +3,15 @@ import AppError from "../../errorHelpers/AppError";
 import { prisma } from "../../lib/prisma";
 import { IClockInPayload, IClockOutPayload, IMarkInformedPayload, IUpdateAttendanceRecordPayload } from "./attendance.interface";
 import { AttendanceStatus } from "../../../generated/prisma/client";
-import { calculateEarlyLeaveMinutes, calculateLateMinutes, calculateWorkMinutes, getExpectedShiftTimes, isWeekend } from "./attendance.utils";
-import { IQueryResult } from "../../interfaces/query.interface";
+import {
+    calculateEarlyLeaveMinutes,
+    calculateLateMinutes,
+    calculateWorkMinutes,
+    getExpectedShiftTimes,
+    getStartOfDayUTC,
+    isWeekend,
+    parseTimeString,
+} from "./attendance.utils";
 import { QueryBuilder } from "../../utils/QueryBuilder";
 
 const checkHolidayOrWeekend = async (date: Date) => {
@@ -12,13 +19,10 @@ const checkHolidayOrWeekend = async (date: Date) => {
         throw new AppError(status.BAD_REQUEST, "Cannot perform this action on a weekend (Friday)");
     }
 
-    const startOfDay = new Date(date);
-    startOfDay.setHours(0, 0, 0, 0);
+    const startOfDay = getStartOfDayUTC(date);
 
     const holiday = await prisma.holiday.findFirst({
-        where: {
-            date: startOfDay,
-        }
+        where: { date: startOfDay }
     });
 
     if (holiday) {
@@ -27,11 +31,19 @@ const checkHolidayOrWeekend = async (date: Date) => {
 };
 
 const clockIn = async (employeeId: string, payload: IClockInPayload) => {
-    const now = new Date();
-    await checkHolidayOrWeekend(now);
+    // Use provided date/time for HR backdated entries, otherwise use current time
+    const clockInTime = payload.time
+        ? parseTimeString(payload.date ? new Date(payload.date + "T00:00:00.000Z") : new Date(), payload.time)
+        : new Date();
+    const recordDate = payload.date
+        ? new Date(payload.date + "T00:00:00.000Z")
+        : new Date(clockInTime);
 
-    const startOfDay = new Date(now);
-    startOfDay.setHours(0, 0, 0, 0);
+    await checkHolidayOrWeekend(recordDate);
+
+    const startOfDay = payload.date
+        ? new Date(payload.date + "T00:00:00.000Z")
+        : getStartOfDayUTC(clockInTime);
 
     let attendance = await prisma.attendance.findFirst({
         where: {
@@ -44,16 +56,16 @@ const clockIn = async (employeeId: string, payload: IClockInPayload) => {
         if (attendance.status === AttendanceStatus.ON_LEAVE) {
             throw new AppError(status.BAD_REQUEST, "You have an approved leave for today.");
         }
-        
+
         if (attendance.status === AttendanceStatus.ABSENT && !attendance.is_auto_clocked_out) {
-            // Case 2: Soft absent, overridable
-            const { expectedClockIn } = getExpectedShiftTimes(now);
-            const lateMinutes = calculateLateMinutes(now, expectedClockIn);
+            // Soft absent — overridable
+            const { expectedClockIn } = getExpectedShiftTimes(recordDate);
+            const lateMinutes = calculateLateMinutes(clockInTime, expectedClockIn);
 
             attendance = await prisma.attendance.update({
                 where: { id: attendance.id },
                 data: {
-                    clock_in_time: now,
+                    clock_in_time: clockInTime,
                     status: AttendanceStatus.PRESENT,
                     late_minutes: lateMinutes,
                     notes: payload.notes || attendance.notes,
@@ -67,15 +79,15 @@ const clockIn = async (employeeId: string, payload: IClockInPayload) => {
         }
     }
 
-    // Normal Case 1
-    const { expectedClockIn } = getExpectedShiftTimes(now);
-    const lateMinutes = calculateLateMinutes(now, expectedClockIn);
+    // Normal clock-in
+    const { expectedClockIn } = getExpectedShiftTimes(recordDate);
+    const lateMinutes = calculateLateMinutes(clockInTime, expectedClockIn);
 
     attendance = await prisma.attendance.create({
         data: {
             employee_id: employeeId,
             date: startOfDay,
-            clock_in_time: now,
+            clock_in_time: clockInTime,
             status: AttendanceStatus.PRESENT,
             late_minutes: lateMinutes,
             notes: payload.notes,
@@ -86,11 +98,19 @@ const clockIn = async (employeeId: string, payload: IClockInPayload) => {
 };
 
 const clockOut = async (employeeId: string, payload: IClockOutPayload) => {
-    const now = new Date();
-    await checkHolidayOrWeekend(now);
+    // Use provided date/time for HR backdated entries, otherwise use current time
+    const clockOutTime = payload.time
+        ? parseTimeString(payload.date ? new Date(payload.date + "T00:00:00.000Z") : new Date(), payload.time)
+        : new Date();
+    const recordDate = payload.date
+        ? new Date(payload.date + "T00:00:00.000Z")
+        : new Date(clockOutTime);
 
-    const startOfDay = new Date(now);
-    startOfDay.setHours(0, 0, 0, 0);
+    await checkHolidayOrWeekend(recordDate);
+
+    const startOfDay = payload.date
+        ? new Date(payload.date + "T00:00:00.000Z")
+        : getStartOfDayUTC(clockOutTime);
 
     const attendance = await prisma.attendance.findFirst({
         where: {
@@ -111,47 +131,27 @@ const clockOut = async (employeeId: string, payload: IClockOutPayload) => {
         throw new AppError(status.BAD_REQUEST, "Your attendance has been marked as informed by HR");
     }
 
-    const { expectedClockOut } = getExpectedShiftTimes(now);
-    const earlyLeaveMinutes = calculateEarlyLeaveMinutes(now, expectedClockOut);
-    const workMinutes = calculateWorkMinutes(attendance.clock_in_time, now);
+    const { expectedClockOut } = getExpectedShiftTimes(recordDate);
+    const earlyLeaveMinutes = calculateEarlyLeaveMinutes(clockOutTime, expectedClockOut);
+    const workMinutes = calculateWorkMinutes(attendance.clock_in_time, clockOutTime);
 
-    const updatedAttendance = await prisma.attendance.update({
+    return prisma.attendance.update({
         where: { id: attendance.id },
         data: {
-            clock_out_time: now,
+            clock_out_time: clockOutTime,
             early_leave_minutes: earlyLeaveMinutes,
             work_minutes: workMinutes,
             notes: payload.notes || attendance.notes,
         }
     });
-
-    return updatedAttendance;
 };
-
-// const getTodayAttendance = async (employeeId: string) => {
-//     const now = new Date();
-//     const startOfDay = new Date(now);
-//     startOfDay.setHours(0, 0, 0, 0);
-
-//     const attendance = await prisma.attendance.findFirst({
-//         where: {
-//             employee_id: employeeId,
-//             date: startOfDay,
-//         }
-//     });
-
-//     return attendance;
-// };
 
 const getMyAttendance = async (employeeId: string, queryParams: any) => {
     const builder = new QueryBuilder(
         prisma.attendance,
         queryParams,
-        {
-            filterableFields: ["status"],
-        }
+        { filterableFields: ["status"] }
     );
-
     return builder.where({ employee_id: employeeId }).filter().sort().paginate().execute();
 };
 
@@ -169,6 +169,11 @@ const getAllAttendance = async (queryParams: any) => {
                 clock_in_time: true,
                 clock_out_time: true,
                 late_minutes: true,
+                early_leave_minutes: true,
+                work_minutes: true,
+                is_informed: true,
+                is_auto_clocked_out: true,
+                notes: true,
                 employee: {
                     select: {
                         first_name: true,
@@ -179,7 +184,6 @@ const getAllAttendance = async (queryParams: any) => {
             }
         }
     );
-
     return builder.search().filter().sort().paginate().execute();
 };
 
@@ -187,11 +191,8 @@ const getAttendanceByEmployee = async (employeeId: string, queryParams: any) => 
     const builder = new QueryBuilder(
         prisma.attendance,
         queryParams,
-        {
-            filterableFields: ["status", "date"],
-        }
+        { filterableFields: ["status", "date"] }
     );
-
     return builder.where({ employee_id: employeeId }).filter().sort().paginate().execute();
 };
 
@@ -208,14 +209,35 @@ const hrMarkInformed = async (attendanceId: string, hrProfileId: string, payload
         throw new AppError(status.BAD_REQUEST, "Employee hasn't clocked in yet");
     }
 
+    if (attendance.is_informed) {
+        throw new AppError(status.BAD_REQUEST, "Attendance is already marked as informed");
+    }
+
     const now = new Date();
     const { expectedClockOut } = getExpectedShiftTimes(attendance.date);
-    
-    // Shift end could be later today, so early leave is calculated from now till shift end
-    const earlyLeaveMinutes = expectedClockOut > now ? Math.floor((expectedClockOut.getTime() - now.getTime()) / (1000 * 60)) : 0;
+
+    // If employee already clocked out, preserve the existing clock-out time and calculations.
+    // Only mark as informed and store metadata.
+    if (attendance.clock_out_time) {
+        return prisma.attendance.update({
+            where: { id: attendanceId },
+            data: {
+                is_informed: true,
+                informed_reason: payload.informed_reason,
+                informed_at: now,
+                informed_by: hrProfileId,
+                status: AttendanceStatus.INFORMED,
+            }
+        });
+    }
+
+    // Employee hasn't clocked out yet — close the record now.
+    const earlyLeaveMinutes = expectedClockOut > now
+        ? Math.floor((expectedClockOut.getTime() - now.getTime()) / (1000 * 60))
+        : 0;
     const workMinutes = calculateWorkMinutes(attendance.clock_in_time, now);
 
-    const updated = await prisma.attendance.update({
+    return prisma.attendance.update({
         where: { id: attendanceId },
         data: {
             is_informed: true,
@@ -228,8 +250,6 @@ const hrMarkInformed = async (attendanceId: string, hrProfileId: string, payload
             work_minutes: workMinutes,
         }
     });
-
-    return updated;
 };
 
 const hrUpdateRecord = async (attendanceId: string, payload: IUpdateAttendanceRecordPayload) => {
@@ -241,32 +261,31 @@ const hrUpdateRecord = async (attendanceId: string, payload: IUpdateAttendanceRe
         throw new AppError(status.NOT_FOUND, "Attendance record not found");
     }
 
-    if (attendance.is_informed) {
-        throw new AppError(status.BAD_REQUEST, "Cannot edit an INFORMED record");
-    }
-
-    const clockIn = payload.clock_in_time ? new Date(payload.clock_in_time) : attendance.clock_in_time;
-    const clockOut = payload.clock_out_time ? new Date(payload.clock_out_time) : attendance.clock_out_time;
-
-    let lateMinutes = 0;
-    let earlyLeaveMinutes = 0;
-    let workMinutes = 0;
+    // Use payload values if provided, otherwise keep existing DB values
+    const clockIn = payload.clock_in_time
+        ? parseTimeString(attendance.date, payload.clock_in_time)
+        : attendance.clock_in_time;
+    const clockOut = payload.clock_out_time
+        ? parseTimeString(attendance.date, payload.clock_out_time)
+        : attendance.clock_out_time;
 
     const { expectedClockIn, expectedClockOut } = getExpectedShiftTimes(attendance.date);
 
-    if (clockIn) {
-        lateMinutes = calculateLateMinutes(clockIn, expectedClockIn);
-    }
-    
-    if (clockOut) {
-        earlyLeaveMinutes = calculateEarlyLeaveMinutes(clockOut, expectedClockOut);
-    }
+    // Only recalculate derived fields when the relevant times are present;
+    // otherwise preserve the existing stored values (avoids resetting to 0)
+    const lateMinutes = clockIn
+        ? calculateLateMinutes(clockIn, expectedClockIn)
+        : attendance.late_minutes;
 
-    if (clockIn && clockOut) {
-        workMinutes = calculateWorkMinutes(clockIn, clockOut);
-    }
+    const earlyLeaveMinutes = clockOut
+        ? calculateEarlyLeaveMinutes(clockOut, expectedClockOut)
+        : attendance.early_leave_minutes;
 
-    const updated = await prisma.attendance.update({
+    const workMinutes = clockIn && clockOut
+        ? calculateWorkMinutes(clockIn, clockOut)
+        : attendance.work_minutes;
+
+    return prisma.attendance.update({
         where: { id: attendanceId },
         data: {
             clock_in_time: clockIn,
@@ -275,11 +294,10 @@ const hrUpdateRecord = async (attendanceId: string, payload: IUpdateAttendanceRe
             late_minutes: lateMinutes,
             early_leave_minutes: earlyLeaveMinutes,
             work_minutes: workMinutes,
-            notes: payload.notes || attendance.notes,
+            // ?? so empty string clears notes; undefined keeps existing
+            notes: payload.notes ?? attendance.notes,
         }
     });
-
-    return updated;
 };
 
 const getAttendanceDetailsById = async (attendanceId: string) => {
@@ -291,21 +309,12 @@ const getAttendanceDetailsById = async (attendanceId: string) => {
                     first_name: true,
                     last_name: true,
                     employee_code: true,
-                    department: {
-                        select: {
-                            name: true,
-                        }
-                    }
+                    department: { select: { name: true } }
                 }
             },
             informed_by_hr: {
                 include: {
-                    employee: {
-                        select: {
-                            first_name: true,
-                            last_name: true,
-                        }
-                    }
+                    employee: { select: { first_name: true, last_name: true } }
                 }
             },
             leave_request: true,
@@ -322,7 +331,6 @@ const getAttendanceDetailsById = async (attendanceId: string) => {
 export const attendanceService = {
     clockIn,
     clockOut,
-    // getTodayAttendance,
     getMyAttendance,
     getAllAttendance,
     getAttendanceByEmployee,
