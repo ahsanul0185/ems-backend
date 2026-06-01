@@ -304,9 +304,9 @@ export type LeaveRequestWhereInput = {
   approved_at?: Prisma.DateTimeNullableFilter<"LeaveRequest"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"LeaveRequest"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeaveRequest"> | Date | string
-  employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
-  approved_emp?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
   attendances?: Prisma.AttendanceListRelationFilter
+  approved_by_user?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
+  employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
 }
 
 export type LeaveRequestOrderByWithRelationInput = {
@@ -326,9 +326,9 @@ export type LeaveRequestOrderByWithRelationInput = {
   approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  employee?: Prisma.EmployeeOrderByWithRelationInput
-  approved_emp?: Prisma.HRProfileOrderByWithRelationInput
   attendances?: Prisma.AttendanceOrderByRelationAggregateInput
+  approved_by_user?: Prisma.HRProfileOrderByWithRelationInput
+  employee?: Prisma.EmployeeOrderByWithRelationInput
 }
 
 export type LeaveRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -351,9 +351,9 @@ export type LeaveRequestWhereUniqueInput = Prisma.AtLeast<{
   approved_at?: Prisma.DateTimeNullableFilter<"LeaveRequest"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"LeaveRequest"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"LeaveRequest"> | Date | string
-  employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
-  approved_emp?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
   attendances?: Prisma.AttendanceListRelationFilter
+  approved_by_user?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
+  employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
 }, "id">
 
 export type LeaveRequestOrderByWithAggregationInput = {
@@ -417,9 +417,9 @@ export type LeaveRequestCreateInput = {
   approved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  employee: Prisma.EmployeeCreateNestedOneWithoutLeave_requestsInput
-  approved_emp?: Prisma.HRProfileCreateNestedOneWithoutApproved_leavesInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutLeave_requestInput
+  approved_by_user?: Prisma.HRProfileCreateNestedOneWithoutApproved_leavesInput
+  employee: Prisma.EmployeeCreateNestedOneWithoutLeave_requestsInput
 }
 
 export type LeaveRequestUncheckedCreateInput = {
@@ -457,9 +457,9 @@ export type LeaveRequestUpdateInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employee?: Prisma.EmployeeUpdateOneRequiredWithoutLeave_requestsNestedInput
-  approved_emp?: Prisma.HRProfileUpdateOneWithoutApproved_leavesNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutLeave_requestNestedInput
+  approved_by_user?: Prisma.HRProfileUpdateOneWithoutApproved_leavesNestedInput
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutLeave_requestsNestedInput
 }
 
 export type LeaveRequestUncheckedUpdateInput = {
@@ -675,45 +675,45 @@ export type LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput = {
   deleteMany?: Prisma.LeaveRequestScalarWhereInput | Prisma.LeaveRequestScalarWhereInput[]
 }
 
-export type LeaveRequestCreateNestedManyWithoutApproved_empInput = {
-  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_empInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput> | Prisma.LeaveRequestCreateWithoutApproved_empInput[] | Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput[]
-  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutApproved_empInput | Prisma.LeaveRequestCreateOrConnectWithoutApproved_empInput[]
-  createMany?: Prisma.LeaveRequestCreateManyApproved_empInputEnvelope
+export type LeaveRequestCreateNestedManyWithoutApproved_by_userInput = {
+  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_by_userInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput> | Prisma.LeaveRequestCreateWithoutApproved_by_userInput[] | Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput[]
+  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutApproved_by_userInput | Prisma.LeaveRequestCreateOrConnectWithoutApproved_by_userInput[]
+  createMany?: Prisma.LeaveRequestCreateManyApproved_by_userInputEnvelope
   connect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
 }
 
-export type LeaveRequestUncheckedCreateNestedManyWithoutApproved_empInput = {
-  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_empInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput> | Prisma.LeaveRequestCreateWithoutApproved_empInput[] | Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput[]
-  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutApproved_empInput | Prisma.LeaveRequestCreateOrConnectWithoutApproved_empInput[]
-  createMany?: Prisma.LeaveRequestCreateManyApproved_empInputEnvelope
+export type LeaveRequestUncheckedCreateNestedManyWithoutApproved_by_userInput = {
+  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_by_userInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput> | Prisma.LeaveRequestCreateWithoutApproved_by_userInput[] | Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput[]
+  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutApproved_by_userInput | Prisma.LeaveRequestCreateOrConnectWithoutApproved_by_userInput[]
+  createMany?: Prisma.LeaveRequestCreateManyApproved_by_userInputEnvelope
   connect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
 }
 
-export type LeaveRequestUpdateManyWithoutApproved_empNestedInput = {
-  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_empInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput> | Prisma.LeaveRequestCreateWithoutApproved_empInput[] | Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput[]
-  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutApproved_empInput | Prisma.LeaveRequestCreateOrConnectWithoutApproved_empInput[]
-  upsert?: Prisma.LeaveRequestUpsertWithWhereUniqueWithoutApproved_empInput | Prisma.LeaveRequestUpsertWithWhereUniqueWithoutApproved_empInput[]
-  createMany?: Prisma.LeaveRequestCreateManyApproved_empInputEnvelope
+export type LeaveRequestUpdateManyWithoutApproved_by_userNestedInput = {
+  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_by_userInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput> | Prisma.LeaveRequestCreateWithoutApproved_by_userInput[] | Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput[]
+  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutApproved_by_userInput | Prisma.LeaveRequestCreateOrConnectWithoutApproved_by_userInput[]
+  upsert?: Prisma.LeaveRequestUpsertWithWhereUniqueWithoutApproved_by_userInput | Prisma.LeaveRequestUpsertWithWhereUniqueWithoutApproved_by_userInput[]
+  createMany?: Prisma.LeaveRequestCreateManyApproved_by_userInputEnvelope
   set?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
   disconnect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
   delete?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
   connect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
-  update?: Prisma.LeaveRequestUpdateWithWhereUniqueWithoutApproved_empInput | Prisma.LeaveRequestUpdateWithWhereUniqueWithoutApproved_empInput[]
-  updateMany?: Prisma.LeaveRequestUpdateManyWithWhereWithoutApproved_empInput | Prisma.LeaveRequestUpdateManyWithWhereWithoutApproved_empInput[]
+  update?: Prisma.LeaveRequestUpdateWithWhereUniqueWithoutApproved_by_userInput | Prisma.LeaveRequestUpdateWithWhereUniqueWithoutApproved_by_userInput[]
+  updateMany?: Prisma.LeaveRequestUpdateManyWithWhereWithoutApproved_by_userInput | Prisma.LeaveRequestUpdateManyWithWhereWithoutApproved_by_userInput[]
   deleteMany?: Prisma.LeaveRequestScalarWhereInput | Prisma.LeaveRequestScalarWhereInput[]
 }
 
-export type LeaveRequestUncheckedUpdateManyWithoutApproved_empNestedInput = {
-  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_empInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput> | Prisma.LeaveRequestCreateWithoutApproved_empInput[] | Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput[]
-  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutApproved_empInput | Prisma.LeaveRequestCreateOrConnectWithoutApproved_empInput[]
-  upsert?: Prisma.LeaveRequestUpsertWithWhereUniqueWithoutApproved_empInput | Prisma.LeaveRequestUpsertWithWhereUniqueWithoutApproved_empInput[]
-  createMany?: Prisma.LeaveRequestCreateManyApproved_empInputEnvelope
+export type LeaveRequestUncheckedUpdateManyWithoutApproved_by_userNestedInput = {
+  create?: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_by_userInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput> | Prisma.LeaveRequestCreateWithoutApproved_by_userInput[] | Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput[]
+  connectOrCreate?: Prisma.LeaveRequestCreateOrConnectWithoutApproved_by_userInput | Prisma.LeaveRequestCreateOrConnectWithoutApproved_by_userInput[]
+  upsert?: Prisma.LeaveRequestUpsertWithWhereUniqueWithoutApproved_by_userInput | Prisma.LeaveRequestUpsertWithWhereUniqueWithoutApproved_by_userInput[]
+  createMany?: Prisma.LeaveRequestCreateManyApproved_by_userInputEnvelope
   set?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
   disconnect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
   delete?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
   connect?: Prisma.LeaveRequestWhereUniqueInput | Prisma.LeaveRequestWhereUniqueInput[]
-  update?: Prisma.LeaveRequestUpdateWithWhereUniqueWithoutApproved_empInput | Prisma.LeaveRequestUpdateWithWhereUniqueWithoutApproved_empInput[]
-  updateMany?: Prisma.LeaveRequestUpdateManyWithWhereWithoutApproved_empInput | Prisma.LeaveRequestUpdateManyWithWhereWithoutApproved_empInput[]
+  update?: Prisma.LeaveRequestUpdateWithWhereUniqueWithoutApproved_by_userInput | Prisma.LeaveRequestUpdateWithWhereUniqueWithoutApproved_by_userInput[]
+  updateMany?: Prisma.LeaveRequestUpdateManyWithWhereWithoutApproved_by_userInput | Prisma.LeaveRequestUpdateManyWithWhereWithoutApproved_by_userInput[]
   deleteMany?: Prisma.LeaveRequestScalarWhereInput | Prisma.LeaveRequestScalarWhereInput[]
 }
 
@@ -740,8 +740,8 @@ export type LeaveRequestCreateWithoutAttendancesInput = {
   approved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
+  approved_by_user?: Prisma.HRProfileCreateNestedOneWithoutApproved_leavesInput
   employee: Prisma.EmployeeCreateNestedOneWithoutLeave_requestsInput
-  approved_emp?: Prisma.HRProfileCreateNestedOneWithoutApproved_leavesInput
 }
 
 export type LeaveRequestUncheckedCreateWithoutAttendancesInput = {
@@ -794,8 +794,8 @@ export type LeaveRequestUpdateWithoutAttendancesInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approved_by_user?: Prisma.HRProfileUpdateOneWithoutApproved_leavesNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutLeave_requestsNestedInput
-  approved_emp?: Prisma.HRProfileUpdateOneWithoutApproved_leavesNestedInput
 }
 
 export type LeaveRequestUncheckedUpdateWithoutAttendancesInput = {
@@ -832,8 +832,8 @@ export type LeaveRequestCreateWithoutEmployeeInput = {
   approved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  approved_emp?: Prisma.HRProfileCreateNestedOneWithoutApproved_leavesInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutLeave_requestInput
+  approved_by_user?: Prisma.HRProfileCreateNestedOneWithoutApproved_leavesInput
 }
 
 export type LeaveRequestUncheckedCreateWithoutEmployeeInput = {
@@ -903,7 +903,7 @@ export type LeaveRequestScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"LeaveRequest"> | Date | string
 }
 
-export type LeaveRequestCreateWithoutApproved_empInput = {
+export type LeaveRequestCreateWithoutApproved_by_userInput = {
   id?: string
   title: string
   start_date: Date | string
@@ -918,11 +918,11 @@ export type LeaveRequestCreateWithoutApproved_empInput = {
   approved_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  employee: Prisma.EmployeeCreateNestedOneWithoutLeave_requestsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutLeave_requestInput
+  employee: Prisma.EmployeeCreateNestedOneWithoutLeave_requestsInput
 }
 
-export type LeaveRequestUncheckedCreateWithoutApproved_empInput = {
+export type LeaveRequestUncheckedCreateWithoutApproved_by_userInput = {
   id?: string
   employee_id: string
   title: string
@@ -941,30 +941,30 @@ export type LeaveRequestUncheckedCreateWithoutApproved_empInput = {
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutLeave_requestInput
 }
 
-export type LeaveRequestCreateOrConnectWithoutApproved_empInput = {
+export type LeaveRequestCreateOrConnectWithoutApproved_by_userInput = {
   where: Prisma.LeaveRequestWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_empInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput>
+  create: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_by_userInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput>
 }
 
-export type LeaveRequestCreateManyApproved_empInputEnvelope = {
-  data: Prisma.LeaveRequestCreateManyApproved_empInput | Prisma.LeaveRequestCreateManyApproved_empInput[]
+export type LeaveRequestCreateManyApproved_by_userInputEnvelope = {
+  data: Prisma.LeaveRequestCreateManyApproved_by_userInput | Prisma.LeaveRequestCreateManyApproved_by_userInput[]
   skipDuplicates?: boolean
 }
 
-export type LeaveRequestUpsertWithWhereUniqueWithoutApproved_empInput = {
+export type LeaveRequestUpsertWithWhereUniqueWithoutApproved_by_userInput = {
   where: Prisma.LeaveRequestWhereUniqueInput
-  update: Prisma.XOR<Prisma.LeaveRequestUpdateWithoutApproved_empInput, Prisma.LeaveRequestUncheckedUpdateWithoutApproved_empInput>
-  create: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_empInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_empInput>
+  update: Prisma.XOR<Prisma.LeaveRequestUpdateWithoutApproved_by_userInput, Prisma.LeaveRequestUncheckedUpdateWithoutApproved_by_userInput>
+  create: Prisma.XOR<Prisma.LeaveRequestCreateWithoutApproved_by_userInput, Prisma.LeaveRequestUncheckedCreateWithoutApproved_by_userInput>
 }
 
-export type LeaveRequestUpdateWithWhereUniqueWithoutApproved_empInput = {
+export type LeaveRequestUpdateWithWhereUniqueWithoutApproved_by_userInput = {
   where: Prisma.LeaveRequestWhereUniqueInput
-  data: Prisma.XOR<Prisma.LeaveRequestUpdateWithoutApproved_empInput, Prisma.LeaveRequestUncheckedUpdateWithoutApproved_empInput>
+  data: Prisma.XOR<Prisma.LeaveRequestUpdateWithoutApproved_by_userInput, Prisma.LeaveRequestUncheckedUpdateWithoutApproved_by_userInput>
 }
 
-export type LeaveRequestUpdateManyWithWhereWithoutApproved_empInput = {
+export type LeaveRequestUpdateManyWithWhereWithoutApproved_by_userInput = {
   where: Prisma.LeaveRequestScalarWhereInput
-  data: Prisma.XOR<Prisma.LeaveRequestUpdateManyMutationInput, Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_empInput>
+  data: Prisma.XOR<Prisma.LeaveRequestUpdateManyMutationInput, Prisma.LeaveRequestUncheckedUpdateManyWithoutApproved_by_userInput>
 }
 
 export type LeaveRequestCreateManyEmployeeInput = {
@@ -1000,8 +1000,8 @@ export type LeaveRequestUpdateWithoutEmployeeInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  approved_emp?: Prisma.HRProfileUpdateOneWithoutApproved_leavesNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutLeave_requestNestedInput
+  approved_by_user?: Prisma.HRProfileUpdateOneWithoutApproved_leavesNestedInput
 }
 
 export type LeaveRequestUncheckedUpdateWithoutEmployeeInput = {
@@ -1041,7 +1041,7 @@ export type LeaveRequestUncheckedUpdateManyWithoutEmployeeInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LeaveRequestCreateManyApproved_empInput = {
+export type LeaveRequestCreateManyApproved_by_userInput = {
   id?: string
   employee_id: string
   title: string
@@ -1059,7 +1059,7 @@ export type LeaveRequestCreateManyApproved_empInput = {
   updated_at?: Date | string
 }
 
-export type LeaveRequestUpdateWithoutApproved_empInput = {
+export type LeaveRequestUpdateWithoutApproved_by_userInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   start_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1074,11 +1074,11 @@ export type LeaveRequestUpdateWithoutApproved_empInput = {
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  employee?: Prisma.EmployeeUpdateOneRequiredWithoutLeave_requestsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutLeave_requestNestedInput
+  employee?: Prisma.EmployeeUpdateOneRequiredWithoutLeave_requestsNestedInput
 }
 
-export type LeaveRequestUncheckedUpdateWithoutApproved_empInput = {
+export type LeaveRequestUncheckedUpdateWithoutApproved_by_userInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1097,7 +1097,7 @@ export type LeaveRequestUncheckedUpdateWithoutApproved_empInput = {
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutLeave_requestNestedInput
 }
 
-export type LeaveRequestUncheckedUpdateManyWithoutApproved_empInput = {
+export type LeaveRequestUncheckedUpdateManyWithoutApproved_by_userInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1163,9 +1163,9 @@ export type LeaveRequestSelect<ExtArgs extends runtime.Types.Extensions.Internal
   approved_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  approved_emp?: boolean | Prisma.LeaveRequest$approved_empArgs<ExtArgs>
   attendances?: boolean | Prisma.LeaveRequest$attendancesArgs<ExtArgs>
+  approved_by_user?: boolean | Prisma.LeaveRequest$approved_by_userArgs<ExtArgs>
+  employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LeaveRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leaveRequest"]>
 
@@ -1186,8 +1186,8 @@ export type LeaveRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   approved_at?: boolean
   created_at?: boolean
   updated_at?: boolean
+  approved_by_user?: boolean | Prisma.LeaveRequest$approved_by_userArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  approved_emp?: boolean | Prisma.LeaveRequest$approved_empArgs<ExtArgs>
 }, ExtArgs["result"]["leaveRequest"]>
 
 export type LeaveRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1207,8 +1207,8 @@ export type LeaveRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   approved_at?: boolean
   created_at?: boolean
   updated_at?: boolean
+  approved_by_user?: boolean | Prisma.LeaveRequest$approved_by_userArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  approved_emp?: boolean | Prisma.LeaveRequest$approved_empArgs<ExtArgs>
 }, ExtArgs["result"]["leaveRequest"]>
 
 export type LeaveRequestSelectScalar = {
@@ -1232,26 +1232,26 @@ export type LeaveRequestSelectScalar = {
 
 export type LeaveRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employee_id" | "title" | "start_date" | "end_date" | "total_days" | "reason" | "attachment_url" | "leave_type" | "status" | "applied_at" | "rejection_reason" | "approved_by" | "approved_at" | "created_at" | "updated_at", ExtArgs["result"]["leaveRequest"]>
 export type LeaveRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  approved_emp?: boolean | Prisma.LeaveRequest$approved_empArgs<ExtArgs>
   attendances?: boolean | Prisma.LeaveRequest$attendancesArgs<ExtArgs>
+  approved_by_user?: boolean | Prisma.LeaveRequest$approved_by_userArgs<ExtArgs>
+  employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LeaveRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeaveRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  approved_by_user?: boolean | Prisma.LeaveRequest$approved_by_userArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  approved_emp?: boolean | Prisma.LeaveRequest$approved_empArgs<ExtArgs>
 }
 export type LeaveRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  approved_by_user?: boolean | Prisma.LeaveRequest$approved_by_userArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
-  approved_emp?: boolean | Prisma.LeaveRequest$approved_empArgs<ExtArgs>
 }
 
 export type $LeaveRequestPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeaveRequest"
   objects: {
-    employee: Prisma.$EmployeePayload<ExtArgs>
-    approved_emp: Prisma.$HRProfilePayload<ExtArgs> | null
     attendances: Prisma.$AttendancePayload<ExtArgs>[]
+    approved_by_user: Prisma.$HRProfilePayload<ExtArgs> | null
+    employee: Prisma.$EmployeePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1664,9 +1664,9 @@ readonly fields: LeaveRequestFieldRefs;
  */
 export interface Prisma__LeaveRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  approved_emp<T extends Prisma.LeaveRequest$approved_empArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeaveRequest$approved_empArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   attendances<T extends Prisma.LeaveRequest$attendancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeaveRequest$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  approved_by_user<T extends Prisma.LeaveRequest$approved_by_userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeaveRequest$approved_by_userArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  employee<T extends Prisma.EmployeeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmployeeDefaultArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2113,25 +2113,6 @@ export type LeaveRequestDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * LeaveRequest.approved_emp
- */
-export type LeaveRequest$approved_empArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the HRProfile
-   */
-  select?: Prisma.HRProfileSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the HRProfile
-   */
-  omit?: Prisma.HRProfileOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.HRProfileInclude<ExtArgs> | null
-  where?: Prisma.HRProfileWhereInput
-}
-
-/**
  * LeaveRequest.attendances
  */
 export type LeaveRequest$attendancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2153,6 +2134,25 @@ export type LeaveRequest$attendancesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.AttendanceScalarFieldEnum | Prisma.AttendanceScalarFieldEnum[]
+}
+
+/**
+ * LeaveRequest.approved_by_user
+ */
+export type LeaveRequest$approved_by_userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HRProfile
+   */
+  select?: Prisma.HRProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HRProfile
+   */
+  omit?: Prisma.HRProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HRProfileInclude<ExtArgs> | null
+  where?: Prisma.HRProfileWhereInput
 }
 
 /**

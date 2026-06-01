@@ -42,63 +42,63 @@ export type AttendanceMinAggregateOutputType = {
   id: string | null
   employee_id: string | null
   date: Date | null
-  clock_in_time: Date | null
-  clock_out_time: Date | null
   status: $Enums.AttendanceStatus | null
   late_minutes: number | null
   early_leave_minutes: number | null
-  work_minutes: number | null
   notes: string | null
-  is_informed: boolean | null
-  informed_reason: string | null
-  informed_at: Date | null
-  informed_by: string | null
-  is_auto_clocked_out: boolean | null
-  leave_request_id: string | null
   created_at: Date | null
   updated_at: Date | null
+  informed_at: Date | null
+  informed_by: string | null
+  informed_reason: string | null
+  is_auto_clocked_out: boolean | null
+  is_informed: boolean | null
+  leave_request_id: string | null
+  work_minutes: number | null
+  clock_in_time: Date | null
+  clock_out_time: Date | null
 }
 
 export type AttendanceMaxAggregateOutputType = {
   id: string | null
   employee_id: string | null
   date: Date | null
-  clock_in_time: Date | null
-  clock_out_time: Date | null
   status: $Enums.AttendanceStatus | null
   late_minutes: number | null
   early_leave_minutes: number | null
-  work_minutes: number | null
   notes: string | null
-  is_informed: boolean | null
-  informed_reason: string | null
-  informed_at: Date | null
-  informed_by: string | null
-  is_auto_clocked_out: boolean | null
-  leave_request_id: string | null
   created_at: Date | null
   updated_at: Date | null
+  informed_at: Date | null
+  informed_by: string | null
+  informed_reason: string | null
+  is_auto_clocked_out: boolean | null
+  is_informed: boolean | null
+  leave_request_id: string | null
+  work_minutes: number | null
+  clock_in_time: Date | null
+  clock_out_time: Date | null
 }
 
 export type AttendanceCountAggregateOutputType = {
   id: number
   employee_id: number
   date: number
-  clock_in_time: number
-  clock_out_time: number
   status: number
   late_minutes: number
   early_leave_minutes: number
-  work_minutes: number
   notes: number
-  is_informed: number
-  informed_reason: number
-  informed_at: number
-  informed_by: number
-  is_auto_clocked_out: number
-  leave_request_id: number
   created_at: number
   updated_at: number
+  informed_at: number
+  informed_by: number
+  informed_reason: number
+  is_auto_clocked_out: number
+  is_informed: number
+  leave_request_id: number
+  work_minutes: number
+  clock_in_time: number
+  clock_out_time: number
   _all: number
 }
 
@@ -119,63 +119,63 @@ export type AttendanceMinAggregateInputType = {
   id?: true
   employee_id?: true
   date?: true
-  clock_in_time?: true
-  clock_out_time?: true
   status?: true
   late_minutes?: true
   early_leave_minutes?: true
-  work_minutes?: true
   notes?: true
-  is_informed?: true
-  informed_reason?: true
-  informed_at?: true
-  informed_by?: true
-  is_auto_clocked_out?: true
-  leave_request_id?: true
   created_at?: true
   updated_at?: true
+  informed_at?: true
+  informed_by?: true
+  informed_reason?: true
+  is_auto_clocked_out?: true
+  is_informed?: true
+  leave_request_id?: true
+  work_minutes?: true
+  clock_in_time?: true
+  clock_out_time?: true
 }
 
 export type AttendanceMaxAggregateInputType = {
   id?: true
   employee_id?: true
   date?: true
-  clock_in_time?: true
-  clock_out_time?: true
   status?: true
   late_minutes?: true
   early_leave_minutes?: true
-  work_minutes?: true
   notes?: true
-  is_informed?: true
-  informed_reason?: true
-  informed_at?: true
-  informed_by?: true
-  is_auto_clocked_out?: true
-  leave_request_id?: true
   created_at?: true
   updated_at?: true
+  informed_at?: true
+  informed_by?: true
+  informed_reason?: true
+  is_auto_clocked_out?: true
+  is_informed?: true
+  leave_request_id?: true
+  work_minutes?: true
+  clock_in_time?: true
+  clock_out_time?: true
 }
 
 export type AttendanceCountAggregateInputType = {
   id?: true
   employee_id?: true
   date?: true
-  clock_in_time?: true
-  clock_out_time?: true
   status?: true
   late_minutes?: true
   early_leave_minutes?: true
-  work_minutes?: true
   notes?: true
-  is_informed?: true
-  informed_reason?: true
-  informed_at?: true
-  informed_by?: true
-  is_auto_clocked_out?: true
-  leave_request_id?: true
   created_at?: true
   updated_at?: true
+  informed_at?: true
+  informed_by?: true
+  informed_reason?: true
+  is_auto_clocked_out?: true
+  is_informed?: true
+  leave_request_id?: true
+  work_minutes?: true
+  clock_in_time?: true
+  clock_out_time?: true
   _all?: true
 }
 
@@ -269,21 +269,21 @@ export type AttendanceGroupByOutputType = {
   id: string
   employee_id: string
   date: Date
-  clock_in_time: Date | null
-  clock_out_time: Date | null
   status: $Enums.AttendanceStatus
   late_minutes: number
   early_leave_minutes: number
-  work_minutes: number
   notes: string | null
-  is_informed: boolean
-  informed_reason: string | null
-  informed_at: Date | null
-  informed_by: string | null
-  is_auto_clocked_out: boolean
-  leave_request_id: string | null
   created_at: Date
   updated_at: Date
+  informed_at: Date | null
+  informed_by: string | null
+  informed_reason: string | null
+  is_auto_clocked_out: boolean
+  is_informed: boolean
+  leave_request_id: string | null
+  work_minutes: number
+  clock_in_time: Date | null
+  clock_out_time: Date | null
   _count: AttendanceCountAggregateOutputType | null
   _avg: AttendanceAvgAggregateOutputType | null
   _sum: AttendanceSumAggregateOutputType | null
@@ -313,21 +313,21 @@ export type AttendanceWhereInput = {
   id?: Prisma.UuidFilter<"Attendance"> | string
   employee_id?: Prisma.UuidFilter<"Attendance"> | string
   date?: Prisma.DateTimeFilter<"Attendance"> | Date | string
-  clock_in_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
-  clock_out_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFilter<"Attendance"> | number
   early_leave_minutes?: Prisma.IntFilter<"Attendance"> | number
-  work_minutes?: Prisma.IntFilter<"Attendance"> | number
   notes?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
-  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
-  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
-  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
-  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
   created_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
+  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
+  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
+  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  work_minutes?: Prisma.IntFilter<"Attendance"> | number
+  clock_in_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  clock_out_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   informed_by_hr?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
   leave_request?: Prisma.XOR<Prisma.LeaveRequestNullableScalarRelationFilter, Prisma.LeaveRequestWhereInput> | null
@@ -337,21 +337,21 @@ export type AttendanceOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   employee_id?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  clock_in_time?: Prisma.SortOrderInput | Prisma.SortOrder
-  clock_out_time?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
-  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_informed?: Prisma.SortOrder
-  informed_reason?: Prisma.SortOrderInput | Prisma.SortOrder
-  informed_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  informed_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_auto_clocked_out?: Prisma.SortOrder
-  leave_request_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  informed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  informed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  informed_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
+  clock_in_time?: Prisma.SortOrderInput | Prisma.SortOrder
+  clock_out_time?: Prisma.SortOrderInput | Prisma.SortOrder
   employee?: Prisma.EmployeeOrderByWithRelationInput
   informed_by_hr?: Prisma.HRProfileOrderByWithRelationInput
   leave_request?: Prisma.LeaveRequestOrderByWithRelationInput
@@ -365,21 +365,21 @@ export type AttendanceWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.AttendanceWhereInput | Prisma.AttendanceWhereInput[]
   employee_id?: Prisma.UuidFilter<"Attendance"> | string
   date?: Prisma.DateTimeFilter<"Attendance"> | Date | string
-  clock_in_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
-  clock_out_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFilter<"Attendance"> | number
   early_leave_minutes?: Prisma.IntFilter<"Attendance"> | number
-  work_minutes?: Prisma.IntFilter<"Attendance"> | number
   notes?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
-  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
-  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
-  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
-  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
   created_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
+  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
+  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
+  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  work_minutes?: Prisma.IntFilter<"Attendance"> | number
+  clock_in_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  clock_out_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   informed_by_hr?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
   leave_request?: Prisma.XOR<Prisma.LeaveRequestNullableScalarRelationFilter, Prisma.LeaveRequestWhereInput> | null
@@ -389,21 +389,21 @@ export type AttendanceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   employee_id?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  clock_in_time?: Prisma.SortOrderInput | Prisma.SortOrder
-  clock_out_time?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
-  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_informed?: Prisma.SortOrder
-  informed_reason?: Prisma.SortOrderInput | Prisma.SortOrder
-  informed_at?: Prisma.SortOrderInput | Prisma.SortOrder
-  informed_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  is_auto_clocked_out?: Prisma.SortOrder
-  leave_request_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  informed_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  informed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  informed_reason?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
+  clock_in_time?: Prisma.SortOrderInput | Prisma.SortOrder
+  clock_out_time?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AttendanceCountOrderByAggregateInput
   _avg?: Prisma.AttendanceAvgOrderByAggregateInput
   _max?: Prisma.AttendanceMaxOrderByAggregateInput
@@ -418,39 +418,39 @@ export type AttendanceScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"Attendance"> | string
   employee_id?: Prisma.UuidWithAggregatesFilter<"Attendance"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"Attendance"> | Date | string
-  clock_in_time?: Prisma.DateTimeNullableWithAggregatesFilter<"Attendance"> | Date | string | null
-  clock_out_time?: Prisma.DateTimeNullableWithAggregatesFilter<"Attendance"> | Date | string | null
   status?: Prisma.EnumAttendanceStatusWithAggregatesFilter<"Attendance"> | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntWithAggregatesFilter<"Attendance"> | number
   early_leave_minutes?: Prisma.IntWithAggregatesFilter<"Attendance"> | number
-  work_minutes?: Prisma.IntWithAggregatesFilter<"Attendance"> | number
   notes?: Prisma.StringNullableWithAggregatesFilter<"Attendance"> | string | null
-  is_informed?: Prisma.BoolWithAggregatesFilter<"Attendance"> | boolean
-  informed_reason?: Prisma.StringNullableWithAggregatesFilter<"Attendance"> | string | null
-  informed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Attendance"> | Date | string | null
-  informed_by?: Prisma.UuidNullableWithAggregatesFilter<"Attendance"> | string | null
-  is_auto_clocked_out?: Prisma.BoolWithAggregatesFilter<"Attendance"> | boolean
-  leave_request_id?: Prisma.UuidNullableWithAggregatesFilter<"Attendance"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Attendance"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Attendance"> | Date | string
+  informed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Attendance"> | Date | string | null
+  informed_by?: Prisma.UuidNullableWithAggregatesFilter<"Attendance"> | string | null
+  informed_reason?: Prisma.StringNullableWithAggregatesFilter<"Attendance"> | string | null
+  is_auto_clocked_out?: Prisma.BoolWithAggregatesFilter<"Attendance"> | boolean
+  is_informed?: Prisma.BoolWithAggregatesFilter<"Attendance"> | boolean
+  leave_request_id?: Prisma.UuidNullableWithAggregatesFilter<"Attendance"> | string | null
+  work_minutes?: Prisma.IntWithAggregatesFilter<"Attendance"> | number
+  clock_in_time?: Prisma.DateTimeNullableWithAggregatesFilter<"Attendance"> | Date | string | null
+  clock_out_time?: Prisma.DateTimeNullableWithAggregatesFilter<"Attendance"> | Date | string | null
 }
 
 export type AttendanceCreateInput = {
   id?: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  is_auto_clocked_out?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
   employee: Prisma.EmployeeCreateNestedOneWithoutAttendanceInput
   informed_by_hr?: Prisma.HRProfileCreateNestedOneWithoutAttendances_informedInput
   leave_request?: Prisma.LeaveRequestCreateNestedOneWithoutAttendancesInput
@@ -460,39 +460,39 @@ export type AttendanceUncheckedCreateInput = {
   id?: string
   employee_id: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  informed_by?: string | null
-  is_auto_clocked_out?: boolean
-  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: string | null
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
 }
 
 export type AttendanceUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendanceNestedInput
   informed_by_hr?: Prisma.HRProfileUpdateOneWithoutAttendances_informedNestedInput
   leave_request?: Prisma.LeaveRequestUpdateOneWithoutAttendancesNestedInput
@@ -502,81 +502,81 @@ export type AttendanceUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AttendanceCreateManyInput = {
   id?: string
   employee_id: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  informed_by?: string | null
-  is_auto_clocked_out?: boolean
-  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: string | null
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
 }
 
 export type AttendanceUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AttendanceUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AttendanceEmployee_idDateCompoundUniqueInput = {
@@ -588,21 +588,21 @@ export type AttendanceCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employee_id?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  clock_in_time?: Prisma.SortOrder
-  clock_out_time?: Prisma.SortOrder
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
-  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  is_informed?: Prisma.SortOrder
-  informed_reason?: Prisma.SortOrder
-  informed_at?: Prisma.SortOrder
-  informed_by?: Prisma.SortOrder
-  is_auto_clocked_out?: Prisma.SortOrder
-  leave_request_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  informed_at?: Prisma.SortOrder
+  informed_by?: Prisma.SortOrder
+  informed_reason?: Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
+  clock_in_time?: Prisma.SortOrder
+  clock_out_time?: Prisma.SortOrder
 }
 
 export type AttendanceAvgOrderByAggregateInput = {
@@ -615,42 +615,42 @@ export type AttendanceMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employee_id?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  clock_in_time?: Prisma.SortOrder
-  clock_out_time?: Prisma.SortOrder
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
-  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  is_informed?: Prisma.SortOrder
-  informed_reason?: Prisma.SortOrder
-  informed_at?: Prisma.SortOrder
-  informed_by?: Prisma.SortOrder
-  is_auto_clocked_out?: Prisma.SortOrder
-  leave_request_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  informed_at?: Prisma.SortOrder
+  informed_by?: Prisma.SortOrder
+  informed_reason?: Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
+  clock_in_time?: Prisma.SortOrder
+  clock_out_time?: Prisma.SortOrder
 }
 
 export type AttendanceMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   employee_id?: Prisma.SortOrder
   date?: Prisma.SortOrder
-  clock_in_time?: Prisma.SortOrder
-  clock_out_time?: Prisma.SortOrder
   status?: Prisma.SortOrder
   late_minutes?: Prisma.SortOrder
   early_leave_minutes?: Prisma.SortOrder
-  work_minutes?: Prisma.SortOrder
   notes?: Prisma.SortOrder
-  is_informed?: Prisma.SortOrder
-  informed_reason?: Prisma.SortOrder
-  informed_at?: Prisma.SortOrder
-  informed_by?: Prisma.SortOrder
-  is_auto_clocked_out?: Prisma.SortOrder
-  leave_request_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  informed_at?: Prisma.SortOrder
+  informed_by?: Prisma.SortOrder
+  informed_reason?: Prisma.SortOrder
+  is_auto_clocked_out?: Prisma.SortOrder
+  is_informed?: Prisma.SortOrder
+  leave_request_id?: Prisma.SortOrder
+  work_minutes?: Prisma.SortOrder
+  clock_in_time?: Prisma.SortOrder
+  clock_out_time?: Prisma.SortOrder
 }
 
 export type AttendanceSumOrderByAggregateInput = {
@@ -810,19 +810,19 @@ export type AttendanceUncheckedUpdateManyWithoutLeave_requestNestedInput = {
 export type AttendanceCreateWithoutEmployeeInput = {
   id?: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  is_auto_clocked_out?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
   informed_by_hr?: Prisma.HRProfileCreateNestedOneWithoutAttendances_informedInput
   leave_request?: Prisma.LeaveRequestCreateNestedOneWithoutAttendancesInput
 }
@@ -830,21 +830,21 @@ export type AttendanceCreateWithoutEmployeeInput = {
 export type AttendanceUncheckedCreateWithoutEmployeeInput = {
   id?: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  informed_by?: string | null
-  is_auto_clocked_out?: boolean
-  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: string | null
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
 }
 
 export type AttendanceCreateOrConnectWithoutEmployeeInput = {
@@ -880,39 +880,39 @@ export type AttendanceScalarWhereInput = {
   id?: Prisma.UuidFilter<"Attendance"> | string
   employee_id?: Prisma.UuidFilter<"Attendance"> | string
   date?: Prisma.DateTimeFilter<"Attendance"> | Date | string
-  clock_in_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
-  clock_out_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
   status?: Prisma.EnumAttendanceStatusFilter<"Attendance"> | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFilter<"Attendance"> | number
   early_leave_minutes?: Prisma.IntFilter<"Attendance"> | number
-  work_minutes?: Prisma.IntFilter<"Attendance"> | number
   notes?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
-  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
-  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
-  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
-  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
-  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
   created_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Attendance"> | Date | string
+  informed_at?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  informed_by?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  informed_reason?: Prisma.StringNullableFilter<"Attendance"> | string | null
+  is_auto_clocked_out?: Prisma.BoolFilter<"Attendance"> | boolean
+  is_informed?: Prisma.BoolFilter<"Attendance"> | boolean
+  leave_request_id?: Prisma.UuidNullableFilter<"Attendance"> | string | null
+  work_minutes?: Prisma.IntFilter<"Attendance"> | number
+  clock_in_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
+  clock_out_time?: Prisma.DateTimeNullableFilter<"Attendance"> | Date | string | null
 }
 
 export type AttendanceCreateWithoutInformed_by_hrInput = {
   id?: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  is_auto_clocked_out?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
   employee: Prisma.EmployeeCreateNestedOneWithoutAttendanceInput
   leave_request?: Prisma.LeaveRequestCreateNestedOneWithoutAttendancesInput
 }
@@ -921,20 +921,20 @@ export type AttendanceUncheckedCreateWithoutInformed_by_hrInput = {
   id?: string
   employee_id: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  is_auto_clocked_out?: boolean
-  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: string | null
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
 }
 
 export type AttendanceCreateOrConnectWithoutInformed_by_hrInput = {
@@ -966,19 +966,19 @@ export type AttendanceUpdateManyWithWhereWithoutInformed_by_hrInput = {
 export type AttendanceCreateWithoutLeave_requestInput = {
   id?: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  is_auto_clocked_out?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
   employee: Prisma.EmployeeCreateNestedOneWithoutAttendanceInput
   informed_by_hr?: Prisma.HRProfileCreateNestedOneWithoutAttendances_informedInput
 }
@@ -987,20 +987,20 @@ export type AttendanceUncheckedCreateWithoutLeave_requestInput = {
   id?: string
   employee_id: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  informed_by?: string | null
-  is_auto_clocked_out?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
 }
 
 export type AttendanceCreateOrConnectWithoutLeave_requestInput = {
@@ -1032,39 +1032,39 @@ export type AttendanceUpdateManyWithWhereWithoutLeave_requestInput = {
 export type AttendanceCreateManyEmployeeInput = {
   id?: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  informed_by?: string | null
-  is_auto_clocked_out?: boolean
-  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: string | null
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
 }
 
 export type AttendanceUpdateWithoutEmployeeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   informed_by_hr?: Prisma.HRProfileUpdateOneWithoutAttendances_informedNestedInput
   leave_request?: Prisma.LeaveRequestUpdateOneWithoutAttendancesNestedInput
 }
@@ -1072,79 +1072,79 @@ export type AttendanceUpdateWithoutEmployeeInput = {
 export type AttendanceUncheckedUpdateWithoutEmployeeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AttendanceUncheckedUpdateManyWithoutEmployeeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AttendanceCreateManyInformed_by_hrInput = {
   id?: string
   employee_id: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  is_auto_clocked_out?: boolean
-  leave_request_id?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: string | null
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
 }
 
 export type AttendanceUpdateWithoutInformed_by_hrInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendanceNestedInput
   leave_request?: Prisma.LeaveRequestUpdateOneWithoutAttendancesNestedInput
 }
@@ -1153,78 +1153,78 @@ export type AttendanceUncheckedUpdateWithoutInformed_by_hrInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AttendanceUncheckedUpdateManyWithoutInformed_by_hrInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  leave_request_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AttendanceCreateManyLeave_requestInput = {
   id?: string
   employee_id: string
   date: Date | string
-  clock_in_time?: Date | string | null
-  clock_out_time?: Date | string | null
   status: $Enums.AttendanceStatus
   late_minutes?: number
   early_leave_minutes?: number
-  work_minutes?: number
   notes?: string | null
-  is_informed?: boolean
-  informed_reason?: string | null
-  informed_at?: Date | string | null
-  informed_by?: string | null
-  is_auto_clocked_out?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  informed_at?: Date | string | null
+  informed_by?: string | null
+  informed_reason?: string | null
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  work_minutes?: number
+  clock_in_time?: Date | string | null
+  clock_out_time?: Date | string | null
 }
 
 export type AttendanceUpdateWithoutLeave_requestInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutAttendanceNestedInput
   informed_by_hr?: Prisma.HRProfileUpdateOneWithoutAttendances_informedNestedInput
 }
@@ -1233,40 +1233,40 @@ export type AttendanceUncheckedUpdateWithoutLeave_requestInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type AttendanceUncheckedUpdateManyWithoutLeave_requestInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   employee_id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
   late_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   early_leave_minutes?: Prisma.IntFieldUpdateOperationsInput | number
-  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  informed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  informed_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  informed_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_auto_clocked_out?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_informed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  work_minutes?: Prisma.IntFieldUpdateOperationsInput | number
+  clock_in_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  clock_out_time?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1275,21 +1275,21 @@ export type AttendanceSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   employee_id?: boolean
   date?: boolean
-  clock_in_time?: boolean
-  clock_out_time?: boolean
   status?: boolean
   late_minutes?: boolean
   early_leave_minutes?: boolean
-  work_minutes?: boolean
   notes?: boolean
-  is_informed?: boolean
-  informed_reason?: boolean
-  informed_at?: boolean
-  informed_by?: boolean
-  is_auto_clocked_out?: boolean
-  leave_request_id?: boolean
   created_at?: boolean
   updated_at?: boolean
+  informed_at?: boolean
+  informed_by?: boolean
+  informed_reason?: boolean
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: boolean
+  work_minutes?: boolean
+  clock_in_time?: boolean
+  clock_out_time?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
   leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
@@ -1299,21 +1299,21 @@ export type AttendanceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   employee_id?: boolean
   date?: boolean
-  clock_in_time?: boolean
-  clock_out_time?: boolean
   status?: boolean
   late_minutes?: boolean
   early_leave_minutes?: boolean
-  work_minutes?: boolean
   notes?: boolean
-  is_informed?: boolean
-  informed_reason?: boolean
-  informed_at?: boolean
-  informed_by?: boolean
-  is_auto_clocked_out?: boolean
-  leave_request_id?: boolean
   created_at?: boolean
   updated_at?: boolean
+  informed_at?: boolean
+  informed_by?: boolean
+  informed_reason?: boolean
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: boolean
+  work_minutes?: boolean
+  clock_in_time?: boolean
+  clock_out_time?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
   leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
@@ -1323,21 +1323,21 @@ export type AttendanceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   employee_id?: boolean
   date?: boolean
-  clock_in_time?: boolean
-  clock_out_time?: boolean
   status?: boolean
   late_minutes?: boolean
   early_leave_minutes?: boolean
-  work_minutes?: boolean
   notes?: boolean
-  is_informed?: boolean
-  informed_reason?: boolean
-  informed_at?: boolean
-  informed_by?: boolean
-  is_auto_clocked_out?: boolean
-  leave_request_id?: boolean
   created_at?: boolean
   updated_at?: boolean
+  informed_at?: boolean
+  informed_by?: boolean
+  informed_reason?: boolean
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: boolean
+  work_minutes?: boolean
+  clock_in_time?: boolean
+  clock_out_time?: boolean
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
   leave_request?: boolean | Prisma.Attendance$leave_requestArgs<ExtArgs>
@@ -1347,24 +1347,24 @@ export type AttendanceSelectScalar = {
   id?: boolean
   employee_id?: boolean
   date?: boolean
-  clock_in_time?: boolean
-  clock_out_time?: boolean
   status?: boolean
   late_minutes?: boolean
   early_leave_minutes?: boolean
-  work_minutes?: boolean
   notes?: boolean
-  is_informed?: boolean
-  informed_reason?: boolean
-  informed_at?: boolean
-  informed_by?: boolean
-  is_auto_clocked_out?: boolean
-  leave_request_id?: boolean
   created_at?: boolean
   updated_at?: boolean
+  informed_at?: boolean
+  informed_by?: boolean
+  informed_reason?: boolean
+  is_auto_clocked_out?: boolean
+  is_informed?: boolean
+  leave_request_id?: boolean
+  work_minutes?: boolean
+  clock_in_time?: boolean
+  clock_out_time?: boolean
 }
 
-export type AttendanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employee_id" | "date" | "clock_in_time" | "clock_out_time" | "status" | "late_minutes" | "early_leave_minutes" | "work_minutes" | "notes" | "is_informed" | "informed_reason" | "informed_at" | "informed_by" | "is_auto_clocked_out" | "leave_request_id" | "created_at" | "updated_at", ExtArgs["result"]["attendance"]>
+export type AttendanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "employee_id" | "date" | "status" | "late_minutes" | "early_leave_minutes" | "notes" | "created_at" | "updated_at" | "informed_at" | "informed_by" | "informed_reason" | "is_auto_clocked_out" | "is_informed" | "leave_request_id" | "work_minutes" | "clock_in_time" | "clock_out_time", ExtArgs["result"]["attendance"]>
 export type AttendanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   informed_by_hr?: boolean | Prisma.Attendance$informed_by_hrArgs<ExtArgs>
@@ -1392,21 +1392,21 @@ export type $AttendancePayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: string
     employee_id: string
     date: Date
-    clock_in_time: Date | null
-    clock_out_time: Date | null
     status: $Enums.AttendanceStatus
     late_minutes: number
     early_leave_minutes: number
-    work_minutes: number
     notes: string | null
-    is_informed: boolean
-    informed_reason: string | null
-    informed_at: Date | null
-    informed_by: string | null
-    is_auto_clocked_out: boolean
-    leave_request_id: string | null
     created_at: Date
     updated_at: Date
+    informed_at: Date | null
+    informed_by: string | null
+    informed_reason: string | null
+    is_auto_clocked_out: boolean
+    is_informed: boolean
+    leave_request_id: string | null
+    work_minutes: number
+    clock_in_time: Date | null
+    clock_out_time: Date | null
   }, ExtArgs["result"]["attendance"]>
   composites: {}
 }
@@ -1836,21 +1836,21 @@ export interface AttendanceFieldRefs {
   readonly id: Prisma.FieldRef<"Attendance", 'String'>
   readonly employee_id: Prisma.FieldRef<"Attendance", 'String'>
   readonly date: Prisma.FieldRef<"Attendance", 'DateTime'>
-  readonly clock_in_time: Prisma.FieldRef<"Attendance", 'DateTime'>
-  readonly clock_out_time: Prisma.FieldRef<"Attendance", 'DateTime'>
   readonly status: Prisma.FieldRef<"Attendance", 'AttendanceStatus'>
   readonly late_minutes: Prisma.FieldRef<"Attendance", 'Int'>
   readonly early_leave_minutes: Prisma.FieldRef<"Attendance", 'Int'>
-  readonly work_minutes: Prisma.FieldRef<"Attendance", 'Int'>
   readonly notes: Prisma.FieldRef<"Attendance", 'String'>
-  readonly is_informed: Prisma.FieldRef<"Attendance", 'Boolean'>
-  readonly informed_reason: Prisma.FieldRef<"Attendance", 'String'>
-  readonly informed_at: Prisma.FieldRef<"Attendance", 'DateTime'>
-  readonly informed_by: Prisma.FieldRef<"Attendance", 'String'>
-  readonly is_auto_clocked_out: Prisma.FieldRef<"Attendance", 'Boolean'>
-  readonly leave_request_id: Prisma.FieldRef<"Attendance", 'String'>
   readonly created_at: Prisma.FieldRef<"Attendance", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Attendance", 'DateTime'>
+  readonly informed_at: Prisma.FieldRef<"Attendance", 'DateTime'>
+  readonly informed_by: Prisma.FieldRef<"Attendance", 'String'>
+  readonly informed_reason: Prisma.FieldRef<"Attendance", 'String'>
+  readonly is_auto_clocked_out: Prisma.FieldRef<"Attendance", 'Boolean'>
+  readonly is_informed: Prisma.FieldRef<"Attendance", 'Boolean'>
+  readonly leave_request_id: Prisma.FieldRef<"Attendance", 'String'>
+  readonly work_minutes: Prisma.FieldRef<"Attendance", 'Int'>
+  readonly clock_in_time: Prisma.FieldRef<"Attendance", 'DateTime'>
+  readonly clock_out_time: Prisma.FieldRef<"Attendance", 'DateTime'>
 }
     
 

@@ -9,7 +9,6 @@ model HRProfile {
   employee             Employee       @relation(fields: [employee_id], references: [id])
   user                 User           @relation(fields: [user_id], references: [id])
   approved_leaves      LeaveRequest[] @relation("LeaveApprovedBy")
-  generated_payslips   Payslip[]      @relation("PayslipGeneratedBy")
 
   @@map("hr_profiles")
 }

@@ -424,12 +424,12 @@ export type EmployeeWhereInput = {
   passport_number?: Prisma.StringNullableFilter<"Employee"> | string | null
   created_at?: Prisma.DateTimeFilter<"Employee"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
-  hr_profile?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
   attendance?: Prisma.AttendanceListRelationFilter
-  payslips?: Prisma.PayslipListRelationFilter
+  department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  hr_profile?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
   leave_requests?: Prisma.LeaveRequestListRelationFilter
+  payslips?: Prisma.PayslipListRelationFilter
 }
 
 export type EmployeeOrderByWithRelationInput = {
@@ -464,12 +464,12 @@ export type EmployeeOrderByWithRelationInput = {
   passport_number?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
-  department?: Prisma.DepartmentOrderByWithRelationInput
-  hr_profile?: Prisma.HRProfileOrderByWithRelationInput
   attendance?: Prisma.AttendanceOrderByRelationAggregateInput
-  payslips?: Prisma.PayslipOrderByRelationAggregateInput
+  department?: Prisma.DepartmentOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
+  hr_profile?: Prisma.HRProfileOrderByWithRelationInput
   leave_requests?: Prisma.LeaveRequestOrderByRelationAggregateInput
+  payslips?: Prisma.PayslipOrderByRelationAggregateInput
 }
 
 export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
@@ -507,12 +507,12 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   passport_number?: Prisma.StringNullableFilter<"Employee"> | string | null
   created_at?: Prisma.DateTimeFilter<"Employee"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
-  hr_profile?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
   attendance?: Prisma.AttendanceListRelationFilter
-  payslips?: Prisma.PayslipListRelationFilter
+  department?: Prisma.XOR<Prisma.DepartmentScalarRelationFilter, Prisma.DepartmentWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  hr_profile?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
   leave_requests?: Prisma.LeaveRequestListRelationFilter
+  payslips?: Prisma.PayslipListRelationFilter
 }, "id" | "user_id" | "employee_code">
 
 export type EmployeeOrderByWithAggregationInput = {
@@ -621,12 +621,12 @@ export type EmployeeCreateInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
-  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
-  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
+  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
+  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
+  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateInput = {
@@ -661,10 +661,10 @@ export type EmployeeUncheckedCreateInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUpdateInput = {
@@ -697,12 +697,12 @@ export type EmployeeUpdateInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
-  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
+  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
+  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateInput = {
@@ -737,10 +737,10 @@ export type EmployeeUncheckedUpdateInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateManyInput = {
@@ -1145,11 +1145,11 @@ export type EmployeeCreateWithoutAttendanceInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
   department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
+  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
-  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutAttendanceInput = {
@@ -1185,8 +1185,8 @@ export type EmployeeUncheckedCreateWithoutAttendanceInput = {
   created_at?: Date | string
   updated_at?: Date | string
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
-  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutAttendanceInput = {
@@ -1235,11 +1235,11 @@ export type EmployeeUpdateWithoutAttendanceInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
   department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutAttendanceInput = {
@@ -1275,8 +1275,8 @@ export type EmployeeUncheckedUpdateWithoutAttendanceInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateWithoutUserInput = {
@@ -1309,11 +1309,11 @@ export type EmployeeCreateWithoutUserInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
-  attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutUserInput = {
@@ -1347,10 +1347,10 @@ export type EmployeeUncheckedCreateWithoutUserInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutUserInput = {
@@ -1399,11 +1399,11 @@ export type EmployeeUpdateWithoutUserInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
-  attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutUserInput = {
@@ -1437,10 +1437,10 @@ export type EmployeeUncheckedUpdateWithoutUserInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateWithoutDepartmentInput = {
@@ -1473,11 +1473,11 @@ export type EmployeeCreateWithoutDepartmentInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
   user: Prisma.UserCreateNestedOneWithoutEmployeeInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
-  attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutDepartmentInput = {
@@ -1511,10 +1511,10 @@ export type EmployeeUncheckedCreateWithoutDepartmentInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutDepartmentInput = {
@@ -1610,11 +1610,11 @@ export type EmployeeCreateWithoutHr_profileInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
-  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
+  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
+  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutHr_profileInput = {
@@ -1650,8 +1650,8 @@ export type EmployeeUncheckedCreateWithoutHr_profileInput = {
   created_at?: Date | string
   updated_at?: Date | string
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
-  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
+  payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutHr_profileInput = {
@@ -1700,11 +1700,11 @@ export type EmployeeUpdateWithoutHr_profileInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
+  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutHr_profileInput = {
@@ -1740,8 +1740,8 @@ export type EmployeeUncheckedUpdateWithoutHr_profileInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateWithoutLeave_requestsInput = {
@@ -1774,10 +1774,10 @@ export type EmployeeCreateWithoutLeave_requestsInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
-  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
-  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
+  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
+  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   payslips?: Prisma.PayslipCreateNestedManyWithoutEmployeeInput
 }
 
@@ -1813,8 +1813,8 @@ export type EmployeeUncheckedCreateWithoutLeave_requestsInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -1864,10 +1864,10 @@ export type EmployeeUpdateWithoutLeave_requestsInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
-  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
+  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -1903,8 +1903,8 @@ export type EmployeeUncheckedUpdateWithoutLeave_requestsInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -1938,10 +1938,10 @@ export type EmployeeCreateWithoutPayslipsInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
-  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
-  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutEmployeeInput
+  department: Prisma.DepartmentCreateNestedOneWithoutEmployeesInput
+  user: Prisma.UserCreateNestedOneWithoutEmployeeInput
+  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestCreateNestedManyWithoutEmployeeInput
 }
 
@@ -1977,8 +1977,8 @@ export type EmployeeUncheckedCreateWithoutPayslipsInput = {
   passport_number?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutEmployeeInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutEmployeeInput
   leave_requests?: Prisma.LeaveRequestUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -2028,10 +2028,10 @@ export type EmployeeUpdateWithoutPayslipsInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
-  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
-  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
+  department?: Prisma.DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
+  hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -2067,8 +2067,8 @@ export type EmployeeUncheckedUpdateWithoutPayslipsInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -2135,11 +2135,11 @@ export type EmployeeUpdateWithoutDepartmentInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutEmployeeNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutEmployeeNestedInput
-  attendance?: Prisma.AttendanceUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutDepartmentInput = {
@@ -2173,10 +2173,10 @@ export type EmployeeUncheckedUpdateWithoutDepartmentInput = {
   passport_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutEmployeeNestedInput
-  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutEmployeeNestedInput
   leave_requests?: Prisma.LeaveRequestUncheckedUpdateManyWithoutEmployeeNestedInput
+  payslips?: Prisma.PayslipUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateManyWithoutDepartmentInput = {
@@ -2219,14 +2219,14 @@ export type EmployeeUncheckedUpdateManyWithoutDepartmentInput = {
 
 export type EmployeeCountOutputType = {
   attendance: number
-  payslips: number
   leave_requests: number
+  payslips: number
 }
 
 export type EmployeeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attendance?: boolean | EmployeeCountOutputTypeCountAttendanceArgs
-  payslips?: boolean | EmployeeCountOutputTypeCountPayslipsArgs
   leave_requests?: boolean | EmployeeCountOutputTypeCountLeave_requestsArgs
+  payslips?: boolean | EmployeeCountOutputTypeCountPayslipsArgs
 }
 
 /**
@@ -2249,15 +2249,15 @@ export type EmployeeCountOutputTypeCountAttendanceArgs<ExtArgs extends runtime.T
 /**
  * EmployeeCountOutputType without action
  */
-export type EmployeeCountOutputTypeCountPayslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PayslipWhereInput
+export type EmployeeCountOutputTypeCountLeave_requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeaveRequestWhereInput
 }
 
 /**
  * EmployeeCountOutputType without action
  */
-export type EmployeeCountOutputTypeCountLeave_requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeaveRequestWhereInput
+export type EmployeeCountOutputTypeCountPayslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayslipWhereInput
 }
 
 
@@ -2293,12 +2293,12 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   passport_number?: boolean
   created_at?: boolean
   updated_at?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
-  hr_profile?: boolean | Prisma.Employee$hr_profileArgs<ExtArgs>
   attendance?: boolean | Prisma.Employee$attendanceArgs<ExtArgs>
-  payslips?: boolean | Prisma.Employee$payslipsArgs<ExtArgs>
+  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  hr_profile?: boolean | Prisma.Employee$hr_profileArgs<ExtArgs>
   leave_requests?: boolean | Prisma.Employee$leave_requestsArgs<ExtArgs>
+  payslips?: boolean | Prisma.Employee$payslipsArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
@@ -2334,8 +2334,8 @@ export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   passport_number?: boolean
   created_at?: boolean
   updated_at?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
 export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2370,8 +2370,8 @@ export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   passport_number?: boolean
   created_at?: boolean
   updated_at?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
 export type EmployeeSelectScalar = {
@@ -2410,32 +2410,32 @@ export type EmployeeSelectScalar = {
 
 export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "employee_code" | "first_name" | "last_name" | "date_of_birth" | "gender" | "blood_group" | "phone" | "emergency_contact_name" | "emergency_contact_phone" | "profile_url" | "department_id" | "designation" | "salary" | "bank_name" | "bank_account_number" | "employment_type" | "join_date" | "employment_status" | "address_line1" | "address_line2" | "city" | "state" | "zip_code" | "country" | "nid_number" | "tin_number" | "passport_number" | "created_at" | "updated_at", ExtArgs["result"]["employee"]>
 export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
-  hr_profile?: boolean | Prisma.Employee$hr_profileArgs<ExtArgs>
   attendance?: boolean | Prisma.Employee$attendanceArgs<ExtArgs>
-  payslips?: boolean | Prisma.Employee$payslipsArgs<ExtArgs>
+  department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  hr_profile?: boolean | Prisma.Employee$hr_profileArgs<ExtArgs>
   leave_requests?: boolean | Prisma.Employee$leave_requestsArgs<ExtArgs>
+  payslips?: boolean | Prisma.Employee$payslipsArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type EmployeeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   department?: boolean | Prisma.DepartmentDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Employee"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
-    department: Prisma.$DepartmentPayload<ExtArgs>
-    hr_profile: Prisma.$HRProfilePayload<ExtArgs> | null
     attendance: Prisma.$AttendancePayload<ExtArgs>[]
-    payslips: Prisma.$PayslipPayload<ExtArgs>[]
+    department: Prisma.$DepartmentPayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
+    hr_profile: Prisma.$HRProfilePayload<ExtArgs> | null
     leave_requests: Prisma.$LeaveRequestPayload<ExtArgs>[]
+    payslips: Prisma.$PayslipPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2863,12 +2863,12 @@ readonly fields: EmployeeFieldRefs;
  */
 export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  department<T extends Prisma.DepartmentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DepartmentDefaultArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  hr_profile<T extends Prisma.Employee$hr_profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$hr_profileArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   attendance<T extends Prisma.Employee$attendanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$attendanceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  payslips<T extends Prisma.Employee$payslipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$payslipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayslipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  department<T extends Prisma.DepartmentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DepartmentDefaultArgs<ExtArgs>>): Prisma.Prisma__DepartmentClient<runtime.Types.Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  hr_profile<T extends Prisma.Employee$hr_profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$hr_profileArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   leave_requests<T extends Prisma.Employee$leave_requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$leave_requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeaveRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payslips<T extends Prisma.Employee$payslipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$payslipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayslipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3330,25 +3330,6 @@ export type EmployeeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * Employee.hr_profile
- */
-export type Employee$hr_profileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the HRProfile
-   */
-  select?: Prisma.HRProfileSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the HRProfile
-   */
-  omit?: Prisma.HRProfileOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.HRProfileInclude<ExtArgs> | null
-  where?: Prisma.HRProfileWhereInput
-}
-
-/**
  * Employee.attendance
  */
 export type Employee$attendanceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3373,27 +3354,22 @@ export type Employee$attendanceArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Employee.payslips
+ * Employee.hr_profile
  */
-export type Employee$payslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Employee$hr_profileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Payslip
+   * Select specific fields to fetch from the HRProfile
    */
-  select?: Prisma.PayslipSelect<ExtArgs> | null
+  select?: Prisma.HRProfileSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Payslip
+   * Omit specific fields from the HRProfile
    */
-  omit?: Prisma.PayslipOmit<ExtArgs> | null
+  omit?: Prisma.HRProfileOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PayslipInclude<ExtArgs> | null
-  where?: Prisma.PayslipWhereInput
-  orderBy?: Prisma.PayslipOrderByWithRelationInput | Prisma.PayslipOrderByWithRelationInput[]
-  cursor?: Prisma.PayslipWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PayslipScalarFieldEnum | Prisma.PayslipScalarFieldEnum[]
+  include?: Prisma.HRProfileInclude<ExtArgs> | null
+  where?: Prisma.HRProfileWhereInput
 }
 
 /**
@@ -3418,6 +3394,30 @@ export type Employee$leave_requestsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.LeaveRequestScalarFieldEnum | Prisma.LeaveRequestScalarFieldEnum[]
+}
+
+/**
+ * Employee.payslips
+ */
+export type Employee$payslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payslip
+   */
+  select?: Prisma.PayslipSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payslip
+   */
+  omit?: Prisma.PayslipOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayslipInclude<ExtArgs> | null
+  where?: Prisma.PayslipWhereInput
+  orderBy?: Prisma.PayslipOrderByWithRelationInput | Prisma.PayslipOrderByWithRelationInput[]
+  cursor?: Prisma.PayslipWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PayslipScalarFieldEnum | Prisma.PayslipScalarFieldEnum[]
 }
 
 /**

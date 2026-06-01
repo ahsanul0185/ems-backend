@@ -12,11 +12,6 @@ const generatePayslip = async (payload: ICreatePayslipPayload, generatedBy: stri
     throw new AppError(status.NOT_FOUND, "Employee not found");
   }
 
-  const hrProfile = await prisma.hRProfile.findUnique({ where: { id: generatedBy } });
-  if (!hrProfile) {
-    throw new AppError(status.FORBIDDEN, "Authenticated HR profile not found");
-  }
-
   const existingPayslip = await prisma.payslip.findFirst({
     where: {
       employee_id: payload.employee_id,
@@ -127,7 +122,26 @@ const getPayslipById = async (payslipId: string) => {
     where: { id: payslipId },
     include: {
       employee: true,
-      generated_emp: true,
+      generator: {
+        select: {
+          id: true,
+          email: true,
+          role: true,
+          status: true,
+          created_at: true,
+          updated_at: true,
+        },
+      },
+      approver: {
+        select: {
+          id: true,
+          email: true,
+          role: true,
+          status: true,
+          created_at: true,
+          updated_at: true,
+        },
+      },
     },
   });
 
@@ -138,7 +152,7 @@ const getPayslipById = async (payslipId: string) => {
   return { payslip };
 };
 
-const approvePayslip = async (payslipId: string) => {
+const approvePayslip = async (payslipId: string, approvedBy: string) => {
   const payslip = await prisma.payslip.findUnique({ where: { id: payslipId } });
 
   if (!payslip) {
@@ -153,13 +167,14 @@ const approvePayslip = async (payslipId: string) => {
     where: { id: payslipId },
     data: {
       status: PayslipStatus.APPROVED,
+      approved_by: approvedBy,
     }
   });
 
   return { payslip: updated };
 };
 
-const markPaidPayslip = async (payslipId: string) => {
+const markPaidPayslip = async (payslipId: string, markedBy: string) => {
   const payslip = await prisma.payslip.findUnique({ where: { id: payslipId } });
 
   if (!payslip) {
@@ -174,6 +189,7 @@ const markPaidPayslip = async (payslipId: string) => {
     where: { id: payslipId },
     data: {
       status: PayslipStatus.PAID,
+      approved_by: markedBy,
     }
   });
 

@@ -55,10 +55,10 @@ export type EmployeeType = (typeof EmployeeType)[keyof typeof EmployeeType]
 
 export const EmployeeStatus = {
   ACTIVE: 'ACTIVE',
-  INACTIVE: 'INACTIVE',
   ON_LEAVE: 'ON_LEAVE',
   RESIGNED: 'RESIGNED',
-  TERMINATED: 'TERMINATED'
+  TERMINATED: 'TERMINATED',
+  INACTIVE: 'INACTIVE'
 } as const
 
 export type EmployeeStatus = (typeof EmployeeStatus)[keyof typeof EmployeeStatus]

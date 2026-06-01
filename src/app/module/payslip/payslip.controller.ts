@@ -64,14 +64,14 @@ const getAllPayslips = catchAsync(
 
 const generatePayslip = catchAsync(
   async (req: Request, res: Response) => {
-    const hrProfileId = req.user?.hrProfileId;
+    const userId = req.user?.userId;
 
-    if (!hrProfileId) {
-      throw new AppError(status.FORBIDDEN, "Authenticated HR profile is required to generate payslips");
+    if (!userId) {
+      throw new AppError(status.FORBIDDEN, "Authenticated user is required to generate payslips");
     }
 
     const payload = req.body;
-    const result = await payslipService.generatePayslip(payload, hrProfileId);
+    const result = await payslipService.generatePayslip(payload, userId);
 
     sendResponse(res, {
       httpStatusCode: status.CREATED,
@@ -99,7 +99,13 @@ const getPayslipById = catchAsync(
 const approvePayslip = catchAsync(
   async (req: Request, res: Response) => {
     const payslipId = req.params.id;
-    const result = await payslipService.approvePayslip(payslipId as string);
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      throw new AppError(status.FORBIDDEN, "Authenticated user is required to approve payslips");
+    }
+
+    const result = await payslipService.approvePayslip(payslipId as string, userId);
 
     sendResponse(res, {
       httpStatusCode: status.OK,
@@ -113,7 +119,13 @@ const approvePayslip = catchAsync(
 const markPaidPayslip = catchAsync(
   async (req: Request, res: Response) => {
     const payslipId = req.params.id;
-    const result = await payslipService.markPaidPayslip(payslipId as string);
+    const userId = req.user?.userId;
+
+    if (!userId) {
+      throw new AppError(status.FORBIDDEN, "Authenticated user is required to mark payslips as paid");
+    }
+
+    const result = await payslipService.markPaidPayslip(payslipId as string, userId);
 
     sendResponse(res, {
       httpStatusCode: status.OK,

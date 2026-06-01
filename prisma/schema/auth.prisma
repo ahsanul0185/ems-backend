@@ -8,11 +8,13 @@ model User {
   email_verified Boolean        @default(false)
   created_at     DateTime       @default(now())
   updated_at     DateTime       @updatedAt
-  announcements  Announcement[] @relation("AnnouncementCreatedBy")
-  employee       Employee?
-  hr_profile     HRProfile?
-  otps           Otp[]
-  session        Session[]
+  announcements    Announcement[] @relation("AnnouncementCreatedBy")
+  employee         Employee?
+  hr_profile       HRProfile?
+  generated_payslips Payslip[]      @relation("PayslipGeneratedBy")
+  approved_payslips  Payslip[]      @relation("PayslipApprovedBy")
+  otps             Otp[]
+  session          Session[]
 
   @@map("users")
 }

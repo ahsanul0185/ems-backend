@@ -214,11 +214,13 @@ export type UserWhereInput = {
   email_verified?: Prisma.BoolFilter<"User"> | boolean
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"User"> | Date | string
-  session?: Prisma.SessionListRelationFilter
-  otps?: Prisma.OtpListRelationFilter
+  announcements?: Prisma.AnnouncementListRelationFilter
   employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
   hr_profile?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
-  announcements?: Prisma.AnnouncementListRelationFilter
+  generated_payslips?: Prisma.PayslipListRelationFilter
+  approved_payslips?: Prisma.PayslipListRelationFilter
+  otps?: Prisma.OtpListRelationFilter
+  session?: Prisma.SessionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -231,11 +233,13 @@ export type UserOrderByWithRelationInput = {
   email_verified?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  session?: Prisma.SessionOrderByRelationAggregateInput
-  otps?: Prisma.OtpOrderByRelationAggregateInput
+  announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
   employee?: Prisma.EmployeeOrderByWithRelationInput
   hr_profile?: Prisma.HRProfileOrderByWithRelationInput
-  announcements?: Prisma.AnnouncementOrderByRelationAggregateInput
+  generated_payslips?: Prisma.PayslipOrderByRelationAggregateInput
+  approved_payslips?: Prisma.PayslipOrderByRelationAggregateInput
+  otps?: Prisma.OtpOrderByRelationAggregateInput
+  session?: Prisma.SessionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -251,11 +255,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   email_verified?: Prisma.BoolFilter<"User"> | boolean
   created_at?: Prisma.DateTimeFilter<"User"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"User"> | Date | string
-  session?: Prisma.SessionListRelationFilter
-  otps?: Prisma.OtpListRelationFilter
+  announcements?: Prisma.AnnouncementListRelationFilter
   employee?: Prisma.XOR<Prisma.EmployeeNullableScalarRelationFilter, Prisma.EmployeeWhereInput> | null
   hr_profile?: Prisma.XOR<Prisma.HRProfileNullableScalarRelationFilter, Prisma.HRProfileWhereInput> | null
-  announcements?: Prisma.AnnouncementListRelationFilter
+  generated_payslips?: Prisma.PayslipListRelationFilter
+  approved_payslips?: Prisma.PayslipListRelationFilter
+  otps?: Prisma.OtpListRelationFilter
+  session?: Prisma.SessionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -298,11 +304,13 @@ export type UserCreateInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
+  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -315,11 +323,13 @@ export type UserUncheckedCreateInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
+  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -332,11 +342,13 @@ export type UserUpdateInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
+  generated_payslips?: Prisma.PayslipUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -349,11 +361,13 @@ export type UserUncheckedUpdateInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
+  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -431,6 +445,11 @@ export type UserMinOrderByAggregateInput = {
   email_verified?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type UserCreateNestedOneWithoutAnnouncementsInput = {
@@ -511,6 +530,36 @@ export type UserUpdateOneRequiredWithoutHr_profileNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHr_profileInput, Prisma.UserUpdateWithoutHr_profileInput>, Prisma.UserUncheckedUpdateWithoutHr_profileInput>
 }
 
+export type UserCreateNestedOneWithoutGenerated_payslipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGenerated_payslipsInput, Prisma.UserUncheckedCreateWithoutGenerated_payslipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGenerated_payslipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutApproved_payslipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApproved_payslipsInput, Prisma.UserUncheckedCreateWithoutApproved_payslipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApproved_payslipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutGenerated_payslipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGenerated_payslipsInput, Prisma.UserUncheckedCreateWithoutGenerated_payslipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGenerated_payslipsInput
+  upsert?: Prisma.UserUpsertWithoutGenerated_payslipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGenerated_payslipsInput, Prisma.UserUpdateWithoutGenerated_payslipsInput>, Prisma.UserUncheckedUpdateWithoutGenerated_payslipsInput>
+}
+
+export type UserUpdateOneWithoutApproved_payslipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApproved_payslipsInput, Prisma.UserUncheckedCreateWithoutApproved_payslipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApproved_payslipsInput
+  upsert?: Prisma.UserUpsertWithoutApproved_payslipsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutApproved_payslipsInput, Prisma.UserUpdateWithoutApproved_payslipsInput>, Prisma.UserUncheckedUpdateWithoutApproved_payslipsInput>
+}
+
 export type UserCreateWithoutAnnouncementsInput = {
   id?: string
   email: string
@@ -521,10 +570,12 @@ export type UserCreateWithoutAnnouncementsInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAnnouncementsInput = {
@@ -537,10 +588,12 @@ export type UserUncheckedCreateWithoutAnnouncementsInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAnnouncementsInput = {
@@ -569,10 +622,12 @@ export type UserUpdateWithoutAnnouncementsInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+  generated_payslips?: Prisma.PayslipUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnnouncementsInput = {
@@ -585,10 +640,12 @@ export type UserUncheckedUpdateWithoutAnnouncementsInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionInput = {
@@ -601,10 +658,12 @@ export type UserCreateWithoutSessionInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
+  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionInput = {
@@ -617,10 +676,12 @@ export type UserUncheckedCreateWithoutSessionInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
+  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionInput = {
@@ -649,10 +710,12 @@ export type UserUpdateWithoutSessionInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
+  generated_payslips?: Prisma.PayslipUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionInput = {
@@ -665,10 +728,12 @@ export type UserUncheckedUpdateWithoutSessionInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
+  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOtpsInput = {
@@ -681,10 +746,12 @@ export type UserCreateWithoutOtpsInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionCreateNestedManyWithoutUserInput
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
   employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
-  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
+  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipCreateNestedManyWithoutApproverInput
+  session?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOtpsInput = {
@@ -697,10 +764,12 @@ export type UserUncheckedCreateWithoutOtpsInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
   employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
-  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
+  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutApproverInput
+  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOtpsInput = {
@@ -729,10 +798,12 @@ export type UserUpdateWithoutOtpsInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
   employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
-  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
+  generated_payslips?: Prisma.PayslipUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUpdateManyWithoutApproverNestedInput
+  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOtpsInput = {
@@ -745,10 +816,12 @@ export type UserUncheckedUpdateWithoutOtpsInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
   employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
-  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
+  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutApproverNestedInput
+  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutEmployeeInput = {
@@ -761,10 +834,12 @@ export type UserCreateWithoutEmployeeInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
-  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
+  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutEmployeeInput = {
@@ -777,10 +852,12 @@ export type UserUncheckedCreateWithoutEmployeeInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
-  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutEmployeeInput = {
@@ -809,10 +886,12 @@ export type UserUpdateWithoutEmployeeInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
-  hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
   announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
+  hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+  generated_payslips?: Prisma.PayslipUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEmployeeInput = {
@@ -825,10 +904,12 @@ export type UserUncheckedUpdateWithoutEmployeeInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
-  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutHr_profileInput = {
@@ -841,10 +922,12 @@ export type UserCreateWithoutHr_profileInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
-  employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
   announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
+  employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
+  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutHr_profileInput = {
@@ -857,10 +940,12 @@ export type UserUncheckedCreateWithoutHr_profileInput = {
   email_verified?: boolean
   created_at?: Date | string
   updated_at?: Date | string
-  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
-  employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
   announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
+  employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
+  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGeneratorInput
+  approved_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutHr_profileInput = {
@@ -889,10 +974,12 @@ export type UserUpdateWithoutHr_profileInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
-  employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
   announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
+  employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
+  generated_payslips?: Prisma.PayslipUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHr_profileInput = {
@@ -905,10 +992,188 @@ export type UserUncheckedUpdateWithoutHr_profileInput = {
   email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
-  employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
   announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
+  employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
+  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGeneratorNestedInput
+  approved_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutGenerated_payslipsInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  is_deleted?: boolean
+  email_verified?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
+  employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
+  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+  approved_payslips?: Prisma.PayslipCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutGenerated_payslipsInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  is_deleted?: boolean
+  email_verified?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
+  employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+  approved_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutApproverInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutGenerated_payslipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutGenerated_payslipsInput, Prisma.UserUncheckedCreateWithoutGenerated_payslipsInput>
+}
+
+export type UserCreateWithoutApproved_payslipsInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  is_deleted?: boolean
+  email_verified?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  announcements?: Prisma.AnnouncementCreateNestedManyWithoutCreatorInput
+  employee?: Prisma.EmployeeCreateNestedOneWithoutUserInput
+  hr_profile?: Prisma.HRProfileCreateNestedOneWithoutUserInput
+  generated_payslips?: Prisma.PayslipCreateNestedManyWithoutGeneratorInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutApproved_payslipsInput = {
+  id?: string
+  email: string
+  password: string
+  role?: $Enums.UserRole
+  status?: $Enums.UserStatus
+  is_deleted?: boolean
+  email_verified?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  announcements?: Prisma.AnnouncementUncheckedCreateNestedManyWithoutCreatorInput
+  employee?: Prisma.EmployeeUncheckedCreateNestedOneWithoutUserInput
+  hr_profile?: Prisma.HRProfileUncheckedCreateNestedOneWithoutUserInput
+  generated_payslips?: Prisma.PayslipUncheckedCreateNestedManyWithoutGeneratorInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
+  session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutApproved_payslipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutApproved_payslipsInput, Prisma.UserUncheckedCreateWithoutApproved_payslipsInput>
+}
+
+export type UserUpsertWithoutGenerated_payslipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutGenerated_payslipsInput, Prisma.UserUncheckedUpdateWithoutGenerated_payslipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutGenerated_payslipsInput, Prisma.UserUncheckedCreateWithoutGenerated_payslipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutGenerated_payslipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutGenerated_payslipsInput, Prisma.UserUncheckedUpdateWithoutGenerated_payslipsInput>
+}
+
+export type UserUpdateWithoutGenerated_payslipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
+  employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
+  hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+  approved_payslips?: Prisma.PayslipUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutGenerated_payslipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
+  employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+  approved_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutApproverNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutApproved_payslipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutApproved_payslipsInput, Prisma.UserUncheckedUpdateWithoutApproved_payslipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutApproved_payslipsInput, Prisma.UserUncheckedCreateWithoutApproved_payslipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutApproved_payslipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutApproved_payslipsInput, Prisma.UserUncheckedUpdateWithoutApproved_payslipsInput>
+}
+
+export type UserUpdateWithoutApproved_payslipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUpdateManyWithoutCreatorNestedInput
+  employee?: Prisma.EmployeeUpdateOneWithoutUserNestedInput
+  hr_profile?: Prisma.HRProfileUpdateOneWithoutUserNestedInput
+  generated_payslips?: Prisma.PayslipUpdateManyWithoutGeneratorNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutApproved_payslipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  email_verified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  announcements?: Prisma.AnnouncementUncheckedUpdateManyWithoutCreatorNestedInput
+  employee?: Prisma.EmployeeUncheckedUpdateOneWithoutUserNestedInput
+  hr_profile?: Prisma.HRProfileUncheckedUpdateOneWithoutUserNestedInput
+  generated_payslips?: Prisma.PayslipUncheckedUpdateManyWithoutGeneratorNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
+  session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -917,15 +1182,19 @@ export type UserUncheckedUpdateWithoutHr_profileInput = {
  */
 
 export type UserCountOutputType = {
-  session: number
-  otps: number
   announcements: number
+  generated_payslips: number
+  approved_payslips: number
+  otps: number
+  session: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  session?: boolean | UserCountOutputTypeCountSessionArgs
-  otps?: boolean | UserCountOutputTypeCountOtpsArgs
   announcements?: boolean | UserCountOutputTypeCountAnnouncementsArgs
+  generated_payslips?: boolean | UserCountOutputTypeCountGenerated_payslipsArgs
+  approved_payslips?: boolean | UserCountOutputTypeCountApproved_payslipsArgs
+  otps?: boolean | UserCountOutputTypeCountOtpsArgs
+  session?: boolean | UserCountOutputTypeCountSessionArgs
 }
 
 /**
@@ -941,8 +1210,22 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SessionWhereInput
+export type UserCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AnnouncementWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountGenerated_payslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayslipWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountApproved_payslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PayslipWhereInput
 }
 
 /**
@@ -955,8 +1238,8 @@ export type UserCountOutputTypeCountOtpsArgs<ExtArgs extends runtime.Types.Exten
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAnnouncementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AnnouncementWhereInput
+export type UserCountOutputTypeCountSessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionWhereInput
 }
 
 
@@ -970,11 +1253,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   email_verified?: boolean
   created_at?: boolean
   updated_at?: boolean
-  session?: boolean | Prisma.User$sessionArgs<ExtArgs>
-  otps?: boolean | Prisma.User$otpsArgs<ExtArgs>
+  announcements?: boolean | Prisma.User$announcementsArgs<ExtArgs>
   employee?: boolean | Prisma.User$employeeArgs<ExtArgs>
   hr_profile?: boolean | Prisma.User$hr_profileArgs<ExtArgs>
-  announcements?: boolean | Prisma.User$announcementsArgs<ExtArgs>
+  generated_payslips?: boolean | Prisma.User$generated_payslipsArgs<ExtArgs>
+  approved_payslips?: boolean | Prisma.User$approved_payslipsArgs<ExtArgs>
+  otps?: boolean | Prisma.User$otpsArgs<ExtArgs>
+  session?: boolean | Prisma.User$sessionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1016,11 +1301,13 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "role" | "status" | "is_deleted" | "email_verified" | "created_at" | "updated_at", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  session?: boolean | Prisma.User$sessionArgs<ExtArgs>
-  otps?: boolean | Prisma.User$otpsArgs<ExtArgs>
+  announcements?: boolean | Prisma.User$announcementsArgs<ExtArgs>
   employee?: boolean | Prisma.User$employeeArgs<ExtArgs>
   hr_profile?: boolean | Prisma.User$hr_profileArgs<ExtArgs>
-  announcements?: boolean | Prisma.User$announcementsArgs<ExtArgs>
+  generated_payslips?: boolean | Prisma.User$generated_payslipsArgs<ExtArgs>
+  approved_payslips?: boolean | Prisma.User$approved_payslipsArgs<ExtArgs>
+  otps?: boolean | Prisma.User$otpsArgs<ExtArgs>
+  session?: boolean | Prisma.User$sessionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1029,11 +1316,13 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    session: Prisma.$SessionPayload<ExtArgs>[]
-    otps: Prisma.$OtpPayload<ExtArgs>[]
+    announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
     employee: Prisma.$EmployeePayload<ExtArgs> | null
     hr_profile: Prisma.$HRProfilePayload<ExtArgs> | null
-    announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
+    generated_payslips: Prisma.$PayslipPayload<ExtArgs>[]
+    approved_payslips: Prisma.$PayslipPayload<ExtArgs>[]
+    otps: Prisma.$OtpPayload<ExtArgs>[]
+    session: Prisma.$SessionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1439,11 +1728,13 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  session<T extends Prisma.User$sessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  otps<T extends Prisma.User$otpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$otpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  announcements<T extends Prisma.User$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   employee<T extends Prisma.User$employeeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$employeeArgs<ExtArgs>>): Prisma.Prisma__EmployeeClient<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   hr_profile<T extends Prisma.User$hr_profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$hr_profileArgs<ExtArgs>>): Prisma.Prisma__HRProfileClient<runtime.Types.Result.GetResult<Prisma.$HRProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  announcements<T extends Prisma.User$announcementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  generated_payslips<T extends Prisma.User$generated_payslipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$generated_payslipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayslipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  approved_payslips<T extends Prisma.User$approved_payslipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approved_payslipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PayslipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  otps<T extends Prisma.User$otpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$otpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  session<T extends Prisma.User$sessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1875,51 +2166,27 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.session
+ * User.announcements
  */
-export type User$sessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Session
+   * Select specific fields to fetch from the Announcement
    */
-  select?: Prisma.SessionSelect<ExtArgs> | null
+  select?: Prisma.AnnouncementSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Session
+   * Omit specific fields from the Announcement
    */
-  omit?: Prisma.SessionOmit<ExtArgs> | null
+  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SessionInclude<ExtArgs> | null
-  where?: Prisma.SessionWhereInput
-  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
-  cursor?: Prisma.SessionWhereUniqueInput
+  include?: Prisma.AnnouncementInclude<ExtArgs> | null
+  where?: Prisma.AnnouncementWhereInput
+  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
+  cursor?: Prisma.AnnouncementWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
-}
-
-/**
- * User.otps
- */
-export type User$otpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Otp
-   */
-  select?: Prisma.OtpSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Otp
-   */
-  omit?: Prisma.OtpOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.OtpInclude<ExtArgs> | null
-  where?: Prisma.OtpWhereInput
-  orderBy?: Prisma.OtpOrderByWithRelationInput | Prisma.OtpOrderByWithRelationInput[]
-  cursor?: Prisma.OtpWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.OtpScalarFieldEnum | Prisma.OtpScalarFieldEnum[]
+  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
 }
 
 /**
@@ -1961,27 +2228,99 @@ export type User$hr_profileArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * User.announcements
+ * User.generated_payslips
  */
-export type User$announcementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$generated_payslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Announcement
+   * Select specific fields to fetch from the Payslip
    */
-  select?: Prisma.AnnouncementSelect<ExtArgs> | null
+  select?: Prisma.PayslipSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Announcement
+   * Omit specific fields from the Payslip
    */
-  omit?: Prisma.AnnouncementOmit<ExtArgs> | null
+  omit?: Prisma.PayslipOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AnnouncementInclude<ExtArgs> | null
-  where?: Prisma.AnnouncementWhereInput
-  orderBy?: Prisma.AnnouncementOrderByWithRelationInput | Prisma.AnnouncementOrderByWithRelationInput[]
-  cursor?: Prisma.AnnouncementWhereUniqueInput
+  include?: Prisma.PayslipInclude<ExtArgs> | null
+  where?: Prisma.PayslipWhereInput
+  orderBy?: Prisma.PayslipOrderByWithRelationInput | Prisma.PayslipOrderByWithRelationInput[]
+  cursor?: Prisma.PayslipWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.AnnouncementScalarFieldEnum | Prisma.AnnouncementScalarFieldEnum[]
+  distinct?: Prisma.PayslipScalarFieldEnum | Prisma.PayslipScalarFieldEnum[]
+}
+
+/**
+ * User.approved_payslips
+ */
+export type User$approved_payslipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payslip
+   */
+  select?: Prisma.PayslipSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payslip
+   */
+  omit?: Prisma.PayslipOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PayslipInclude<ExtArgs> | null
+  where?: Prisma.PayslipWhereInput
+  orderBy?: Prisma.PayslipOrderByWithRelationInput | Prisma.PayslipOrderByWithRelationInput[]
+  cursor?: Prisma.PayslipWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PayslipScalarFieldEnum | Prisma.PayslipScalarFieldEnum[]
+}
+
+/**
+ * User.otps
+ */
+export type User$otpsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Otp
+   */
+  select?: Prisma.OtpSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Otp
+   */
+  omit?: Prisma.OtpOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OtpInclude<ExtArgs> | null
+  where?: Prisma.OtpWhereInput
+  orderBy?: Prisma.OtpOrderByWithRelationInput | Prisma.OtpOrderByWithRelationInput[]
+  cursor?: Prisma.OtpWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OtpScalarFieldEnum | Prisma.OtpScalarFieldEnum[]
+}
+
+/**
+ * User.session
+ */
+export type User$sessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Session
+   */
+  select?: Prisma.SessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Session
+   */
+  omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  where?: Prisma.SessionWhereInput
+  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
+  cursor?: Prisma.SessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 
 /**
