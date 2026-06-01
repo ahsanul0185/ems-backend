@@ -5,6 +5,7 @@ export interface ICreateAnnouncementPayload {
   title: string;
   content: string;
   audience: AnnouncementAudience;
+  status : AnnouncementStatus;
   department_id?: string;
   is_pinned?: boolean;
   attachment_url?: string;
