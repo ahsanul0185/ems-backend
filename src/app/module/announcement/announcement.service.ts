@@ -89,14 +89,14 @@ const getAllAnnouncements = async (queryParams: IAnnouncementQueryParams, user: 
     .sort()
     .paginate();
 
-  const audienceFilter = await buildAudienceFilter(user);
-  if (audienceFilter) {
-    builder.where(audienceFilter as any);
-  }
+  // const audienceFilter = await buildAudienceFilter(user);
+  // if (audienceFilter) {
+  //   builder.where(audienceFilter as any);
+  // }
 
-  if (user.role !== UserRole.ADMIN) {
-    builder.where({ status: AnnouncementStatus.PUBLISHED } as any);
-  }
+  // if (user.role !== UserRole.ADMIN) {
+  //   builder.where({ status: AnnouncementStatus.PUBLISHED } as any);
+  // }
 
   return builder.execute();
 };
