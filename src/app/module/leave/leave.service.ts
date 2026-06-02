@@ -63,7 +63,7 @@ const getMyLeaves = async (employeeId: string, queryParams: ILeaveQueryParams): 
 const getLeaveById = async (leaveId: string) => {
     const leave = await prisma.leaveRequest.findUnique({
         where: { id: leaveId },
-        include: { employee: true, approved_emp: true },
+        include: { employee: true, approved_by_user: true },
     });
 
     if (!leave) {
