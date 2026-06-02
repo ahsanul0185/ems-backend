@@ -10,6 +10,7 @@ const createAnnouncement = async (payload: ICreateAnnouncementPayload, createdBy
   const announcement = await prisma.announcement.create({
     data: {
       ...payload,
+      published_at: payload.status === AnnouncementStatus.PUBLISHED ? new Date() : null,
       created_by: createdBy,
     },
   });
