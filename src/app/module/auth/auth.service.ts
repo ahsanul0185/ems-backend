@@ -151,16 +151,51 @@ const getNewToken = async (refreshToken: string) => {
 }
 
 const getMe = async (userId: string) => { 
-    const user = await prisma.user.findUnique({ where: { id: userId } });
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+            id: true,
+            email: true,
+            role: true,
+            status: true,
+            email_verified: true,
+            created_at: true,
+            updated_at: true,
+            employee: {
+                select: {
+                    id: true,
+                    employee_code: true,
+                    first_name: true,
+                    last_name: true,
+                    phone: true,
+                }
+            },
+            hr_profile: {
+                select: {
+                    id: true,
+                }
+            },
+        }
+    });
 
     if (!user) {
         throw new AppError(status.NOT_FOUND, "User not found");
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _, ...userWithoutPassword } = user;
-
-    return userWithoutPassword;
+    return {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        status: user.status,
+        email_verified: user.email_verified,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        name: user.employee ? `${user.employee.first_name} ${user.employee.last_name}` : null,
+        employee_id: user.employee?.id ?? null,
+        employee_code: user.employee?.employee_code ?? null,
+        phone: user.employee?.phone ?? null,
+        hr_id: user.hr_profile?.id ?? null,
+    };
 }
 
 const getMyProfile = async (userId: string) => { 

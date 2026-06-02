@@ -4,7 +4,7 @@ import { AnnouncementAudience, AnnouncementStatus } from "../../../generated/pri
 export interface ICreateAnnouncementPayload {
   title: string;
   content: string;
-  audience: AnnouncementAudience;
+  audience?: AnnouncementAudience;
   status : AnnouncementStatus;
   department_id?: string;
   is_pinned?: boolean;

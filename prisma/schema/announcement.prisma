@@ -2,7 +2,7 @@ model Announcement {
   id             String               @id @default(uuid()) @db.Uuid
   title          String
   content        String
-  audience       AnnouncementAudience @default(ALL)
+  audience       AnnouncementAudience? @default(ALL)
   department_id  String?              @db.Uuid
   status         AnnouncementStatus   @default(DRAFT)
   is_pinned      Boolean              @default(false)
