@@ -5,9 +5,10 @@ export interface ICreateEmployeePayload {
     email: string;
     password: string;
 
+    employee_code: string;
     first_name: string;
     last_name: string;
-    date_of_birth: Date;
+    date_of_birth: string; // ISO date string YYYY-MM-DD
     gender: Gender;
     blood_group?: string;
     phone: string;
@@ -20,7 +21,7 @@ export interface ICreateEmployeePayload {
     bank_name: string;
     bank_account_number: string;
     employment_type: EmployeeType;
-    join_date: Date;
+    join_date: string; // ISO date string YYYY-MM-DD
     employment_status?: EmployeeStatus;
     address_line1: string;
     address_line2?: string;

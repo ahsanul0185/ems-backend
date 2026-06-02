@@ -8,13 +8,14 @@ import status from "http-status";
 
 const getAllUsers = catchAsync(
     async (req: Request, res: Response) => {
-        const result = await userService.getAllUsers();
+        const result = await userService.getAllUsers(req.query as Record<string, string>);
 
         sendResponse(res, {
             httpStatusCode: status.OK,
             success: true,
             message: "Users fetched successfully",
-            data: result
+            data: result.data,
+            meta: result.meta,
         })
     }
 )

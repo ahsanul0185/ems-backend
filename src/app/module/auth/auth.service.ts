@@ -6,10 +6,18 @@ import { jwtUtils } from "../../utils/jwt";
 import { tokenUtils } from "../../utils/token";
 import { env } from "../../config/env";
 import { IChangePasswordPayload, ICreateUserPayload, ILoginUserPayload } from "./auth.interface";
-import { UserStatus } from "../../../generated/prisma/enums";
+import { UserRole, UserStatus } from "../../../generated/prisma/enums";
+
+const toISODateTime = (dateStr: string): Date => {
+    return new Date(dateStr + "T00:00:00.000Z");
+};
 
 const createUser = async (payload: ICreateUserPayload) => {
-    const { email, password, role } = payload;
+    const {
+        email, password, role,
+        employee_code, date_of_birth, join_date,
+        ...restEmployeeData
+    } = payload;
 
     const isUserExist = await prisma.user.findUnique({
         where: { email }
@@ -19,22 +27,45 @@ const createUser = async (payload: ICreateUserPayload) => {
         throw new AppError(status.BAD_REQUEST, "User already exists with this email");
     }
 
-    const hashedPassword = await bcryptUtils.hash(password);
-
-    const user = await prisma.user.create({
-        data: {
-            email,
-            password: hashedPassword,
-            role,
-        }
+    const isEmployeeCodeTaken = await prisma.employee.findUnique({
+        where: { employee_code }
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _, ...userWithoutPassword } = user;
+    if (isEmployeeCodeTaken) {
+        throw new AppError(status.BAD_REQUEST, "Employee code already exists");
+    }
 
-    return {
-        user: userWithoutPassword,
-    };
+    const hashedPassword = await bcryptUtils.hash(password);
+
+    const result = await prisma.$transaction(async (tx) => {
+        const user = await tx.user.create({
+            data: {
+                email,
+                password: hashedPassword,
+                role,
+            }
+        });
+
+        // Create employee profile for EMPLOYEE and HR roles
+        if (role === UserRole.EMPLOYEE || role === UserRole.HR) {
+            await tx.employee.create({
+                data: {
+                    ...restEmployeeData,
+                    user_id: user.id,
+                    employee_code,
+                    date_of_birth: toISODateTime(date_of_birth),
+                    join_date: toISODateTime(join_date),
+                },
+            });
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { password: _, ...userWithoutPassword } = user;
+
+        return { user: userWithoutPassword };
+    });
+
+    return result;
 }
 
 const loginUser = async (payload: ILoginUserPayload) => {

@@ -8,8 +8,16 @@ import { Employee, EmployeeStatus, UserRole } from "../../../generated/prisma/cl
 import { bcryptUtils } from "../../utils/bcrypt";
 
 
+const toISODateTime = (dateStr: string): Date => {
+    return new Date(dateStr + "T00:00:00.000Z");
+};
+
 const createEmployee = async (payload: ICreateEmployeePayload) => {
-    const { email, password, ...employeeData } = payload;
+    const {
+        email, password,
+        employee_code, date_of_birth, join_date,
+        ...restEmployeeData
+    } = payload;
 
     const isUserExist = await prisma.user.findUnique({
         where: { email }
@@ -17,6 +25,14 @@ const createEmployee = async (payload: ICreateEmployeePayload) => {
 
     if (isUserExist) {
         throw new AppError(status.BAD_REQUEST, "User already exists with this email");
+    }
+
+    const isEmployeeCodeTaken = await prisma.employee.findUnique({
+        where: { employee_code }
+    });
+
+    if (isEmployeeCodeTaken) {
+        throw new AppError(status.BAD_REQUEST, "Employee code already exists");
     }
 
     const hashedPassword = await bcryptUtils.hash(password);
@@ -30,13 +46,13 @@ const createEmployee = async (payload: ICreateEmployeePayload) => {
             },
         });
 
-        const employee_code = "EMP-" + user.id.slice(-6).toUpperCase();
-
         const employee = await tx.employee.create({
             data: {
-                ...employeeData,
+                ...restEmployeeData,
                 user_id: user.id,
                 employee_code,
+                date_of_birth: toISODateTime(date_of_birth),
+                join_date: toISODateTime(join_date),
             },
         });
 

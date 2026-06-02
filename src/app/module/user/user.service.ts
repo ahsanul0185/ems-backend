@@ -1,8 +1,11 @@
-import status from "http-status";
+import httpStatus from "http-status";
 import AppError from "../../errorHelpers/AppError";
 import { prisma } from "../../lib/prisma";
-import { IGetAllUsersResult, IUpdateUserPayload, IUser } from "./user.interface";
+import { QueryBuilder } from "../../utils/QueryBuilder";
+import { IQueryResult } from "../../interfaces/query.interface";
+import { IUserQueryParams, IUpdateUserPayload, IUser } from "./user.interface";
 import { EmployeeStatus, UserRole, UserStatus } from "../../../generated/prisma/enums";
+import { User } from "../../../generated/prisma/client";
 
 const userSelectFields = {
     id: true,
@@ -14,12 +17,49 @@ const userSelectFields = {
     email_verified: true,
 } as const;
 
-const getAllUsers = async (): Promise<IGetAllUsersResult> => {
-    const users = await prisma.user.findMany({
-        where: { is_deleted: false },
-        select: userSelectFields,
-    });
-    return { users };
+const getAllUsers = async (queryParams: IUserQueryParams): Promise<IQueryResult<User>> => {
+    const builder = new QueryBuilder<User>(
+        prisma.user,
+        queryParams,
+        {
+            searchableFields: [
+                "email",
+                "employee.first_name",
+                "employee.last_name",
+                "employee.phone",
+            ],
+            filterableFields: [
+                "role",
+                "status",
+            ],
+            defaultSelect: {
+                id: true,
+                email: true,
+                role: true,
+                status: true,
+                created_at: true,
+                is_deleted: true,
+                email_verified: true,
+                employee: {
+                    select: {
+                        id: true,
+                        first_name: true,
+                        last_name: true,
+                        phone: true,
+                        designation: true,
+                        employment_status: true,
+                    }
+                }
+            }
+        }
+    )
+        .where({ is_deleted: false })
+        .search()
+        .filter()
+        .sort()
+        .paginate();
+
+    return builder.execute();
 };
 
 const getUserById = async (userId: string): Promise<IUser> => {
@@ -33,7 +73,7 @@ const getUserById = async (userId: string): Promise<IUser> => {
     });
 
     if (!user) {
-        throw new AppError(status.NOT_FOUND, "User not found");
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
     }
 
     return user;
@@ -42,19 +82,62 @@ const getUserById = async (userId: string): Promise<IUser> => {
 const updateUser = async (userId: string, payload: IUpdateUserPayload) => {
     const existingUser = await prisma.user.findUnique({
         where: { id: userId, is_deleted: false },
+        include: { employee: true },
     });
 
     if (!existingUser) {
-        throw new AppError(status.NOT_FOUND, "User not found");
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
     }
 
-    const user = await prisma.user.update({
-        where: { id: userId },
-        data: payload,
-        select: userSelectFields,
+    const {
+        email, role, status,
+        first_name, last_name, date_of_birth, gender, blood_group,
+        phone, emergency_contact_name, emergency_contact_phone, profile_url,
+        department_id, designation, salary, bank_name, bank_account_number,
+        employment_type, join_date, employment_status,
+        address_line1, address_line2, city, state, zip_code, country,
+        nid_number, tin_number, passport_number,
+        ...rest
+    } = payload;
+
+    // Separate user-level fields from employee-level fields
+    const userData: Record<string, unknown> = { email, role, status, ...rest };
+    Object.keys(userData).forEach((key) => {
+        if (userData[key] === undefined) delete userData[key];
     });
 
-    return { user };
+    const employeeData: Record<string, unknown> = {
+        first_name, last_name, date_of_birth, gender, blood_group,
+        phone, emergency_contact_name, emergency_contact_phone, profile_url,
+        department_id, designation, salary, bank_name, bank_account_number,
+        employment_type, join_date, employment_status,
+        address_line1, address_line2, city, state, zip_code, country,
+        nid_number, tin_number, passport_number,
+    };
+    Object.keys(employeeData).forEach((key) => {
+        if (employeeData[key] === undefined) delete employeeData[key];
+    });
+
+    const hasEmployeeData = Object.keys(employeeData).length > 0;
+
+    const result = await prisma.$transaction(async (tx) => {
+        const updatedUser = await tx.user.update({
+            where: { id: userId },
+            data: userData,
+            select: userSelectFields,
+        });
+
+        if (hasEmployeeData && existingUser.employee) {
+            await tx.employee.update({
+                where: { id: existingUser.employee.id },
+                data: employeeData,
+            });
+        }
+
+        return { user: updatedUser };
+    });
+
+    return result;
 };
 
 const deleteUser = async (userId: string) => {
@@ -67,7 +150,7 @@ const deleteUser = async (userId: string) => {
     });
 
     if (!existingUser) {
-        throw new AppError(status.NOT_FOUND, "User not found");
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
     }
 
     const user = await prisma.$transaction(async (tx) => {
@@ -92,12 +175,12 @@ const deleteUser = async (userId: string) => {
 const createHRProfile = async (user_id: string, employee_id: string) => {
     const user = await prisma.user.findUnique({ where: { id: user_id } });
     if (!user) {
-        throw new AppError(status.NOT_FOUND, "User not found");
+        throw new AppError(httpStatus.NOT_FOUND, "User not found");
     }
 
     const employee = await prisma.employee.findUnique({ where: { id: employee_id } });
     if (!employee) {
-        throw new AppError(status.NOT_FOUND, "Employee not found");
+        throw new AppError(httpStatus.NOT_FOUND, "Employee not found");
     }
 
     const existing = await prisma.hRProfile.findFirst({
@@ -110,7 +193,7 @@ const createHRProfile = async (user_id: string, employee_id: string) => {
     });
 
     if (existing) {
-        throw new AppError(status.BAD_REQUEST, "HR profile already exists for the provided user or employee");
+        throw new AppError(httpStatus.BAD_REQUEST, "HR profile already exists for the provided user or employee");
     }
 
     const [hrProfile] = await prisma.$transaction([
