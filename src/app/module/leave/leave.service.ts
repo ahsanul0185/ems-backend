@@ -5,6 +5,7 @@ import { QueryBuilder } from "../../utils/QueryBuilder";
 import { IQueryResult } from "../../interfaces/query.interface";
 import { ICreateLeavePayload, ILeaveQueryParams } from "./leave.interface";
 import { LeaveRequest, LeaveRequestStatus } from "../../../generated/prisma/client";
+import { UserRole } from "../../../generated/prisma/enums";
 
 const applyLeave = async (payload: ICreateLeavePayload) => {
     const { employee_id } = payload;
@@ -60,7 +61,7 @@ const getMyLeaves = async (employeeId: string, queryParams: ILeaveQueryParams): 
     return builder.execute();
 }
 
-const getLeaveById = async (leaveId: string) => {
+const getLeaveById = async (leaveId: string, userRole?: string, employeeId?: string) => {
     const leave = await prisma.leaveRequest.findUnique({
         where: { id: leaveId },
         include: { employee: true, approved_by_user: true },
@@ -68,6 +69,11 @@ const getLeaveById = async (leaveId: string) => {
 
     if (!leave) {
         throw new AppError(status.NOT_FOUND, "Leave request not found");
+    }
+
+    // Employees can only view their own leave requests
+    if (userRole === UserRole.EMPLOYEE && employeeId && leave.employee_id !== employeeId) {
+        throw new AppError(status.FORBIDDEN, "You are not allowed to view this leave request");
     }
 
     return { leave };

@@ -81,7 +81,10 @@ const getAllLeaves = catchAsync(
 const getLeaveById = catchAsync(
     async (req: Request, res: Response) => {
         const leaveId = req.params.id;
-        const result = await leaveService.getLeaveById(leaveId as string);
+        const userRole = req.user?.role;
+        const employeeId = req.user?.employeeId;
+
+        const result = await leaveService.getLeaveById(leaveId as string, userRole, employeeId);
 
         sendResponse(res, {
             httpStatusCode: status.OK,
