@@ -1,13 +1,11 @@
 import { Router } from "express";
 import { holidayController } from "./holiday.controller";
-// import auth from "../../middleware/auth";
-// import { UserRole } from "../../../generated/prisma/client";
+import { checkAuth } from "../../middleware/checkAuth";
+import { UserRole } from "../../../generated/prisma/enums";
 
 const router = Router();
 
-// TODO: Add auth middleware when ready
-// router.post("/", auth(UserRole.ADMIN, UserRole.HR), holidayController.createHoliday);
-router.post("/", holidayController.createHoliday);
-router.get("/", holidayController.getAllHolidays);
+router.post("/", checkAuth(UserRole.ADMIN, UserRole.HR), holidayController.createHoliday);
+router.get("/", checkAuth(), holidayController.getAllHolidays);
 
 export const holidayRoutes = router;

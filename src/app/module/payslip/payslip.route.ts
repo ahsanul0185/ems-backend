@@ -16,7 +16,7 @@ router.get("/me/:id", checkAuth(), payslipController.getMyPayslipById);
 router.get("/", checkAuth(), payslipController.getAllPayslips);
 router.post("/", checkAuth(UserRole.HR, UserRole.ADMIN), validateRequest(createPayslipSchema), payslipController.generatePayslip);
 router.get("/:id", checkAuth(), payslipController.getPayslipById);
-router.patch("/:id/approve", checkAuth(), payslipController.approvePayslip);
-router.patch("/:id/mark-paid", checkAuth(), payslipController.markPaidPayslip);
+router.patch("/:id/approve", checkAuth(UserRole.HR, UserRole.ADMIN), payslipController.approvePayslip);
+router.patch("/:id/mark-paid", checkAuth(UserRole.HR, UserRole.ADMIN), payslipController.markPaidPayslip);
 
 export const payslipRoutes = router;
