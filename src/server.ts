@@ -2,6 +2,7 @@ import { Server } from "http";
 import app from "./app";
 import dotenv from "dotenv";
 import { initializeCrons } from "./app/module/attendance/attendance.cron";
+import { seedAdmin } from "./app/utils/seedAdmin";
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ let server: Server;
 
 const bootstrap = async () => {
     try {
+        await seedAdmin();
+
         server = app.listen(PORT, () => {
             console.log(`Server is running on http://localhost:${PORT}`);
             initializeCrons();
