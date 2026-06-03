@@ -107,10 +107,14 @@ const updateUser = async (userId: string, payload: IUpdateUserPayload) => {
     });
 
     const employeeData: Record<string, unknown> = {
-        first_name, last_name, date_of_birth, gender, blood_group,
+        first_name, last_name,
+        date_of_birth: date_of_birth ? new Date(date_of_birth) : undefined,
+        gender, blood_group,
         phone, emergency_contact_name, emergency_contact_phone, profile_url,
         department_id, designation, salary, bank_name, bank_account_number,
-        employment_type, join_date, employment_status,
+        employment_type,
+        join_date: join_date ? new Date(join_date) : undefined,
+        employment_status,
         address_line1, address_line2, city, state, zip_code, country,
         nid_number, tin_number, passport_number,
     };
