@@ -29,3 +29,19 @@ export interface IAdminDashboardData {
 }
 
 export type IHrDashboardData = IAdminDashboardData;
+
+export interface IEmployeeKpiData {
+    title: string;
+    value: string;
+    description: string;
+}
+
+export interface IDailyWorkingHoursData {
+    day: string;
+    workingHours: number;
+}
+
+export interface IEmployeeDashboardData {
+    kpiData: IEmployeeKpiData[];
+    monthlyWorkingHours: IDailyWorkingHoursData[];
+}

@@ -30,7 +30,22 @@ const getHrDashboardData = catchAsync(
     }
 );
 
+const getEmployeeDashboardData = catchAsync(
+    async (req: Request, res: Response) => {
+        const employeeId = req.user?.employeeId as string;
+        const result = await dashboardService.getEmployeeDashboardData(employeeId);
+
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Dashboard data fetched successfully",
+            data: result,
+        });
+    }
+);
+
 export const dashboardController = {
     getAdminDashboardData,
     getHrDashboardData,
+    getEmployeeDashboardData,
 };

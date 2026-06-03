@@ -7,5 +7,6 @@ const router = Router();
 
 router.get('/admin', checkAuth(UserRole.ADMIN, UserRole.HR), dashboardController.getAdminDashboardData);
 router.get('/hr', checkAuth(UserRole.ADMIN, UserRole.HR), dashboardController.getHrDashboardData);
+router.get('/employee', checkAuth(UserRole.EMPLOYEE), dashboardController.getEmployeeDashboardData);
 
 export const dashboardRoutes = router;
