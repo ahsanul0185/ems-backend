@@ -22,6 +22,20 @@ const checkHolidayOrWeekend = async (date) => {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, `Cannot perform this action on a holiday: ${holiday.name}`);
     }
 };
+const checkEmployeeOnLeave = async (employeeId, date) => {
+    const startOfDay = (0, attendance_utils_1.getStartOfDayUTC)(date);
+    const activeLeave = await prisma_1.prisma.leaveRequest.findFirst({
+        where: {
+            employee_id: employeeId,
+            status: client_1.LeaveRequestStatus.APPROVED,
+            start_date: { lte: startOfDay },
+            end_date: { gte: startOfDay },
+        },
+    });
+    if (activeLeave) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Employee has an approved leave for today.");
+    }
+};
 const clockIn = async (employeeId, payload) => {
     // Use provided date/time for HR backdated entries, otherwise use current time
     const clockInTime = payload.time
@@ -31,6 +45,7 @@ const clockIn = async (employeeId, payload) => {
         ? new Date(payload.date + "T00:00:00.000Z")
         : new Date(clockInTime);
     await checkHolidayOrWeekend(recordDate);
+    await checkEmployeeOnLeave(employeeId, recordDate);
     const startOfDay = payload.date
         ? new Date(payload.date + "T00:00:00.000Z")
         : (0, attendance_utils_1.getStartOfDayUTC)(clockInTime);
@@ -107,6 +122,7 @@ const clockOut = async (employeeId, payload) => {
         ? new Date(payload.date + "T00:00:00.000Z")
         : new Date(clockOutTime);
     await checkHolidayOrWeekend(recordDate);
+    await checkEmployeeOnLeave(employeeId, recordDate);
     const startOfDay = payload.date
         ? new Date(payload.date + "T00:00:00.000Z")
         : (0, attendance_utils_1.getStartOfDayUTC)(clockOutTime);

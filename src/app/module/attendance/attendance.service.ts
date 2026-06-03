@@ -2,7 +2,7 @@ import status from "http-status";
 import AppError from "../../errorHelpers/AppError";
 import { prisma } from "../../lib/prisma";
 import { IClockInPayload, IClockOutPayload, IMarkInformedPayload, IUpdateAttendanceRecordPayload } from "./attendance.interface";
-import { AttendanceStatus } from "../../../generated/prisma/client";
+import { AttendanceStatus, LeaveRequestStatus } from "../../../generated/prisma/client";
 import {
     calculateEarlyLeaveMinutes,
     calculateLateMinutes,
@@ -29,6 +29,23 @@ const checkHolidayOrWeekend = async (date: Date) => {
         throw new AppError(status.BAD_REQUEST, `Cannot perform this action on a holiday: ${holiday.name}`);
     }
 };
+const checkEmployeeOnLeave = async (employeeId: string, date: Date) => {
+    const startOfDay = getStartOfDayUTC(date);
+
+    const activeLeave = await prisma.leaveRequest.findFirst({
+        where: {
+            employee_id: employeeId,
+            status: LeaveRequestStatus.APPROVED,
+            start_date: { lte: startOfDay },
+            end_date: { gte: startOfDay },
+        },
+    });
+
+    if (activeLeave) {
+        throw new AppError(status.BAD_REQUEST, "Employee has an approved leave for today.");
+    }
+};
+
 const clockIn = async (employeeId: string, payload: IClockInPayload) => {
     // Use provided date/time for HR backdated entries, otherwise use current time
     const clockInTime = payload.time
@@ -39,6 +56,7 @@ const clockIn = async (employeeId: string, payload: IClockInPayload) => {
         : new Date(clockInTime);
 
     await checkHolidayOrWeekend(recordDate);
+    await checkEmployeeOnLeave(employeeId, recordDate);
 
     const startOfDay = payload.date
         ? new Date(payload.date + "T00:00:00.000Z")
@@ -129,6 +147,7 @@ const clockOut = async (employeeId: string, payload: IClockOutPayload) => {
         : new Date(clockOutTime);
 
     await checkHolidayOrWeekend(recordDate);
+    await checkEmployeeOnLeave(employeeId, recordDate);
 
     const startOfDay = payload.date
         ? new Date(payload.date + "T00:00:00.000Z")
