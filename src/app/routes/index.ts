@@ -8,6 +8,7 @@ import { payslipRoutes } from "../module/payslip/payslip.route";
 import { announcementRoutes } from "../module/announcement/announcement.route";
 import { holidayRoutes } from "../module/holiday/holiday.route";
 import { attendanceRoutes } from "../module/attendance/attendance.route";
+import { dashboardRoutes } from "../module/dashboard/dashboard.route";
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.use("/payslips", payslipRoutes);
 router.use("/announcements", announcementRoutes);
 router.use("/holidays", holidayRoutes);
 router.use("/attendance", attendanceRoutes);
+router.use("/dashboard", dashboardRoutes);
 
 export const IndexRoutes = router;
