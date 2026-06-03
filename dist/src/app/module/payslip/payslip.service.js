@@ -14,10 +14,6 @@ const generatePayslip = async (payload, generatedBy) => {
     if (!employee) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Employee not found");
     }
-    const hrProfile = await prisma_1.prisma.hRProfile.findUnique({ where: { id: generatedBy } });
-    if (!hrProfile) {
-        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "Authenticated HR profile not found");
-    }
     const existingPayslip = await prisma_1.prisma.payslip.findFirst({
         where: {
             employee_id: payload.employee_id,
@@ -109,7 +105,26 @@ const getPayslipById = async (payslipId) => {
         where: { id: payslipId },
         include: {
             employee: true,
-            generated_emp: true,
+            generator: {
+                select: {
+                    id: true,
+                    email: true,
+                    role: true,
+                    status: true,
+                    created_at: true,
+                    updated_at: true,
+                },
+            },
+            approver: {
+                select: {
+                    id: true,
+                    email: true,
+                    role: true,
+                    status: true,
+                    created_at: true,
+                    updated_at: true,
+                },
+            },
         },
     });
     if (!payslip) {
@@ -117,7 +132,7 @@ const getPayslipById = async (payslipId) => {
     }
     return { payslip };
 };
-const approvePayslip = async (payslipId) => {
+const approvePayslip = async (payslipId, approvedBy) => {
     const payslip = await prisma_1.prisma.payslip.findUnique({ where: { id: payslipId } });
     if (!payslip) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Payslip not found");
@@ -129,11 +144,12 @@ const approvePayslip = async (payslipId) => {
         where: { id: payslipId },
         data: {
             status: client_1.PayslipStatus.APPROVED,
+            approved_by: approvedBy,
         }
     });
     return { payslip: updated };
 };
-const markPaidPayslip = async (payslipId) => {
+const markPaidPayslip = async (payslipId, markedBy) => {
     const payslip = await prisma_1.prisma.payslip.findUnique({ where: { id: payslipId } });
     if (!payslip) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Payslip not found");
@@ -145,6 +161,7 @@ const markPaidPayslip = async (payslipId) => {
         where: { id: payslipId },
         data: {
             status: client_1.PayslipStatus.PAID,
+            approved_by: markedBy,
         }
     });
     return { payslip: updated };

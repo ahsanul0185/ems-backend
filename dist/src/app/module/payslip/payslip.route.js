@@ -13,6 +13,6 @@ router.get("/me/:id", (0, checkAuth_1.checkAuth)(), payslip_controller_1.payslip
 router.get("/", (0, checkAuth_1.checkAuth)(), payslip_controller_1.payslipController.getAllPayslips);
 router.post("/", (0, checkAuth_1.checkAuth)(enums_1.UserRole.HR, enums_1.UserRole.ADMIN), (0, validateRequest_1.validateRequest)(payslip_validation_1.createPayslipSchema), payslip_controller_1.payslipController.generatePayslip);
 router.get("/:id", (0, checkAuth_1.checkAuth)(), payslip_controller_1.payslipController.getPayslipById);
-router.patch("/:id/approve", (0, checkAuth_1.checkAuth)(), payslip_controller_1.payslipController.approvePayslip);
-router.patch("/:id/mark-paid", (0, checkAuth_1.checkAuth)(), payslip_controller_1.payslipController.markPaidPayslip);
+router.patch("/:id/approve", (0, checkAuth_1.checkAuth)(enums_1.UserRole.HR, enums_1.UserRole.ADMIN), payslip_controller_1.payslipController.approvePayslip);
+router.patch("/:id/mark-paid", (0, checkAuth_1.checkAuth)(enums_1.UserRole.HR, enums_1.UserRole.ADMIN), payslip_controller_1.payslipController.markPaidPayslip);
 exports.payslipRoutes = router;

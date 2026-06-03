@@ -36,10 +36,10 @@ exports.EmployeeType = {
 };
 exports.EmployeeStatus = {
     ACTIVE: 'ACTIVE',
-    INACTIVE: 'INACTIVE',
     ON_LEAVE: 'ON_LEAVE',
     RESIGNED: 'RESIGNED',
-    TERMINATED: 'TERMINATED'
+    TERMINATED: 'TERMINATED',
+    INACTIVE: 'INACTIVE'
 };
 exports.AttendanceStatus = {
     PRESENT: 'PRESENT',

@@ -199,7 +199,7 @@ export type AnnouncementGroupByOutputType = {
   id: string
   title: string
   content: string
-  audience: $Enums.AnnouncementAudience
+  audience: $Enums.AnnouncementAudience | null
   department_id: string | null
   status: $Enums.AnnouncementStatus
   is_pinned: boolean
@@ -236,7 +236,7 @@ export type AnnouncementWhereInput = {
   id?: Prisma.UuidFilter<"Announcement"> | string
   title?: Prisma.StringFilter<"Announcement"> | string
   content?: Prisma.StringFilter<"Announcement"> | string
-  audience?: Prisma.EnumAnnouncementAudienceFilter<"Announcement"> | $Enums.AnnouncementAudience
+  audience?: Prisma.EnumAnnouncementAudienceNullableFilter<"Announcement"> | $Enums.AnnouncementAudience | null
   department_id?: Prisma.UuidNullableFilter<"Announcement"> | string | null
   status?: Prisma.EnumAnnouncementStatusFilter<"Announcement"> | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFilter<"Announcement"> | boolean
@@ -254,7 +254,7 @@ export type AnnouncementOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  audience?: Prisma.SortOrder
+  audience?: Prisma.SortOrderInput | Prisma.SortOrder
   department_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   is_pinned?: Prisma.SortOrder
@@ -275,7 +275,7 @@ export type AnnouncementWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.AnnouncementWhereInput | Prisma.AnnouncementWhereInput[]
   title?: Prisma.StringFilter<"Announcement"> | string
   content?: Prisma.StringFilter<"Announcement"> | string
-  audience?: Prisma.EnumAnnouncementAudienceFilter<"Announcement"> | $Enums.AnnouncementAudience
+  audience?: Prisma.EnumAnnouncementAudienceNullableFilter<"Announcement"> | $Enums.AnnouncementAudience | null
   department_id?: Prisma.UuidNullableFilter<"Announcement"> | string | null
   status?: Prisma.EnumAnnouncementStatusFilter<"Announcement"> | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFilter<"Announcement"> | boolean
@@ -293,7 +293,7 @@ export type AnnouncementOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  audience?: Prisma.SortOrder
+  audience?: Prisma.SortOrderInput | Prisma.SortOrder
   department_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   is_pinned?: Prisma.SortOrder
@@ -315,7 +315,7 @@ export type AnnouncementScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"Announcement"> | string
   title?: Prisma.StringWithAggregatesFilter<"Announcement"> | string
   content?: Prisma.StringWithAggregatesFilter<"Announcement"> | string
-  audience?: Prisma.EnumAnnouncementAudienceWithAggregatesFilter<"Announcement"> | $Enums.AnnouncementAudience
+  audience?: Prisma.EnumAnnouncementAudienceNullableWithAggregatesFilter<"Announcement"> | $Enums.AnnouncementAudience | null
   department_id?: Prisma.UuidNullableWithAggregatesFilter<"Announcement"> | string | null
   status?: Prisma.EnumAnnouncementStatusWithAggregatesFilter<"Announcement"> | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolWithAggregatesFilter<"Announcement"> | boolean
@@ -331,7 +331,7 @@ export type AnnouncementCreateInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
   attachment_url?: string | null
@@ -347,7 +347,7 @@ export type AnnouncementUncheckedCreateInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   department_id?: string | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
@@ -363,7 +363,7 @@ export type AnnouncementUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -379,7 +379,7 @@ export type AnnouncementUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   department_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -395,7 +395,7 @@ export type AnnouncementCreateManyInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   department_id?: string | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
@@ -411,7 +411,7 @@ export type AnnouncementUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -425,7 +425,7 @@ export type AnnouncementUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   department_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -499,8 +499,8 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type EnumAnnouncementAudienceFieldUpdateOperationsInput = {
-  set?: $Enums.AnnouncementAudience
+export type NullableEnumAnnouncementAudienceFieldUpdateOperationsInput = {
+  set?: $Enums.AnnouncementAudience | null
 }
 
 export type EnumAnnouncementStatusFieldUpdateOperationsInput = {
@@ -611,7 +611,7 @@ export type AnnouncementCreateWithoutCreatorInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
   attachment_url?: string | null
@@ -626,7 +626,7 @@ export type AnnouncementUncheckedCreateWithoutCreatorInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   department_id?: string | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
@@ -670,7 +670,7 @@ export type AnnouncementScalarWhereInput = {
   id?: Prisma.UuidFilter<"Announcement"> | string
   title?: Prisma.StringFilter<"Announcement"> | string
   content?: Prisma.StringFilter<"Announcement"> | string
-  audience?: Prisma.EnumAnnouncementAudienceFilter<"Announcement"> | $Enums.AnnouncementAudience
+  audience?: Prisma.EnumAnnouncementAudienceNullableFilter<"Announcement"> | $Enums.AnnouncementAudience | null
   department_id?: Prisma.UuidNullableFilter<"Announcement"> | string | null
   status?: Prisma.EnumAnnouncementStatusFilter<"Announcement"> | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFilter<"Announcement"> | boolean
@@ -686,7 +686,7 @@ export type AnnouncementCreateWithoutDepartmentInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
   attachment_url?: string | null
@@ -701,7 +701,7 @@ export type AnnouncementUncheckedCreateWithoutDepartmentInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
   attachment_url?: string | null
@@ -742,7 +742,7 @@ export type AnnouncementCreateManyCreatorInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   department_id?: string | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
@@ -757,7 +757,7 @@ export type AnnouncementUpdateWithoutCreatorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -772,7 +772,7 @@ export type AnnouncementUncheckedUpdateWithoutCreatorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   department_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -787,7 +787,7 @@ export type AnnouncementUncheckedUpdateManyWithoutCreatorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   department_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -802,7 +802,7 @@ export type AnnouncementCreateManyDepartmentInput = {
   id?: string
   title: string
   content: string
-  audience?: $Enums.AnnouncementAudience
+  audience?: $Enums.AnnouncementAudience | null
   status?: $Enums.AnnouncementStatus
   is_pinned?: boolean
   attachment_url?: string | null
@@ -817,7 +817,7 @@ export type AnnouncementUpdateWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -832,7 +832,7 @@ export type AnnouncementUncheckedUpdateWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -847,7 +847,7 @@ export type AnnouncementUncheckedUpdateManyWithoutDepartmentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
-  audience?: Prisma.EnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience
+  audience?: Prisma.NullableEnumAnnouncementAudienceFieldUpdateOperationsInput | $Enums.AnnouncementAudience | null
   status?: Prisma.EnumAnnouncementStatusFieldUpdateOperationsInput | $Enums.AnnouncementStatus
   is_pinned?: Prisma.BoolFieldUpdateOperationsInput | boolean
   attachment_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -954,7 +954,7 @@ export type $AnnouncementPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: string
     title: string
     content: string
-    audience: $Enums.AnnouncementAudience
+    audience: $Enums.AnnouncementAudience | null
     department_id: string | null
     status: $Enums.AnnouncementStatus
     is_pinned: boolean

@@ -9,12 +9,13 @@ const sendResponse_1 = require("../../shared/sendResponse");
 const user_service_1 = require("./user.service");
 const http_status_1 = __importDefault(require("http-status"));
 const getAllUsers = (0, catchAsync_1.catchAsync)(async (req, res) => {
-    const result = await user_service_1.userService.getAllUsers();
+    const result = await user_service_1.userService.getAllUsers(req.query);
     (0, sendResponse_1.sendResponse)(res, {
         httpStatusCode: http_status_1.default.OK,
         success: true,
         message: "Users fetched successfully",
-        data: result
+        data: result.data,
+        meta: result.meta,
     });
 });
 const getUserById = (0, catchAsync_1.catchAsync)(async (req, res) => {

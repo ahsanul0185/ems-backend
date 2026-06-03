@@ -143,21 +143,21 @@ exports.AttendanceScalarFieldEnum = {
     id: 'id',
     employee_id: 'employee_id',
     date: 'date',
-    clock_in_time: 'clock_in_time',
-    clock_out_time: 'clock_out_time',
     status: 'status',
     late_minutes: 'late_minutes',
     early_leave_minutes: 'early_leave_minutes',
-    work_minutes: 'work_minutes',
     notes: 'notes',
-    is_informed: 'is_informed',
-    informed_reason: 'informed_reason',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
     informed_at: 'informed_at',
     informed_by: 'informed_by',
+    informed_reason: 'informed_reason',
     is_auto_clocked_out: 'is_auto_clocked_out',
+    is_informed: 'is_informed',
     leave_request_id: 'leave_request_id',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
+    work_minutes: 'work_minutes',
+    clock_in_time: 'clock_in_time',
+    clock_out_time: 'clock_out_time'
 };
 exports.UserScalarFieldEnum = {
     id: 'id',
@@ -274,6 +274,7 @@ exports.PayslipScalarFieldEnum = {
     deduction: 'deduction',
     net_salary: 'net_salary',
     generated_by: 'generated_by',
+    approved_by: 'approved_by',
     notes: 'notes',
     created_at: 'created_at',
     updated_at: 'updated_at'

@@ -12,27 +12,49 @@ const jwt_1 = require("../../utils/jwt");
 const token_1 = require("../../utils/token");
 const env_1 = require("../../config/env");
 const enums_1 = require("../../../generated/prisma/enums");
+const toISODateTime = (dateStr) => {
+    return new Date(dateStr + "T00:00:00.000Z");
+};
 const createUser = async (payload) => {
-    const { email, password, role } = payload;
+    const { email, password, role, employee_code, date_of_birth, join_date, ...restEmployeeData } = payload;
     const isUserExist = await prisma_1.prisma.user.findUnique({
         where: { email }
     });
     if (isUserExist) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "User already exists with this email");
     }
-    const hashedPassword = await bcrypt_1.bcryptUtils.hash(password);
-    const user = await prisma_1.prisma.user.create({
-        data: {
-            email,
-            password: hashedPassword,
-            role,
-        }
+    const isEmployeeCodeTaken = await prisma_1.prisma.employee.findUnique({
+        where: { employee_code }
     });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _, ...userWithoutPassword } = user;
-    return {
-        user: userWithoutPassword,
-    };
+    if (isEmployeeCodeTaken) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Employee code already exists");
+    }
+    const hashedPassword = await bcrypt_1.bcryptUtils.hash(password);
+    const result = await prisma_1.prisma.$transaction(async (tx) => {
+        const user = await tx.user.create({
+            data: {
+                email,
+                password: hashedPassword,
+                role,
+            }
+        });
+        // Create employee profile for EMPLOYEE and HR roles
+        if (role === enums_1.UserRole.EMPLOYEE || role === enums_1.UserRole.HR) {
+            await tx.employee.create({
+                data: {
+                    ...restEmployeeData,
+                    user_id: user.id,
+                    employee_code,
+                    date_of_birth: toISODateTime(date_of_birth),
+                    join_date: toISODateTime(join_date),
+                },
+            });
+        }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { password: _, ...userWithoutPassword } = user;
+        return { user: userWithoutPassword };
+    });
+    return result;
 };
 const loginUser = async (payload) => {
     const { email, password } = payload;
@@ -122,13 +144,49 @@ const getNewToken = async (refreshToken) => {
     };
 };
 const getMe = async (userId) => {
-    const user = await prisma_1.prisma.user.findUnique({ where: { id: userId } });
+    const user = await prisma_1.prisma.user.findUnique({
+        where: { id: userId },
+        select: {
+            id: true,
+            email: true,
+            role: true,
+            status: true,
+            email_verified: true,
+            created_at: true,
+            updated_at: true,
+            employee: {
+                select: {
+                    id: true,
+                    employee_code: true,
+                    first_name: true,
+                    last_name: true,
+                    phone: true,
+                }
+            },
+            hr_profile: {
+                select: {
+                    id: true,
+                }
+            },
+        }
+    });
     if (!user) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, "User not found");
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password: _, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    return {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+        status: user.status,
+        email_verified: user.email_verified,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        name: user.employee ? `${user.employee.first_name} ${user.employee.last_name}` : null,
+        employee_id: user.employee?.id ?? null,
+        employee_code: user.employee?.employee_code ?? null,
+        phone: user.employee?.phone ?? null,
+        hr_id: user.hr_profile?.id ?? null,
+    };
 };
 const getMyProfile = async (userId) => {
     const user = await prisma_1.prisma.user.findUnique({

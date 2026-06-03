@@ -9,6 +9,7 @@ const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
 const prisma_1 = require("../../lib/prisma");
 const QueryBuilder_1 = require("../../utils/QueryBuilder");
 const client_1 = require("../../../generated/prisma/client");
+const enums_1 = require("../../../generated/prisma/enums");
 const applyLeave = async (payload) => {
     const { employee_id } = payload;
     const employee = await prisma_1.prisma.employee.findUnique({ where: { id: employee_id } });
@@ -52,13 +53,17 @@ const getMyLeaves = async (employeeId, queryParams) => {
         .paginate();
     return builder.execute();
 };
-const getLeaveById = async (leaveId) => {
+const getLeaveById = async (leaveId, userRole, employeeId) => {
     const leave = await prisma_1.prisma.leaveRequest.findUnique({
         where: { id: leaveId },
-        include: { employee: true, approved_emp: true },
+        include: { employee: true, approved_by_user: true },
     });
     if (!leave) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, "Leave request not found");
+    }
+    // Employees can only view their own leave requests
+    if (userRole === enums_1.UserRole.EMPLOYEE && employeeId && leave.employee_id !== employeeId) {
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "You are not allowed to view this leave request");
     }
     return { leave };
 };
@@ -104,7 +109,7 @@ const approveLeave = async (leaveId, approverId) => {
         where: { id: leaveId },
         data: {
             status: client_1.LeaveRequestStatus.APPROVED,
-            approved_by: approverId,
+            // approved_by: approverId,
             approved_at: new Date(),
         }
     });
@@ -123,7 +128,7 @@ const rejectLeave = async (leaveId, rejectorId, rejectionReason) => {
         data: {
             status: client_1.LeaveRequestStatus.REJECTED,
             rejection_reason: rejectionReason,
-            approved_by: rejectorId,
+            // approved_by: rejectorId,
             approved_at: new Date(),
         }
     });

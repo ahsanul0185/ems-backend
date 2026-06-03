@@ -57,6 +57,7 @@ const loadEnvVariables = () => {
         OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
         SHIFT_START_TIME: process.env.SHIFT_START_TIME || "09:00",
         SHIFT_END_TIME: process.env.SHIFT_END_TIME || "17:00",
+        CRON_START_TIME: process.env.CRON_START_TIME || "00:00",
     };
 };
 exports.env = loadEnvVariables();

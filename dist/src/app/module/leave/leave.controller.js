@@ -8,15 +8,27 @@ const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = require("../../shared/catchAsync");
 const sendResponse_1 = require("../../shared/sendResponse");
 const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
+const enums_1 = require("../../../generated/prisma/enums");
 const leave_service_1 = require("./leave.service");
 const applyLeave = (0, catchAsync_1.catchAsync)(async (req, res) => {
+    const userRole = req.user?.role;
     const employeeId = req.user?.employeeId;
-    if (!employeeId) {
-        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Authenticated employee_id is required");
+    const bodyEmployeeId = req.body.employee_id;
+    // HR/Admin can create leave for any employee by passing employee_id
+    // Regular employees must have their own employee_id from auth
+    let targetEmployeeId;
+    if (bodyEmployeeId && (userRole === enums_1.UserRole.HR || userRole === enums_1.UserRole.ADMIN)) {
+        targetEmployeeId = bodyEmployeeId;
+    }
+    else {
+        if (!employeeId) {
+            throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Authenticated employee_id is required");
+        }
+        targetEmployeeId = employeeId;
     }
     const payload = {
         ...req.body,
-        employee_id: employeeId,
+        employee_id: targetEmployeeId,
     };
     const result = await leave_service_1.leaveService.applyLeave(payload);
     (0, sendResponse_1.sendResponse)(res, {
@@ -54,7 +66,9 @@ const getAllLeaves = (0, catchAsync_1.catchAsync)(async (req, res) => {
 });
 const getLeaveById = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const leaveId = req.params.id;
-    const result = await leave_service_1.leaveService.getLeaveById(leaveId);
+    const userRole = req.user?.role;
+    const employeeId = req.user?.employeeId;
+    const result = await leave_service_1.leaveService.getLeaveById(leaveId, userRole, employeeId);
     (0, sendResponse_1.sendResponse)(res, {
         httpStatusCode: http_status_1.default.OK,
         success: true,
@@ -64,9 +78,10 @@ const getLeaveById = (0, catchAsync_1.catchAsync)(async (req, res) => {
 });
 const approveLeave = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const leaveId = req.params.id;
-    const approverId = req.body.approver_id || req.user?.userId;
-    if (!approverId) {
-        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "approver_id is required to approve");
+    const userRole = req.user?.role;
+    const approverId = req.user?.userId;
+    if (userRole !== enums_1.UserRole.HR && userRole !== enums_1.UserRole.ADMIN) {
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "Only HR or Admin can approve leave requests");
     }
     const result = await leave_service_1.leaveService.approveLeave(leaveId, approverId);
     (0, sendResponse_1.sendResponse)(res, {
@@ -78,10 +93,11 @@ const approveLeave = (0, catchAsync_1.catchAsync)(async (req, res) => {
 });
 const rejectLeave = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const leaveId = req.params.id;
-    const rejectorId = req.body.rejector_id || req.user?.userId;
+    const userRole = req.user?.role;
+    const rejectorId = req.user?.userId;
     const { rejection_reason } = req.body;
-    if (!rejectorId) {
-        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "rejector_id is required to reject");
+    if (userRole !== enums_1.UserRole.HR && userRole !== enums_1.UserRole.ADMIN) {
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "Only HR or Admin can reject leave requests");
     }
     const result = await leave_service_1.leaveService.rejectLeave(leaveId, rejectorId, rejection_reason);
     (0, sendResponse_1.sendResponse)(res, {
@@ -93,11 +109,16 @@ const rejectLeave = (0, catchAsync_1.catchAsync)(async (req, res) => {
 });
 const cancelLeave = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const leaveId = req.params.id;
+    const userRole = req.user?.role;
     const employeeId = req.user?.employeeId;
     if (!employeeId) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Authenticated employee_id is required to cancel leave");
     }
-    const result = await leave_service_1.leaveService.cancelLeave(leaveId, employeeId);
+    // HR/Admin can cancel any leave; employees can only cancel their own
+    const targetEmployeeId = (userRole === enums_1.UserRole.HR || userRole === enums_1.UserRole.ADMIN)
+        ? undefined
+        : employeeId;
+    const result = await leave_service_1.leaveService.cancelLeave(leaveId, targetEmployeeId);
     (0, sendResponse_1.sendResponse)(res, {
         httpStatusCode: http_status_1.default.OK,
         success: true,

@@ -20,8 +20,8 @@ exports.createLeaveZodSchema = zod_1.default.object({
     reason: zod_1.default.string().min(1, "reason is required"),
     attachment_url: zod_1.default.string().url().optional(),
     leave_type: zod_1.default.nativeEnum(enums_1.LeaveType),
+    employee_id: zod_1.default.string().uuid().optional(),
 });
 exports.rejectLeaveZodSchema = zod_1.default.object({
-    rejector_id: zod_1.default.string().uuid("rejector_id must be a valid UUID"),
     rejection_reason: zod_1.default.string().min(1, "rejection_reason is required"),
 });

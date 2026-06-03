@@ -7,6 +7,7 @@ exports.userService = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const AppError_1 = __importDefault(require("../../errorHelpers/AppError"));
 const prisma_1 = require("../../lib/prisma");
+const QueryBuilder_1 = require("../../utils/QueryBuilder");
 const enums_1 = require("../../../generated/prisma/enums");
 const userSelectFields = {
     id: true,
@@ -17,12 +18,44 @@ const userSelectFields = {
     is_deleted: true,
     email_verified: true,
 };
-const getAllUsers = async () => {
-    const users = await prisma_1.prisma.user.findMany({
-        where: { is_deleted: false },
-        select: userSelectFields,
-    });
-    return { users };
+const getAllUsers = async (queryParams) => {
+    const builder = new QueryBuilder_1.QueryBuilder(prisma_1.prisma.user, queryParams, {
+        searchableFields: [
+            "email",
+            "employee.first_name",
+            "employee.last_name",
+            "employee.phone",
+        ],
+        filterableFields: [
+            "role",
+            "status",
+        ],
+        defaultSelect: {
+            id: true,
+            email: true,
+            role: true,
+            status: true,
+            created_at: true,
+            is_deleted: true,
+            email_verified: true,
+            employee: {
+                select: {
+                    id: true,
+                    first_name: true,
+                    last_name: true,
+                    phone: true,
+                    designation: true,
+                    employment_status: true,
+                }
+            }
+        }
+    })
+        .where({ is_deleted: false })
+        .search()
+        .filter()
+        .sort()
+        .paginate();
+    return builder.execute();
 };
 const getUserById = async (userId) => {
     const user = await prisma_1.prisma.user.findUnique({
@@ -41,16 +74,46 @@ const getUserById = async (userId) => {
 const updateUser = async (userId, payload) => {
     const existingUser = await prisma_1.prisma.user.findUnique({
         where: { id: userId, is_deleted: false },
+        include: { employee: true },
     });
     if (!existingUser) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, "User not found");
     }
-    const user = await prisma_1.prisma.user.update({
-        where: { id: userId },
-        data: payload,
-        select: userSelectFields,
+    const { email, role, status, first_name, last_name, date_of_birth, gender, blood_group, phone, emergency_contact_name, emergency_contact_phone, profile_url, department_id, designation, salary, bank_name, bank_account_number, employment_type, join_date, employment_status, address_line1, address_line2, city, state, zip_code, country, nid_number, tin_number, passport_number, ...rest } = payload;
+    // Separate user-level fields from employee-level fields
+    const userData = { email, role, status, ...rest };
+    Object.keys(userData).forEach((key) => {
+        if (userData[key] === undefined)
+            delete userData[key];
     });
-    return { user };
+    const employeeData = {
+        first_name, last_name, date_of_birth, gender, blood_group,
+        phone, emergency_contact_name, emergency_contact_phone, profile_url,
+        department_id, designation, salary, bank_name, bank_account_number,
+        employment_type, join_date, employment_status,
+        address_line1, address_line2, city, state, zip_code, country,
+        nid_number, tin_number, passport_number,
+    };
+    Object.keys(employeeData).forEach((key) => {
+        if (employeeData[key] === undefined)
+            delete employeeData[key];
+    });
+    const hasEmployeeData = Object.keys(employeeData).length > 0;
+    const result = await prisma_1.prisma.$transaction(async (tx) => {
+        const updatedUser = await tx.user.update({
+            where: { id: userId },
+            data: userData,
+            select: userSelectFields,
+        });
+        if (hasEmployeeData && existingUser.employee) {
+            await tx.employee.update({
+                where: { id: existingUser.employee.id },
+                data: employeeData,
+            });
+        }
+        return { user: updatedUser };
+    });
+    return result;
 };
 const deleteUser = async (userId) => {
     const existingUser = await prisma_1.prisma.user.findUnique({

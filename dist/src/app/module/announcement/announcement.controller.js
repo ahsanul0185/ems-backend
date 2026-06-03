@@ -24,7 +24,7 @@ const getAllAnnouncements = (0, catchAsync_1.catchAsync)(async (req, res) => {
     });
 });
 const createAnnouncement = (0, catchAsync_1.catchAsync)(async (req, res) => {
-    const payload = req.body;
+    let payload = req.body;
     const createdBy = req.user.userId;
     const result = await announcement_service_1.announcementService.createAnnouncement(payload, createdBy);
     (0, sendResponse_1.sendResponse)(res, {

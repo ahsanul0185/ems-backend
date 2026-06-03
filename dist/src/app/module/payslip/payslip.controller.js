@@ -50,12 +50,12 @@ const getAllPayslips = (0, catchAsync_1.catchAsync)(async (req, res) => {
     });
 });
 const generatePayslip = (0, catchAsync_1.catchAsync)(async (req, res) => {
-    const hrProfileId = req.user?.hrProfileId;
-    if (!hrProfileId) {
-        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "Authenticated HR profile is required to generate payslips");
+    const userId = req.user?.userId;
+    if (!userId) {
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "Authenticated user is required to generate payslips");
     }
     const payload = req.body;
-    const result = await payslip_service_1.payslipService.generatePayslip(payload, hrProfileId);
+    const result = await payslip_service_1.payslipService.generatePayslip(payload, userId);
     (0, sendResponse_1.sendResponse)(res, {
         httpStatusCode: http_status_1.default.CREATED,
         success: true,
@@ -75,7 +75,11 @@ const getPayslipById = (0, catchAsync_1.catchAsync)(async (req, res) => {
 });
 const approvePayslip = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const payslipId = req.params.id;
-    const result = await payslip_service_1.payslipService.approvePayslip(payslipId);
+    const userId = req.user?.userId;
+    if (!userId) {
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "Authenticated user is required to approve payslips");
+    }
+    const result = await payslip_service_1.payslipService.approvePayslip(payslipId, userId);
     (0, sendResponse_1.sendResponse)(res, {
         httpStatusCode: http_status_1.default.OK,
         success: true,
@@ -85,7 +89,11 @@ const approvePayslip = (0, catchAsync_1.catchAsync)(async (req, res) => {
 });
 const markPaidPayslip = (0, catchAsync_1.catchAsync)(async (req, res) => {
     const payslipId = req.params.id;
-    const result = await payslip_service_1.payslipService.markPaidPayslip(payslipId);
+    const userId = req.user?.userId;
+    if (!userId) {
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, "Authenticated user is required to mark payslips as paid");
+    }
+    const result = await payslip_service_1.payslipService.markPaidPayslip(payslipId, userId);
     (0, sendResponse_1.sendResponse)(res, {
         httpStatusCode: http_status_1.default.OK,
         success: true,

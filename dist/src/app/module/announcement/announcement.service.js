@@ -13,6 +13,7 @@ const createAnnouncement = async (payload, createdBy) => {
     const announcement = await prisma_1.prisma.announcement.create({
         data: {
             ...payload,
+            published_at: payload.status === client_1.AnnouncementStatus.PUBLISHED ? new Date() : null,
             created_by: createdBy,
         },
     });
@@ -80,13 +81,13 @@ const getAllAnnouncements = async (queryParams, user) => {
         .filter()
         .sort()
         .paginate();
-    const audienceFilter = await buildAudienceFilter(user);
-    if (audienceFilter) {
-        builder.where(audienceFilter);
-    }
-    if (user.role !== client_1.UserRole.ADMIN) {
-        builder.where({ status: client_1.AnnouncementStatus.PUBLISHED });
-    }
+    // const audienceFilter = await buildAudienceFilter(user);
+    // if (audienceFilter) {
+    //   builder.where(audienceFilter as any);
+    // }
+    // if (user.role !== UserRole.ADMIN) {
+    //   builder.where({ status: AnnouncementStatus.PUBLISHED } as any);
+    // }
     return builder.execute();
 };
 const getAnnouncementById = async (announcementId) => {

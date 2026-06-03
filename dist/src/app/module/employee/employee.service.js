@@ -10,13 +10,22 @@ const prisma_1 = require("../../lib/prisma");
 const QueryBuilder_1 = require("../../utils/QueryBuilder");
 const client_1 = require("../../../generated/prisma/client");
 const bcrypt_1 = require("../../utils/bcrypt");
+const toISODateTime = (dateStr) => {
+    return new Date(dateStr + "T00:00:00.000Z");
+};
 const createEmployee = async (payload) => {
-    const { email, password, ...employeeData } = payload;
+    const { email, password, employee_code, date_of_birth, join_date, ...restEmployeeData } = payload;
     const isUserExist = await prisma_1.prisma.user.findUnique({
         where: { email }
     });
     if (isUserExist) {
         throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "User already exists with this email");
+    }
+    const isEmployeeCodeTaken = await prisma_1.prisma.employee.findUnique({
+        where: { employee_code }
+    });
+    if (isEmployeeCodeTaken) {
+        throw new AppError_1.default(http_status_1.default.BAD_REQUEST, "Employee code already exists");
     }
     const hashedPassword = await bcrypt_1.bcryptUtils.hash(password);
     const result = await prisma_1.prisma.$transaction(async (tx) => {
@@ -27,12 +36,13 @@ const createEmployee = async (payload) => {
                 role: client_1.UserRole.EMPLOYEE,
             },
         });
-        const employee_code = "EMP-" + user.id.slice(-6).toUpperCase();
         const employee = await tx.employee.create({
             data: {
-                ...employeeData,
+                ...restEmployeeData,
                 user_id: user.id,
                 employee_code,
+                date_of_birth: toISODateTime(date_of_birth),
+                join_date: toISODateTime(join_date),
             },
         });
         return { employee };
@@ -134,6 +144,7 @@ const getAllEmployees = async (queryParams) => {
         ],
         defaultSelect: {
             id: true,
+            employee_code: true,
             first_name: true,
             last_name: true,
             phone: true,

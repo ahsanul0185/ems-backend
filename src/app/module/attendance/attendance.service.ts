@@ -29,7 +29,6 @@ const checkHolidayOrWeekend = async (date: Date) => {
         throw new AppError(status.BAD_REQUEST, `Cannot perform this action on a holiday: ${holiday.name}`);
     }
 };
-
 const clockIn = async (employeeId: string, payload: IClockInPayload) => {
     // Use provided date/time for HR backdated entries, otherwise use current time
     const clockInTime = payload.time
@@ -54,13 +53,28 @@ const clockIn = async (employeeId: string, payload: IClockInPayload) => {
 
     if (attendance) {
         if (attendance.status === AttendanceStatus.ON_LEAVE) {
-            throw new AppError(status.BAD_REQUEST, "You have an approved leave for today.");
+            throw new AppError(status.BAD_REQUEST, "Employee has an approved leave for today.");
         }
 
+        // If already clocked in (and not a soft absent record), block duplicate
+        if (attendance.clock_in_time && attendance.status !== AttendanceStatus.ABSENT) {
+            throw new AppError(status.BAD_REQUEST, "Already clocked in today");
+        }
+
+        // Soft absent (created by midnight cron) — overridable by HR clock-in
         if (attendance.status === AttendanceStatus.ABSENT && !attendance.is_auto_clocked_out) {
-            // Soft absent — overridable
             const { expectedClockIn } = getExpectedShiftTimes(recordDate);
             const lateMinutes = calculateLateMinutes(clockInTime, expectedClockIn);
+
+            // Build notes: append late info if applicable
+            let notes = attendance.notes || "";
+            if (payload.notes) {
+                notes = notes ? `${notes}\n${payload.notes}` : payload.notes;
+            }
+            if (lateMinutes > 0) {
+                const lateNote = `Late by ${lateMinutes} minute(s)`;
+                notes = notes ? `${notes}\n${lateNote}` : lateNote;
+            }
 
             attendance = await prisma.attendance.update({
                 where: { id: attendance.id },
@@ -68,20 +82,28 @@ const clockIn = async (employeeId: string, payload: IClockInPayload) => {
                     clock_in_time: clockInTime,
                     status: AttendanceStatus.PRESENT,
                     late_minutes: lateMinutes,
-                    notes: payload.notes || attendance.notes,
+                    notes: notes || undefined,
                 }
             });
             return attendance;
         }
 
+        // Any other state with clock_in_time already set — block
         if (attendance.clock_in_time) {
             throw new AppError(status.BAD_REQUEST, "Already clocked in today");
         }
     }
 
-    // Normal clock-in
+    // Normal clock-in (no existing record)
     const { expectedClockIn } = getExpectedShiftTimes(recordDate);
     const lateMinutes = calculateLateMinutes(clockInTime, expectedClockIn);
+
+    // Build notes with late info if applicable
+    let notes = payload.notes || "";
+    if (lateMinutes > 0) {
+        const lateNote = `Late by ${lateMinutes} minute(s)`;
+        notes = notes ? `${notes}\n${lateNote}` : lateNote;
+    }
 
     attendance = await prisma.attendance.create({
         data: {
@@ -90,7 +112,7 @@ const clockIn = async (employeeId: string, payload: IClockInPayload) => {
             clock_in_time: clockInTime,
             status: AttendanceStatus.PRESENT,
             late_minutes: lateMinutes,
-            notes: payload.notes,
+            notes: notes || undefined,
         }
     });
 
@@ -135,13 +157,23 @@ const clockOut = async (employeeId: string, payload: IClockOutPayload) => {
     const earlyLeaveMinutes = calculateEarlyLeaveMinutes(clockOutTime, expectedClockOut);
     const workMinutes = calculateWorkMinutes(attendance.clock_in_time, clockOutTime);
 
+    // Build notes: append early-leave info if applicable
+    let notes = attendance.notes || "";
+    if (payload.notes) {
+        notes = notes ? `${notes}\n${payload.notes}` : payload.notes;
+    }
+    if (earlyLeaveMinutes > 0) {
+        const earlyNote = `Left early by ${earlyLeaveMinutes} minute(s)`;
+        notes = notes ? `${notes}\n${earlyNote}` : earlyNote;
+    }
+
     return prisma.attendance.update({
         where: { id: attendance.id },
         data: {
             clock_out_time: clockOutTime,
             early_leave_minutes: earlyLeaveMinutes,
             work_minutes: workMinutes,
-            notes: payload.notes || attendance.notes,
+            notes: notes || undefined,
         }
     });
 };

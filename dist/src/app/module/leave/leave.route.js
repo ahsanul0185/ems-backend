@@ -12,7 +12,7 @@ router.get("/me", (0, checkAuth_1.checkAuth)(), leave_controller_1.leaveControll
 router.post("/", (0, checkAuth_1.checkAuth)(), (0, validateRequest_1.validateRequest)(leave_validation_1.createLeaveZodSchema), leave_controller_1.leaveController.applyLeave);
 router.put("/:id/cancel", (0, checkAuth_1.checkAuth)(), leave_controller_1.leaveController.cancelLeave);
 router.get("/", (0, checkAuth_1.checkAuth)(), leave_controller_1.leaveController.getAllLeaves);
-router.get("/:id", (0, checkAuth_1.checkAuth)(enums_1.UserRole.HR, enums_1.UserRole.ADMIN), leave_controller_1.leaveController.getLeaveById);
-router.put("/:id/approve", (0, checkAuth_1.checkAuth)(), leave_controller_1.leaveController.approveLeave);
-router.put("/:id/reject", (0, checkAuth_1.checkAuth)(), (0, validateRequest_1.validateRequest)(leave_validation_1.rejectLeaveZodSchema), leave_controller_1.leaveController.rejectLeave);
+router.get("/:id", (0, checkAuth_1.checkAuth)(), leave_controller_1.leaveController.getLeaveById);
+router.put("/:id/approve", (0, checkAuth_1.checkAuth)(enums_1.UserRole.HR, enums_1.UserRole.ADMIN), leave_controller_1.leaveController.approveLeave);
+router.put("/:id/reject", (0, checkAuth_1.checkAuth)(enums_1.UserRole.HR, enums_1.UserRole.ADMIN), (0, validateRequest_1.validateRequest)(leave_validation_1.rejectLeaveZodSchema), leave_controller_1.leaveController.rejectLeave);
 exports.leaveRoutes = router;
