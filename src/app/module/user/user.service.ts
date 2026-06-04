@@ -48,6 +48,7 @@ const getAllUsers = async (queryParams: IUserQueryParams): Promise<IQueryResult<
                         last_name: true,
                         phone: true,
                         designation: true,
+                        employee_code: true,
                         employment_status: true,
                     }
                 }
