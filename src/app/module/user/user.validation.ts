@@ -15,7 +15,7 @@ export const updateUserSchema = z.object({
   date_of_birth: z.string().datetime().or(z.string().regex(/^\d{4}-\d{2}-\d{2}$/)).optional(),
   gender: z.nativeEnum(Gender).optional(),
   blood_group: z.string().optional(),
-  phone: z.string().optional(),
+  phone: z.string().regex(/^([01]|\+88)?\d{11}$/, { message: "Phone must be a valid 11-digit Bangladeshi mobile number" }).optional(),
   emergency_contact_name: z.string().optional(),
   emergency_contact_phone: z.string().optional(),
   profile_url: z.string().optional(),
