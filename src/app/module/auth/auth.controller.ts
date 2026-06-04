@@ -163,6 +163,21 @@ const getUserSessions = catchAsync(
     }
 )
 
+const getAllSessions = catchAsync(
+    async (req: Request, res: Response) => {
+        const queryParams = req.query as Record<string, string>;
+        const result = await authService.getAllSessions(queryParams);
+
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Sessions fetched successfully",
+            data: result.data,
+            meta: result.meta,
+        });
+    }
+)
+
 const revokeSession = catchAsync(
     async (req: Request, res: Response) => {
         const sessionId = req.params.sessionId as string;
@@ -188,5 +203,6 @@ export const authController = {
     changePassword,
     logoutUser,
     getUserSessions,
+    getAllSessions,
     revokeSession,
 };

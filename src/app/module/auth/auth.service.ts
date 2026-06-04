@@ -5,7 +5,10 @@ import { bcryptUtils } from "../../utils/bcrypt";
 import { jwtUtils } from "../../utils/jwt";
 import { tokenUtils } from "../../utils/token";
 import { env } from "../../config/env";
-import { IChangePasswordPayload, ICreateUserPayload, ILoginMeta, ILoginUserPayload } from "./auth.interface";
+import { IChangePasswordPayload, ICreateUserPayload, ILoginMeta, ILoginUserPayload, ISessionQueryParams } from "./auth.interface";
+import { QueryBuilder } from "../../utils/QueryBuilder";
+import { IQueryResult } from "../../interfaces/query.interface";
+import { Session } from "../../../generated/prisma/client";
 import { UserRole, UserStatus } from "../../../generated/prisma/enums";
 
 const toISODateTime = (dateStr: string): Date => {
@@ -305,7 +308,19 @@ const logoutUser = async (refreshToken: string) => {
 }
 
 const getUserSessions = async (userId: string) => {
-    const user = await prisma.user.findUnique({ where: { id: userId } });
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+            employee: {
+                select: {
+                    id: true,
+                    first_name: true,
+                    last_name: true,
+                    employee_code: true,
+                }
+            }
+        }
+    });
 
     if (!user) {
         throw new AppError(status.NOT_FOUND, "User not found");
@@ -326,7 +341,65 @@ const getUserSessions = async (userId: string) => {
         orderBy: { created_at: 'desc' }
     });
 
-    return sessions;
+    return {
+        user: {
+            id: user.id,
+            email: user.email,
+            name: user.employee
+                ? `${user.employee.first_name} ${user.employee.last_name}`
+                : null,
+            employee_id: user.employee?.id ?? null,
+            employee_code: user.employee?.employee_code ?? null,
+        },
+        sessions,
+    };
+}
+
+const getAllSessions = async (queryParams: ISessionQueryParams): Promise<IQueryResult<Session>> => {
+    const builder = new QueryBuilder<Session>(
+        prisma.session,
+        queryParams,
+        {
+            searchableFields: [
+                "user.email",
+                "user.employee.first_name",
+                "user.employee.last_name",
+                "user.employee.employee_code",
+            ],
+            filterableFields: [],
+            defaultSelect: {
+                id: true,
+                user_id: true,
+                created_at: true,
+                updated_at: true,
+                expires_at: true,
+                ip_address: true,
+                user_agent: true,
+                device_info: true,
+                user: {
+                    select: {
+                        id: true,
+                        email: true,
+                        employee: {
+                            select: {
+                                id: true,
+                                first_name: true,
+                                last_name: true,
+                                employee_code: true,
+                            }
+                        }
+                    }
+                }
+            },
+            defaultSortBy: "created_at",
+            defaultSortOrder: "desc",
+        }
+    )
+        .search()
+        .sort()
+        .paginate();
+
+    return builder.execute();
 }
 
 const revokeSession = async (sessionId: string, adminUserId: string) => {
@@ -359,5 +432,6 @@ export const authService = {
     changePassword,
     logoutUser,
     getUserSessions,
+    getAllSessions,
     revokeSession,
 };

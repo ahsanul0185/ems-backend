@@ -16,6 +16,7 @@ router.post('/refresh-token', authController.getNewToken);
 router.post('/change-password', checkAuth(), validateRequest(changePasswordZodSchema), authController.changePassword);
 router.post('/logout', authController.logoutUser);
 router.get('/users/:userId/sessions', checkAuth(UserRole.ADMIN), authController.getUserSessions);
+router.get('/sessions', checkAuth(UserRole.ADMIN), authController.getAllSessions);
 router.delete('/sessions/:sessionId', checkAuth(UserRole.ADMIN), authController.revokeSession);
 
 export const authRoutes = router;
