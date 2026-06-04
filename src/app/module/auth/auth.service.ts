@@ -5,7 +5,7 @@ import { bcryptUtils } from "../../utils/bcrypt";
 import { jwtUtils } from "../../utils/jwt";
 import { tokenUtils } from "../../utils/token";
 import { env } from "../../config/env";
-import { IChangePasswordPayload, ICreateUserPayload, ILoginUserPayload } from "./auth.interface";
+import { IChangePasswordPayload, ICreateUserPayload, ILoginMeta, ILoginUserPayload } from "./auth.interface";
 import { UserRole, UserStatus } from "../../../generated/prisma/enums";
 
 const toISODateTime = (dateStr: string): Date => {
@@ -68,7 +68,7 @@ const createUser = async (payload: ICreateUserPayload) => {
     return result;
 }
 
-const loginUser = async (payload: ILoginUserPayload) => {
+const loginUser = async (payload: ILoginUserPayload, meta?: ILoginMeta) => {
     const { email, password } = payload;
 
     const user = await prisma.user.findUnique({
@@ -107,6 +107,9 @@ const loginUser = async (payload: ILoginUserPayload) => {
             user_id: user.id,
             refresh_token: hashedRefreshToken,
             expires_at: expiresAt,
+            ip_address: meta?.ip_address ?? null,
+            user_agent: meta?.user_agent ?? null,
+            device_info: meta?.device_info ?? null,
         }
     });
 
@@ -301,6 +304,52 @@ const logoutUser = async (refreshToken: string) => {
     }
 }
 
+const getUserSessions = async (userId: string) => {
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+
+    if (!user) {
+        throw new AppError(status.NOT_FOUND, "User not found");
+    }
+
+    const sessions = await prisma.session.findMany({
+        where: { user_id: userId },
+        select: {
+            id: true,
+            user_id: true,
+            created_at: true,
+            updated_at: true,
+            expires_at: true,
+            ip_address: true,
+            user_agent: true,
+            device_info: true,
+        },
+        orderBy: { created_at: 'desc' }
+    });
+
+    return sessions;
+}
+
+const revokeSession = async (sessionId: string, adminUserId: string) => {
+    const session = await prisma.session.findUnique({
+        where: { id: sessionId },
+        include: { user: true }
+    });
+
+    if (!session) {
+        throw new AppError(status.NOT_FOUND, "Session not found");
+    }
+
+    // Prevent admin from revoking their own current session via this endpoint
+    // (optional guard; can be removed if not desired)
+    if (session.user_id === adminUserId) {
+        throw new AppError(status.FORBIDDEN, "You cannot revoke your own session from here");
+    }
+
+    await prisma.session.delete({ where: { id: sessionId } });
+
+    return { revoked: true };
+}
+
 export const authService = {
     createUser,
     loginUser,
@@ -309,4 +358,6 @@ export const authService = {
     getNewToken,
     changePassword,
     logoutUser,
+    getUserSessions,
+    revokeSession,
 };

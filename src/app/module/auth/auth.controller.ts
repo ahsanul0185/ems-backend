@@ -28,7 +28,12 @@ const createUser = catchAsync(
 const loginUser = catchAsync(
     async (req: Request, res: Response) => {
         const payload = req.body;
-        const result = await authService.loginUser(payload);
+        const meta = {
+            ip_address: req.ip || (req.socket && req.socket.remoteAddress) || undefined,
+            user_agent: req.headers['user-agent'] || undefined,
+            device_info: req.headers['user-agent'] || undefined,
+        };
+        const result = await authService.loginUser(payload, meta);
 
         const { accessToken, refreshToken, user } = result;
 
@@ -144,8 +149,35 @@ const logoutUser = catchAsync(
     }
 )
 
+const getUserSessions = catchAsync(
+    async (req: Request, res: Response) => {
+        const userId = req.params.userId as string;
+        const sessions = await authService.getUserSessions(userId);
 
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "User sessions fetched successfully",
+            data: sessions,
+        });
+    }
+)
 
+const revokeSession = catchAsync(
+    async (req: Request, res: Response) => {
+        const sessionId = req.params.sessionId as string;
+        const adminUserId = req.user.userId;
+
+        const result = await authService.revokeSession(sessionId, adminUserId);
+
+        sendResponse(res, {
+            httpStatusCode: status.OK,
+            success: true,
+            message: "Session revoked successfully",
+            data: result,
+        });
+    }
+)
 
 export const authController = {
     createUser,
@@ -155,4 +187,6 @@ export const authController = {
     getNewToken,
     changePassword,
     logoutUser,
+    getUserSessions,
+    revokeSession,
 };

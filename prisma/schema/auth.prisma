@@ -26,6 +26,9 @@ model Session {
   expires_at    DateTime
   created_at    DateTime @default(now())
   updated_at    DateTime @updatedAt
+  ip_address    String?
+  user_agent    String?
+  device_info   String?
   user          User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("sessions")

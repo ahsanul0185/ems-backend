@@ -27,6 +27,7 @@ const getAllUsers = async (queryParams: IUserQueryParams): Promise<IQueryResult<
                 "employee.first_name",
                 "employee.last_name",
                 "employee.phone",
+                "employee.employee_code"
             ],
             filterableFields: [
                 "role",

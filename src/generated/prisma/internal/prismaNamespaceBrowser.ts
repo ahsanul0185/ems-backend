@@ -144,7 +144,10 @@ export const SessionScalarFieldEnum = {
   refresh_token: 'refresh_token',
   expires_at: 'expires_at',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  device_info: 'device_info'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]

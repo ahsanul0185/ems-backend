@@ -41,6 +41,12 @@ export interface ILoginUserPayload {
     password: string;
 }
 
+export interface ILoginMeta {
+    ip_address?: string;
+    user_agent?: string;
+    device_info?: string;
+}
+
 
 export interface IRegisterUserPayload {
     email: string;
